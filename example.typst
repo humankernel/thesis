@@ -1,0 +1,44 @@
+#import "conf.typ": conf
+
+#show: doc => conf(
+  facultad: "VERTEX: INTERACTIVE 3D ENVIRONMENTS, FACULTAD 4",
+  title: "Desarrollo de una herramienta basada en RAG y LLMs para optimizar el análisis de
+artículos científicos",
+  authors: (
+    "authors": ["Joaquin Rivas Sanchez"],
+    "tutors": ["Aaa", "bbb"]
+  ),
+  abstract: lorem(80),
+  keywords: [Inteligencia artificial; RAG; procesamiento de lenguaje natural; conectividad limitada; código abierto],
+  doc
+)
+
+
+
+#outline(title: "Índice de Contenidos")
+
+= Dsfsdf
+
+fdgdfg
+
+#set heading(numbering: "1.")
+= Introduction
+
+#lorem(100)
+
+== Chapter 1
+
+#lorem(100)
+
+= sddfgj
+
+
+
+
+
+
+
+vete de aquí, súbete arriba de este carro @Mathew2010
+
+
+#bibliography("example.bib", title: "Bibliografía", style:"american-psychological-association")

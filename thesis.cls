@@ -8,9 +8,9 @@
 %% 
 %% This is a generated file.
 %% 
-%% Copyright (C) 2015 by Hassán Lombera Rodríguez <hlombera@uci.cu>
+%% Copyright (C) 2015 by Hassï¿½n Lombera Rodrï¿½guez <hlombera@uci.cu>
 %% Maintainers: Luis Guillermo Silva Rojas <lgsilva@uci.cu>
-%%              Rubén Alcolea Núñez <ralcolea@uci.cu>
+%%              Rubï¿½n Alcolea Nï¿½ï¿½ez <ralcolea@uci.cu>
 %% 
 %% This file may be distributed and/or modified under the conditions of
 %% the LaTeX Project Public License, either version 1.3c of this license
@@ -109,8 +109,7 @@
 \RequirePackage{etoolbox}
 \RequirePackage{xkeyval}
 \RequirePackage{environ}
-\RequirePackage[urlcolor=blue, filecolor=magenta, colorlinks, linkcolor=blue,
- citecolor=blue]{hyperref}
+\RequirePackage[urlcolor=blue, filecolor=magenta, colorlinks, linkcolor=blue, citecolor=blue]{hyperref}
 \RequirePackage{draftwatermark}
 \RequirePackage{textpos}
 \RequirePackage{rotating}
@@ -142,8 +141,8 @@
 \DeclareOption{nolol}{\booltrue{nolol}}\ProcessOptions
 
 \newcommand{\eqIntRef}[2]{(\ref{#1}-\ref{#2})}
-\renewcommand{\appendixtocname}{Apéndices}
-\renewcommand{\appendixpagename}{Apéndices}
+\renewcommand{\appendixtocname}{Apï¿½ndices}
+\renewcommand{\appendixpagename}{Apï¿½ndices}
 
 \newcommand{\ucicenter}[1]
 {
@@ -181,7 +180,7 @@
 
 \newcommand{\@logoFoot}
 {
-\textsc{\large Universidad de las Ciencias Informáticas}     \\
+\textsc{\large Universidad de las Ciencias Informï¿½ticas}     \\
 \textsc
 {\large
 \ifx\@center\@undefined\relax
@@ -197,8 +196,8 @@ Facultad \@facultyNum} \\
 \newcommand{\@doctypeText}
 {
 \centering
-{\bfseries Trabajo de diploma para optar por el título de
-Ingeniero en Ciencias Informáticas }
+{\bfseries Trabajo de diploma para optar por el tï¿½tulo de
+Ingeniero en Ciencias Informï¿½ticas }
 }
 
 \newcommand{\doctype}[1]
@@ -396,8 +395,8 @@ Ingeniero en Ciencias Informáticas }
 \newcommand{\introduction}
 {
 \phantomsection
-\chapter*{Introducción  \markboth{\slshape INTRODUCCIÓN}{\slshape INTRODUCCIÓN}}
-\addcontentsline{toc}{chapter}{Introducción}
+\chapter*{Introducciï¿½n  \markboth{\slshape INTRODUCCIï¿½N}{\slshape INTRODUCCIï¿½N}}
+\addcontentsline{toc}{chapter}{Introducciï¿½n}
 }
 \newcommand{\conclusions}
 {
@@ -408,7 +407,7 @@ Ingeniero en Ciencias Informáticas }
 \makeglossaries
 \newcommand{\newacronymeng}[3]
 {
-\newacronym[first={\glsentrylong{\glslabel} (\glsentryshort{\glslabel}, por sus siglas en inglés)}]{#1}{#2}{#3}
+\newacronym[first={\glsentrylong{\glslabel} (\glsentryshort{\glslabel}, por sus siglas en inglï¿½s)}]{#1}{#2}{#3}
 }
 \renewcommand*{\glsclearpage}{\clearpage} % it prevents the glossaries package to start in odd pages always
 \newcommand{\suggestions}
@@ -514,8 +513,8 @@ Ingeniero en Ciencias Informáticas }
 
 \renewcommand{\listalgorithmname}{Lista de algoritmos}
 \floatname{algorithm}{Algoritmo}
-\renewcommand{\lstlistingname}{Código fuente}
-\renewcommand{\lstlistlistingname}{Lista de códigos fuentes}
+\renewcommand{\lstlistingname}{Cï¿½digo fuente}
+\renewcommand{\lstlistlistingname}{Lista de cï¿½digos fuentes}
 
 \newcommand{\CC}[1][\tiny]{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{#1\bf ++}}}
 \definecolor{strcolor}{RGB}{163,21,21} % This is the Visual Studio color for strings.
@@ -778,13 +777,13 @@ showstringspaces=false,      % Leerzeichen in Strings anzeigen ?
   breaklines=true,
   % German umlauts
   literate=%
-  {Ö}{{\"O}}1
-  {Ä}{{\"A}}1
-  {Ü}{{\"U}}1
-  {ß}{{\ss}}1
-  {ü}{{\"u}}1
-  {ä}{{\"a}}1
-  {ö}{{\"o}}1
+  {ï¿½}{{\"O}}1
+  {ï¿½}{{\"A}}1
+  {ï¿½}{{\"U}}1
+  {ï¿½}{{\ss}}1
+  {ï¿½}{{\"u}}1
+  {ï¿½}{{\"a}}1
+  {ï¿½}{{\"o}}1
 }
 
 \newcommand{\@pagelimit}{80}
@@ -878,7 +877,7 @@ sortlocale=es_ES]{biblatex}[2014/06/25]
     pdfcreator={\LaTeX},          %creator of the document
     pdfkeywords={\@keywords},     %list of keywords
     pdfnewwindow=true,            %links in new window
-    plainpages=false,             %make page anchors using the formatted form of the page number. With this option, hyperref writes different anchors for pages ‘ii’ and ‘2’
+    plainpages=false,             %make page anchors using the formatted form of the page number. With this option, hyperref writes different anchors for pages ï¿½iiï¿½ and ï¿½2ï¿½
 }
 
 \DeclareOption{print}
@@ -888,7 +887,7 @@ sortlocale=es_ES]{biblatex}[2014/06/25]
 hidelinks
 }
 \renewcommand{\@predefensetext}{\resizebox{!}{12pt}{\textcolor{gray!60}
-{Pre-defensa [versión de impresión]}}}
+{Pre-defensa [versiï¿½n de impresiï¿½n]}}}
 }
 \ProcessOptions
 }
@@ -931,11 +930,11 @@ hidelinks
 {
 \clearpage
 \thispagestyle{empty}
-\chapter*{Declaración de autoría}
+\chapter*{Declaraciï¿½n de autorï¿½a}
 
-Declaramos ser autores de la presente tesis y reconocemos a la Universidad de las Ciencias Informáticas los derechos patrimoniales sobre esta, con carácter exclusivo.\\
+Declaramos ser autores de la presente tesis y reconocemos a la Universidad de las Ciencias Informï¿½ticas los derechos patrimoniales sobre esta, con carï¿½cter exclusivo.\\
 
-Para que así conste firmamos la presente a los \underline{\hspace{0.7cm}} días del mes de \underline{\hspace{1.7cm}} del año \underline{\hspace{1.3cm}}.
+Para que asï¿½ conste firmamos la presente a los \underline{\hspace{0.7cm}} dï¿½as del mes de \underline{\hspace{1.7cm}} del aï¿½o \underline{\hspace{1.3cm}}.
 
 \newcounter{itemscnt}
 \setcounter{itemscnt}{0}
@@ -1120,21 +1119,21 @@ Para que así conste firmamos la presente a los \underline{\hspace{0.7cm}} días d
 \multicolumn{2}{|l|}{\colorentry{\textbf{Historia de usuario}}}
 \endfirsthead
 
-\caption[]{Continuación de la página anterior}
+\caption[]{Continuaciï¿½n de la pï¿½gina anterior}
 \endhead
 
-\multicolumn{2}{r}{{Continúa en la próxima página}} \\
+\multicolumn{2}{r}{{Continï¿½a en la prï¿½xima pï¿½gina}} \\
 \endfoot
 
 \hline
 \endlastfoot
 \hhline{*{2}{-}}
-\textbf{Número:} \thestorycnt & \textbf{Nombre:} \@storyname\\ \hline
+\textbf{Nï¿½mero:} \thestorycnt & \textbf{Nombre:} \@storyname\\ \hline
 \multicolumn{2}{|p{0.97\linewidth}|}{\textbf{Usuario:} \@storyuser} \\ \hline
 \textbf{Prioridad en negocio:} \@storypriority & \textbf{Riesgo en desarrollo:} \@storyrisk\\ \hline
-\textbf{Puntos estimados:} \@storypoints &  \textbf{Iteración asignada:} \@storyiter  \\ \hline
+\textbf{Puntos estimados:} \@storypoints &  \textbf{Iteraciï¿½n asignada:} \@storyiter  \\ \hline
 \multicolumn{2}{|p{0.97\linewidth}|}{\textbf{Programador responsable:} \@storyprogrammer} \\ \hline
-\multicolumn{2}{|p{0.97\linewidth}|}{\textbf{Descripción:} \@storydescription}\\ \hline
+\multicolumn{2}{|p{0.97\linewidth}|}{\textbf{Descripciï¿½n:} \@storydescription}\\ \hline
 \multicolumn{2}{|p{0.97\linewidth}|}{\textbf{Observaciones:} \@storyobservation}
 \ifx\@storyinterface\undefined\relax
 \else
@@ -1186,17 +1185,17 @@ Para que así conste firmamos la presente a los \underline{\hspace{0.7cm}} días d
 \multicolumn{2}{|c|}{\colorentry{\textbf{Tarjeta CRC}}}
 \endfirsthead
 
-\caption[]{Continuación de la página anterior}
+\caption[]{Continuaciï¿½n de la pï¿½gina anterior}
 \endhead
 
-\multicolumn{2}{r}{{Continúa en la próxima página}} \\
+\multicolumn{2}{r}{{Continï¿½a en la prï¿½xima pï¿½gina}} \\
 \endfoot
 
 \hline
 \endlastfoot
 \hhline{*{2}{-}}
 \multicolumn{2}{|l|}{\textbf{Clase:} \@crcclass} \\ \hline
-\textbf{Responsabilidad} & \textbf{Colaboración} \\ \hline
+\textbf{Responsabilidad} & \textbf{Colaboraciï¿½n} \\ \hline
 \multicolumn{1}{|p{0.4\linewidth}|}{\vspace{-4ex}\begin{flushleft}\@crcresp \vspace{-2ex}\end{flushleft}} & \multicolumn{1}{p{0.4\linewidth}|}{\vspace{-4ex}\begin{flushleft}\@crccolab \vspace{-2ex}\end{flushleft}}
 \end{longtable}
 }
@@ -1222,17 +1221,17 @@ Para que así conste firmamos la presente a los \underline{\hspace{0.7cm}} días d
 }
 {
 \begin{longtable}[c]{|c|c|m{.45\linewidth}|c|@{}c@{}}
-\caption{Estimación de esfuerzo por historia de usuario}
+\caption{Estimaciï¿½n de esfuerzo por historia de usuario}
 \label{\@effortestlabel}\\ % the return here is mandatory
 \hhline{*{4}{-}}
-\colorentry{\textbf{Iteración}} & \multicolumn{2}{c|}{\colorentry{\textbf{Historias de usuario}}}&  \multicolumn{1}{c|}{\colorentry{\textbf{Puntos estimados (semanas)}}} % & \colorentry{\textbf{Puntos reales}}
+\colorentry{\textbf{Iteraciï¿½n}} & \multicolumn{2}{c|}{\colorentry{\textbf{Historias de usuario}}}&  \multicolumn{1}{c|}{\colorentry{\textbf{Puntos estimados (semanas)}}} % & \colorentry{\textbf{Puntos reales}}
 \endfirsthead
 
-\caption[]{Continuación de la página anterior}
+\caption[]{Continuaciï¿½n de la pï¿½gina anterior}
 \endhead
 
 \cline{1-4}
-\multicolumn{4}{r}{{Continúa en la próxima página}} \\
+\multicolumn{4}{r}{{Continï¿½a en la prï¿½xima pï¿½gina}} \\
 \endfoot
 
 \hhline{*{4}{-}}
@@ -1351,17 +1350,17 @@ Para que así conste firmamos la presente a los \underline{\hspace{0.7cm}} días d
 }
 {
 \begin{longtable}[c]{|c|c|m{.45\linewidth}|c|@{}c@{}}
-\caption{Plan de duración de las iteraciones}
+\caption{Plan de duraciï¿½n de las iteraciones}
 \label{\@iterdurationlabel}\\ % the return here is mandatory
 \hhline{*{4}{-}}
-\colorentry{\textbf{Iteración}} & \multicolumn{2}{c|}{\colorentry{\textbf{Historias de usuario}}}&  \multicolumn{1}{c|}{\colorentry{\textbf{Duración (semanas)}}}
+\colorentry{\textbf{Iteraciï¿½n}} & \multicolumn{2}{c|}{\colorentry{\textbf{Historias de usuario}}}&  \multicolumn{1}{c|}{\colorentry{\textbf{Duraciï¿½n (semanas)}}}
 \endfirsthead
 
-\caption[]{Continuación de la página anterior}
+\caption[]{Continuaciï¿½n de la pï¿½gina anterior}
 \endhead
 
 \cline{1-4}
-\multicolumn{4}{r}{{Continúa en la próxima página}} \\
+\multicolumn{4}{r}{{Continï¿½a en la prï¿½xima pï¿½gina}} \\
 \endfoot
 
 \hhline{*{4}{-}}
@@ -1505,7 +1504,7 @@ Para que así conste firmamos la presente a los \underline{\hspace{0.7cm}} días d
 
 \@clrengtaskcmds
 \set@engtasklabel{#1}
-\set@caption{Tarea de ingeniería \# \theengtaskcnt}
+\set@caption{Tarea de ingenierï¿½a \# \theengtaskcnt}
 \set@taskcnt{\theengtaskcnt}
 }
 {
@@ -1518,17 +1517,17 @@ Para que así conste firmamos la presente a los \underline{\hspace{0.7cm}} días d
 \multicolumn{2}{|l|}{\colorentry{\textbf{Tarea}}}
 \endfirsthead
 
-\caption[]{Continuación de la página anterior}
+\caption[]{Continuaciï¿½n de la pï¿½gina anterior}
 \endhead
 
-\multicolumn{2}{r}{{Continúa en la próxima página}} \\ \hhline{*{2}{-}}
+\multicolumn{2}{r}{{Continï¿½a en la prï¿½xima pï¿½gina}} \\ \hhline{*{2}{-}}
 \endfoot
 
 \hline
 \endlastfoot
 
 \hhline{*{2}{-}}
-\textbf{Número de tarea:} \@taskcnt  & \textbf{Número de Historia de usuario:} \@engtaskuserstory \\ \hline
+\textbf{Nï¿½mero de tarea:} \@taskcnt  & \textbf{Nï¿½mero de Historia de usuario:} \@engtaskuserstory \\ \hline
 \multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Nombre de la tarea:} \@engtaskname} \\ \hline
 \textbf{Tipo de tarea:} \@engtasktype  & \textbf{Puntos estimados:} \@engtaskpointestimation \\ \hline
 \textbf{Fecha de inicio:} \displaydate{startdate} &  \textbf{Fecha de fin:} \displaydate{enddate}
@@ -1538,7 +1537,7 @@ Para que así conste firmamos la presente a los \underline{\hspace{0.7cm}} días d
 \\ \hline
 \multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Programador responsable:} \@engtaskprogrammer} \\ \hline
 \fi
-\multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Descripción:} \@engtaskdescription}\\
+\multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Descripciï¿½n:} \@engtaskdescription}\\
 \end{longtable}
 }
 
@@ -1612,32 +1611,32 @@ Para que así conste firmamos la presente a los \underline{\hspace{0.7cm}} días d
 {
 \@chktestcasecmds
 \begin{longtable}[c] {|l|l|}
-\caption{Prueba de aceptación \# \thetestcasecnt}
+\caption{Prueba de aceptaciï¿½n \# \thetestcasecnt}
 \label{\@testcaselabel}\\ % the return here is mandatory
 
 \hhline{*{2}{-}}
-\multicolumn{2}{|l|}{\colorentry{\textbf{Caso de prueba de aceptación}}}
+\multicolumn{2}{|l|}{\colorentry{\textbf{Caso de prueba de aceptaciï¿½n}}}
 \endfirsthead
 
-\caption[]{Continuación de la página anterior}
+\caption[]{Continuaciï¿½n de la pï¿½gina anterior}
 \endhead
 
-\multicolumn{2}{r}{{Continúa en la próxima página}} \\
+\multicolumn{2}{r}{{Continï¿½a en la prï¿½xima pï¿½gina}} \\
 \endfoot
 
 \hline
 \endlastfoot
 
 \hhline{*{2}{-}}
-\multicolumn{1}{|p{0.4\linewidth}|}{\textbf{Código:} \@testcasecode} & \textbf{Historia de usuario:} \@testcaseuserstory\\ \hline
+\multicolumn{1}{|p{0.4\linewidth}|}{\textbf{Cï¿½digo:} \@testcasecode} & \textbf{Historia de usuario:} \@testcaseuserstory\\ \hline
 \multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Nombre:} \@testcasename} \\ \hline
-\multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Descripción:} \@testcasedescription} \\ \hline
-\multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Condiciones de ejecución:}\vspace{-2ex}
+\multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Descripciï¿½n:} \@testcasedescription} \\ \hline
+\multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Condiciones de ejecuciï¿½n:}\vspace{-2ex}
  \begin{flushleft}
 \@testcaseexeccond
 \vspace{-2ex}
 \end{flushleft}} \\ \hline
-\multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Pasos de ejecución:}\vspace{-2ex}
+\multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Pasos de ejecuciï¿½n:}\vspace{-2ex}
 \begin{flushleft}\@testcaseexecstep \vspace{-2ex} \end{flushleft}}\\ \hline
 \multicolumn{2}{|p{0.8\linewidth}|}{\textbf{Resultados esperados:} \@testcaseexpresult}
 \end{longtable}
@@ -1646,8 +1645,8 @@ Para que así conste firmamos la presente a los \underline{\hspace{0.7cm}} días d
 \AtEndDocument
 {
 \printglossary
-\printglossary[type=\acronymtype, toctitle=Acrónimos, title=Acrónimos]
-\printbibliography[heading=bibintoc, title=Referencias bibliográficas]
+\printglossary[type=\acronymtype, toctitle=Acrï¿½nimos, title=Acrï¿½nimos]
+\printbibliography[heading=bibintoc, title=Referencias bibliogrï¿½ficas]
 \vfill
 \medskip
 \settimeformat{ampmtime}
@@ -1678,7 +1677,7 @@ Para que así conste firmamos la presente a los \underline{\hspace{0.7cm}} días d
 \SetWatermarkLightness{0.9}
 \fboxrule=1pt  % rule width
 \fboxsep=1pt
-\newcommand{\@predefensetext}{\resizebox{!}{15pt}{\fcolorbox{black}{blue!90}{\textcolor{yellow}{Pre-defensa [compilación digital]}}}}
+\newcommand{\@predefensetext}{\resizebox{!}{15pt}{\fcolorbox{black}{blue!90}{\textcolor{yellow}{Pre-defensa [compilaciï¿½n digital]}}}}
 \newcommand\@predefensestamp{%
 \begin{textblock}{2}(-0.09,0.55)
 \begin{rotate}{90}
