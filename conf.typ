@@ -2,6 +2,7 @@
   facultad: str,
   title: str,
   authors: (), 
+  tutors: (),
   abstract: [], 
   keywords: [],
   doc
@@ -46,9 +47,9 @@
   align(center)[
     #text(17pt)[
       #block(width: 85%)[
-        Autor: #authors.authors.first()
-        v(3mm)
-        Tutores: #authors.tutors.join(", ")
+        // Autor: #authors.authors.first()
+        // v(3mm)
+        // Tutores: #authors.tutors.join(", ")
       ]
     ]
   ]
@@ -56,6 +57,13 @@
   v(8mm)
 
 
+  pagebreak()
+
+  outline(title: "Índice de Contenidos")
+  pagebreak()
+  outline(title: "Índice de Tablas", target: figure.where(kind: table))
+  pagebreak()
+  outline(title: "Índice de Figuras", target: figure.where(kind: image))
   pagebreak()
 
   set par(justify: true)
