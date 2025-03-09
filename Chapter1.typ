@@ -28,10 +28,10 @@ Un *modelo de aprendizaje automático* es un sistema computacional diseñado par
         edge(<results>, "->", <perf>),
         edge(<perf>, "->", <weights>, bend: 40deg),
     ),
-    caption: [Esquema general del proceso de aprendizaje automático]
+    caption: [Esquema general del proceso de aprendizaje profundo @Gugger2020-on]
 )<ml-diagram>
 
-En el contexto del aprendizaje automático, @ml-diagram ilustra de manera esquemática el flujo de trabajo de un modelo de aprendizaje, se observa que el proceso comienza con la entrada de datos (inputs), que alimenta al modelo (model). El modelo genera predicciones o resultados (results), los cuales son evaluados mediante una métrica de desempeño (perf). Adicionalmente, el modelo ajusta sus parámetros a través de un mecanismo de pesos (weights), permitiendo la optimización y mejora progresiva del rendimiento @Gugger2020-on.
+En el contexto del aprendizaje automático, @ml-diagram ilustra de manera esquemática el flujo de trabajo de un modelo de aprendizaje de profundo, se observa que el proceso comienza con la entrada de datos (inputs), que alimenta al modelo (model). El modelo genera predicciones o resultados (results), los cuales son evaluados mediante una métrica de desempeño (perf). Adicionalmente, el modelo ajusta sus parámetros a través de un mecanismo de pesos (weights), permitiendo la optimización y mejora progresiva del rendimiento @Gugger2020-on.
 
 // ¿Qué es un modelo del Lenguaje?
 
@@ -156,7 +156,7 @@ Este proceso se lleva a cabo en dos fases principales:
         edge(<e2>, "-|>", <e2x>),
         edge(<e2x>, "-|>", <cos>, corner: right),
     ),
-    caption: [Descripción general de RAG]
+    caption: [Descripción general de RAG (Elaboración propia)]
 )<rag>
 
 La @rag ilustra el flujo general de un sistema de Generación Aumentada por Recuperación (RAG) dividido en tres etapas, cada una señalada con un color distinto:
@@ -180,7 +180,7 @@ $"cosine similarity" = S_c (A, B) := cos(theta) = (A dot B) / (||A||||B||) = (su
 
 === Comparativa
 
-La @finetuning-v-rag compara los dos enfoques anteriormente mencionados: Fine-Tuning y RAG (Retrieval-Augmented Generation). Se analizan y contrastan estos métodos según diferentes características clave, incluyendo la adaptación a nuevos conocimientos, los requerimientos computacionales, la latencia, sus aplicaciones ideales y sus limitaciones.
+La @finetuning-v-rag compara los dos enfoques anteriormente mencionados: Fine-Tuning y RAG @gao2024retrievalaugmentedgenerationlargelanguage. Se analizan y contrastan estos métodos según diferentes características clave, incluyendo la adaptación a nuevos conocimientos, los requerimientos computacionales, la latencia, sus aplicaciones ideales y sus limitaciones.
 
 #figure(
     table(
@@ -216,7 +216,7 @@ Teniendo en cuenta lo anterior la arquitectura RAG para este proyecto es la mas 
 
 == Estudio de sistemas a nivel internacional
 
-A partir del estudio de los sistemas internacionales detallados en la @comparison (Elicit, ChatGPT, Humata y Scholarcy), se identificaron limitaciones que afectan su usabilidad en el contexto nacional. Estos servicios, desarrollados bajo modelos de software propietario y dependientes de servidores remotos, enfrentan barreras geopolíticas (como bloqueos en Cuba) y restricciones de uso (límites mensuales de artículos, páginas o mensajes), lo que limita su escalabilidad y adaptabilidad a entornos con necesidades intensivas, como la investigación académica o la implementación en regiones con censura. Estas restricciones contradicen los principios de accesibilidad universal y soberanía tecnológica, fundamentales para proyectos que buscan autonomía en el manejo de datos y herramientas.
+A partir del estudio de los sistemas internacionales detallados en la @comparison (Elicit @elicit-2025, ChatGPT @chatgpt-2025, ChatPDF @chatpdf-2025, Humata @humata-2025 y Scholarcy @scholarcy-2025), se identificaron limitaciones que afectan su usabilidad en el contexto nacional. Estos servicios, desarrollados bajo modelos de software propietario y dependientes de servidores remotos, enfrentan barreras geopolíticas (como bloqueos en Cuba) y restricciones de uso (límites mensuales de artículos, páginas o mensajes), lo que limita su escalabilidad y adaptabilidad a entornos con necesidades intensivas, como la investigación académica o la implementación en regiones con censura. Estas restricciones contradicen los principios de accesibilidad universal y soberanía tecnológica, fundamentales para proyectos que buscan autonomía en el manejo de datos y herramientas.
 
 #figure(
     table(
@@ -237,19 +237,21 @@ A partir del estudio de los sistemas internacionales detallados en la @compariso
 
 Si bien las soluciones analizadas no resuelven integralmente los desafíos identificados, ofrecen referencias valiosas para el diseño de un sistema alternativo. Por ejemplo:
 
-- Estandarización de funcionalidades: La capacidad de ChatGPT para operar en múltiples idiomas (aunque su accesibilidad sea limitada) destaca la importancia del soporte multilingüe en plataformas globales.
+- Estandarización de funcionalidades: La capacidad de ChatGPT para operar en múltiples idiomas (aunque su accesibilidad sea limitada) destaca la importancia del soporte multilingüe en plataformas globales @chatgpt-2025.
 
 - Gestión de recursos: Las restricciones de uso, como las 60 páginas/mes de Humata, aunque insuficientes, establecen un marco base para implementar modelos de suscripción escalables.
 
 - Seguridad básica: La dependencia de servidores remotos, si bien plantea riesgos, subraya la necesidad de protocolos de privacidad robustos en futuros desarrollos.
 
-- Gestión de referencias bibliográficas: ChatPDF se distingue por su eficacia en el manejo de referencias bibliográficas, ya que permite identificar y vincular citas con el texto original, facilitando su visualización y verificación
+- Gestión de referencias bibliográficas: ChatPDF se distingue por su eficacia en el manejo de referencias bibliográficas, ya que permite identificar y vincular citas con el texto original, facilitando su visualización y verificación @chatpdf-2025.
 
 == Tecnologías a utilizar
 
 A continuación se detallan las tecnologías y herramientas utilizadas asi como la Metodología del desarrollo. 
 
-=== Metodologías de desarrollo de software
+=== Metodología de desarrollo de software
+
+
 
 === Herramientas CASE
 

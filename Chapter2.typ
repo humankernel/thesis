@@ -1,7 +1,17 @@
+#import "@preview/fletcher:0.5.6" as fletcher: diagram, node, edge
 
 = Propuesta de solución
 
-== Análisis de la propuesta 
+Este capítulo se enfoca en la formulación y desarrollo de la solución propuesta, derivada de un riguroso proceso de investigación. Bajo el marco metodológico adoptado, se identifican y establecen los requisitos funcionales y no funcionales que definirán las características esenciales del sistema. Paralelamente, se examina la arquitectura de base que sustentará la implementación, generando los artefactos correspondientes a la fase de análisis y diseño.
+
+== Descripción de la propuesta de solución
+
+Luego de llevar a cabo un análisis exhaustivo de los conceptos y herramientas clave que se emplearán en esta investigación, se presenta la propuesta de solución en la @prototype, la cual se describe de la siguiente manera.
+
+#figure(
+    diagram(),
+    caption: [Propuesta de Solución]
+)<prototype>
 
 == Modelo conceptual
 
@@ -35,6 +45,8 @@
 - *RnF5*: El sistema permitirá que multiple usuarios lo empleen a la vez
 - *RnF6*: Los tiempos de respuesta no excederán los 10 segundos
 
+arreglar
+
 *Legales*
 - *RnF7*: Las herramientas seleccionadas para el desarrollo de la propuesta de solución estarán respaldadas por licencias libres
 
@@ -53,6 +65,8 @@
 === Patrones de diseño 
 
 === Diagrama de clases
+
+no si es XP
 
 == Evaluación
 

@@ -7,11 +7,13 @@
 
 === Pruebas de integración
 
+revisar bien
+
 === Estrategias de pruebas
 
-==== Nivel unidad: Métodos de Caja Blanca
+==== Métodos de Caja Negra
 
-==== Nivel unidad: Métodos de Caja Negra
+solo a la UI
 
 == Conclusiones parciales
 

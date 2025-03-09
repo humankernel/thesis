@@ -199,10 +199,6 @@
     },
   )
 
-
-  // Configure equation numbering.
-  set math.equation(numbering: "(1)")
-
   // Display inline code in a small box that retains the correct baseline.
   show raw.where(block: false): box.with(
     fill: fill-color.darken(2%),
@@ -310,7 +306,7 @@
 #let BODY-MATTER(
   text-size,
   ship-part-page: true,
-  body-matter-material
+  body
 ) = {
   // New Page
   pagebreak()
@@ -337,9 +333,6 @@
 
   // Main headings in BODY-MATTER
   show heading.where(level: 1): it => {
-    counter(figure.where(kind: image)).update(0)
-    counter(figure.where(kind: table)).update(0)
-    counter(math.equation).update(0)
     // Layout
     pagebreak(weak: true)
     align(right, {
@@ -361,6 +354,5 @@
     line(length: 100%, stroke: 0.5pt)
   }
 
-  // Book body material
-  body-matter-material
+  body
 }
