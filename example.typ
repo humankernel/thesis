@@ -305,8 +305,34 @@ Teniendo en cuenta lo anterior la arquitectura RAG para este proyecto es la mas 
 
 == Estudio de sistemas a nivel internacional
 
+A partir del estudio de los sistemas internacionales detallados en la @comparison (Elicit, ChatGPT, Humata y Scholarcy), se identificaron limitaciones que afectan su usabilidad en el contexto nacional. Estos servicios, desarrollados bajo modelos de software propietario y dependientes de servidores remotos, enfrentan barreras geopolíticas (como bloqueos en Cuba) y restricciones de uso (límites mensuales de artículos, páginas o mensajes), lo que limita su escalabilidad y adaptabilidad a entornos con necesidades intensivas, como la investigación académica o la implementación en regiones con censura. Estas restricciones contradicen los principios de accesibilidad universal y soberanía tecnológica, fundamentales para proyectos que buscan autonomía en el manejo de datos y herramientas.
 
+#figure(
+    table(
+        columns: 6,
+        inset: 10pt,
+        align: horizon,
+        table.header(
+            [*Servicio*], [*Accesibilidad*], [*Uso Limitado*], [*Localización*], [*Código Abierto*], [*Seguridad y Privacidad*]
+        ),
+        [Elicit],[Si],[20 Artículos / mes],[Ingles mayormente],[No],[Servidor remoto],
+        [ChatGPT],[Bloqueada],[No permite registrase desde Cuba],[Todos],[No],[Servidor remoto],
+        [ChatPDF],[Bloqueada],[2 pdf y 20 mensajes / dia ],[Todos],[No],[Servidor remoto],
+        [Humata],[Si],[60 paginas / mes],[Ingles mayormente],[No],[Servidor remoto],
+        [Scholarcy],[Bloqueada],[10 resúmenes],[Ingles mayormente],[No],[Servidor remoto],
+    ),
+    caption: [Comparativa entre homólogos]
+)<comparison>
 
+Si bien las soluciones analizadas no resuelven integralmente los desafíos identificados, ofrecen referencias valiosas para el diseño de un sistema alternativo. Por ejemplo:
+
+- Estandarización de funcionalidades: La capacidad de ChatGPT para operar en múltiples idiomas (aunque su accesibilidad sea limitada) destaca la importancia del soporte multilingüe en plataformas globales.
+
+- Gestión de recursos: Las restricciones de uso, como las 60 páginas/mes de Humata, aunque insuficientes, establecen un marco base para implementar modelos de suscripción escalables.
+
+- Seguridad básica: La dependencia de servidores remotos, si bien plantea riesgos, subraya la necesidad de protocolos de privacidad robustos en futuros desarrollos.
+
+- Gestión de referencias bibliográficas: ChatPDF se distingue por su eficacia en el manejo de referencias bibliográficas, ya que permite identificar y vincular citas con el texto original, facilitando su visualización y verificación
 
 == Tecnologías a utilizar
 
