@@ -48,16 +48,13 @@
   set document(title: title, author: author)
   // Set the body font.
   set text(size: 12pt) // default is 11pt
-
   // Set raw text font.
   show raw: set text(font: ("DejaVu Math TeX Gyre"), size: 9pt)
-
   // Configure page size and margins.
   set page(
     paper: paper-size,
     margin: (bottom: 1.75cm, top: 2.25cm),
   )
-
 
 
 
@@ -72,6 +69,8 @@
     align(
       center,
       block(width: 90%)[
+        #image("Images/uci_logo.jpg", width: 20%)
+
         #let v-space = v(2em, weak: true)
         #text(size: 10pt)[Universidad de las Ciencias Informáticas]
         #v(-0.5em)
