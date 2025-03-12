@@ -5,10 +5,6 @@
 
 === Pruebas unitarias
 
-=== Pruebas de integración
-
-revisar bien
-
 === Estrategias de pruebas
 
 ==== Métodos de Caja Negra
