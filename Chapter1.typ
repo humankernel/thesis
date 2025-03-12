@@ -245,16 +245,30 @@ Si bien las soluciones analizadas no resuelven integralmente los desafíos ident
 
 - Gestión de referencias bibliográficas: ChatPDF se distingue por su eficacia en el manejo de referencias bibliográficas, ya que permite identificar y vincular citas con el texto original, facilitando su visualización y verificación @chatpdf-2025.
 
+== Metodología de desarrollo de software
+
+Una metodología es un conjunto organizado de procedimientos, técnicas, herramientas y documentos auxiliares que guían a los desarrolladores en la implementación de sistemas de información. Se estructura en fases y subfases que facilitan la elección de las técnicas más adecuadas en cada etapa del proyecto, permitiendo una planificación, gestión, control y evaluación efectivas, y asegurando la calidad y coherencia del producto final @sommerville_ingenierisoftware_2005.
+
+Dado que el proyecto es pequeño, el tamaño del equipo consta es de un solo integrante, el tiempo es limitado, la metodología XP (Programación Extrema) es ideal porque permite recibir retroalimentación frecuente y realizar ajustes rápidos en el desarrollo. Su enfoque en ciclos iterativos cortos y pruebas constantes ayuda a garantizar que cada avance sea funcional y alineado con los objetivos del proyecto, optimizando el uso del tiempo y asegurando mejoras continuas sin desviaciones significativas.
+
+
+*Metodología de desarrollo de software Programación Extrema (XP)*
+
+XP, o Extreme Programming, es una metodología de desarrollo de software que lleva las prácticas tradicionales al extremo. Se fundamenta en iteraciones frecuentes y breves ciclos de lanzamiento, donde los requisitos se definen mediante "historias de usuario" que se transforman en tareas con pruebas de aceptación. Entre sus prácticas clave se encuentran la programación en pareja, el desarrollo guiado por pruebas (TDD) y la integración continua, lo que garantiza la calidad y la adaptabilidad del software a lo largo del proceso. Además, XP incorpora valores fundamentales y técnicas como el diseño simple, tarjetas CRC, pruebas unitarias, soluciones spike, prototipos y refactorización, lo que la hace especialmente efectiva para desarrollar sistemas complejos con equipos pequeños @sommerville_ingenierisoftware_2005. Esta se desarrolla a través de varias fases fundamentales iterativas y flexibles: Planificación, Diseño, Codificación y Pruebas.
+
+En la *fase de planificación*, se recopilan y definen las historias de usuario que expresan de forma práctica los requisitos y objetivos del sistema. Aquí, el equipo estima el esfuerzo y los recursos necesarios para cada historia, lo que permite establecer prioridades basadas en el valor que aportan al proyecto y en las restricciones de tiempo. Este enfoque iterativo posibilita la adaptación de la planificación a medida que se van clarificando los requerimientos y surgen nuevos desafíos.
+
+En la *fase de diseño*, se busca mantener la solución lo más sencilla posible, evitando complejidades innecesarias. El diseño es emergente, es decir, se va refinando conforme se avanza en el desarrollo, permitiendo incorporar cambios y mejoras de forma gradual. La práctica de la refactorización es fundamental en esta etapa, ya que implica reorganizar y mejorar el código sin modificar su comportamiento externo, lo que ayuda a mantener una estructura clara y eficiente.
+
+La *fase de codificación* se centra en la implementación efectiva de las historias de usuario. Aquí, la programación en parejas fomenta la colaboración y la revisión constante del código, reduciendo errores y mejorando la calidad del software. Además, se integra el Desarrollo Basado en Pruebas (TDD), donde se escriben primero las pruebas unitarias que definen el comportamiento esperado, y luego se desarrolla el código que cumpla con estas pruebas, asegurando así que cada parte del sistema funcione correctamente desde el inicio.
+
+Por último, en la *fase de pruebas*, se verifica de manera continua la funcionalidad y calidad del software. Se realizan pruebas unitarias para cada módulo y pruebas de aceptación basadas en las historias de usuario, lo que permite detectar y corregir errores de forma temprana. La integración continua facilita que los cambios se incorporen de inmediato al proyecto, garantizando que el sistema evolucione de manera estable y acorde a los requisitos establecidos.
+
 == Tecnologías a utilizar
 
 A continuación se detallan las tecnologías y herramientas utilizadas asi como la Metodología del desarrollo. 
 
-=== Metodología de desarrollo de software
-
-
-
-=== Herramientas CASE
-
+// === Herramienta CASE
 === Lenguaje de Programación
 
 *Python v3.12*: es un lenguaje de programación multiparadigma que prioriza la legibilidad del código y la productividad. Aunque soporta programación orientada a objetos (OOP), también integra enfoques funcionales y procedurales, lo que lo hace versátil para abordar problemas complejos.
@@ -285,8 +299,67 @@ A continuación se detallan las tecnologías y herramientas utilizadas asi como 
 
 - Tipado dinámico: Aunque favorece la flexibilidad, puede generar errores en tiempo de ejecución difíciles de depurar @castro2023landscapehighperformancepythondevelop.
 
-=== Entorno de desarrollo integrado
+=== Modelos LLM 
+
+*DeepSeek-R1-Distill-Qwen-1.5B-Q8_0*: es una versión cuantizada #footnote[Técnica de compresión que reduce la precisión numérica de los pesos del modelo. Esto disminuye significativamente el tamaño del modelo y sus requisitos computacionales, lo que lo hace más eficiente en términos de memoria y energía] y distilada #footnote[Técnica que permite transferir el conocimiento de un modelo grande y complejo, denominado "modelo profesor", a un modelo más pequeño y eficiente, conocido como "modelo alumno". Este proceso busca reducir el tamaño y la complejidad del modelo original sin comprometer significativamente su rendimiento] del modelo de lenguaje DeepSeek-R1, diseñada para ser más eficiente y compacta mientras mantiene un rendimiento sólido, especialmente en tareas de razonamiento.
+
+*Ventajas*
+
+- *Rendimiento en razonamiento*: Hereda capacidades de razonamiento del modelo más grande DeepSeek-R1, mostrando un rendimiento impresionante en tareas de matemáticas y razonamiento lógico.
+
+- *Versatilidad*: Puede ser utilizado en una variedad de aplicaciones, desde generación de texto hasta tareas de comprensión del lenguaje.
+
+- *Licencia permisiva*: Está disponible bajo la licencia Apache 2.0, que permite su uso comercial sin restricciones.
+
+- *Flexibilidad de implementación*: Disponible en varios formatos y niveles de cuantización, lo que permite su uso en diferentes tipos de dispositivos y aplicaciones @deepseekai2025deepseekr1incentivizingreasoningcapability.
+
+*BAAI/bge-m3*: es un modelo avanzado de embeddings #footnote[Los embeddings son representaciones numéricas de datos que capturan el significado o características de objetos como palabras, imágenes o conceptos en un espacio multidimensional. Elementos con significados similares se ubican cerca en el espacio vectorial, esto permite la búsqueda por cercanía]. Destaca por su versatilidad en tres dimensiones clave.
+
+- Multifuncionalidad: Combina tres métodos de recuperación en un solo modelo:
+  1. Embeddings Densos: Vectores compactos para búsqueda semántica.
+  2. Recuperación léxica (sparse): Ponderación de tokens al estilo BM25.
+  3. Interacción multi-vector (Col-BERT): Múltiples vectores por texto para mayor precisión.
+
+- Multilingüístico: Soporta más de 100 idiomas. Rendimiento optimizado para lenguas como inglés, español, chino, francés y árabe.
+
+- Multigranularidad: Procesa textos desde frases cortas hasta documentos largos (hasta 8,192 tokens) esto lo hace ideal para RAG (Retrieval-Augmented Generation) con textos extensos @bge-m3.
+
+
+=== Bibliotecas
+
+*llama-cpp v0.3.17*: es un proyecto de código abierto que permite ejecutar modelos de lenguaje grandes (LLMs) de manera eficiente en hardware convencional, sin necesidad de GPUs potentes. Implementado en C/C++, optimiza el uso de CPU y RAM.
+
+*Ventajas clave*:
+
+- Formato GGUF: Cuantiza modelos para equilibrar rendimiento y precisión.
+    
+- Soporte multiplataforma: Funciona en Windows, Linux, macOS y hasta dispositivos móviles, con soporte para aceleración GPU.
+
+- Eficiencia y privacidad: Optimizado para CPU, evita el alto consumo de energía y mantiene los datos locales.
+
+- Flexibilidad y comunidad activa: Compatible con múltiples modelos y en constante desarrollo. @llama-cpp
+
+*Gradio v5.20.1*: es una biblioteca de Python de código abierto diseñada para crear interfaces web interactivas para modelos de machine learning y aplicaciones de inteligencia artificial. Permite a los desarrolladores construir y desplegar interfaces gráficas de manera rápida y sencilla, sin necesidad de conocimientos avanzados en desarrollo web
+
+*Ventajas clave*:
+
+- Fácil de usar: Con solo unas pocas líneas de código, puedes crear una interfaz web funcional para probar o demostrar modelos de IA.
+  
+- Soporte para múltiples componentes: Incluye una amplia variedad de elementos interactivos, como cuadros de texto, botones, deslizadores, subida de archivos, imágenes, audio y más.
+
+- Interactividad en tiempo real: Soporta streaming y actualizaciones dinámicas, ideal para aplicaciones como chatbot o generadores de texto.
+
+- Personalización: Permite modificar el diseño, añadir temas personalizados y combinar múltiples componentes para crear interfaces complejas @gradio-app.
+
+// === Entorno de desarrollo integrado
 
 == Conclusiones parciales
 
+Se dieron cumplimiento a los primeros objetivos específicos. por lo que se llego a las siguientes conclusiones:
+
+- El análisis de los conceptos asociados estableció una base teórica sólida que facilitó la comprensión profunda de la problemática y los mecanismos subyacentes, permitiendo identificar las herramientas y técnicas más adecuadas para el proyecto.
+
+- La elección de tecnologías como Python y llama.cpp definió las bases para un diseño optimizado y escalable, especialmente en entornos con recursos limitados, lo que garantiza una mayor eficiencia en el procesamiento de los modelos.
+
+- Las características particulares del proyecto evidenciaron la necesidad de adoptar la metodología XP, que favoreció una gestión iterativa y flexible. Esta metodología permitió realizar ajustes continuos durante el desarrollo, asegurando la calidad del sistema y adaptándose rápidamente a los cambios emergentes.
 
