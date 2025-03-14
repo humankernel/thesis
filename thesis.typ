@@ -6,14 +6,28 @@
   title: [Desarrollo de una herramienta basada en RAG y LLMs para optimizar el análisis de
 artículos científicos],
   faculty: [VERTEX: INTERACTIVE 3D ENVIRONMENTS, FACULTAD 4],
-  author: ("Joaquin Rivas Sanchez"),
-  tutor: ("Msc. Angel Alberto Vazquez Sánchez", "Msc. Lisset Salazar Gómez"),
+  author: ("Joaquin Rivas Sánchez"),
+  advisors: ("Msc. Angel Alberto Vazquez Sánchez", "Msc. Lisset Salazar Gómez"),
   abstract: [#lorem(80)],
   keywords: ("Aprendizaje Profundo", "RAG", "Procesamiento de Lenguaje Natural", "Contexto Cubano", "Código Abierto"),
-  bibliography: bibliography("refs.bib", title: "Bibliografía", style:"american-psychological-association"),
-  table-of-contents: outline(title: "Índice de Contenidos"),
-  figure-index: (enabled: true),
-  table-index: (enabled: true),
+  table-of-contents: (
+    enable: true,
+    title: "Índice general"
+  ),
+  figure-index: (
+    enabled: true,
+    title: "Índice de figuras"
+  ),
+  table-index: (
+    enabled: true,
+    title: "Índice de tablas"
+  ),
+  watermark: [Borrador],
+  bibliography: bibliography(
+    "refs.bib",
+    title: "Bibliografía",
+    style: "american-physiological-society"
+  )
 )
 
 #show: BODY-MATTER.with(10pt)

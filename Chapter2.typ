@@ -90,196 +90,231 @@ El usuario inicia la interacción proporcionando una consulta (query), que el si
 
 === Requisitos funcionales 
 
-- *HU1*: Envío de consultas.
-- *HU2*: Envío de archivos PDF.
-- *HU3*: Generación de respuestas. // review
-- *HU4*: Procesamiento de archivos. // review
-- *HU5*: Búsqueda de documentos relevantes. // review
-- *HU6*: Visualización de resultados.
-- *HU7*: Regeneración de respuestas.
-- *HU8*: Retroalimentación sobre respuestas.
-- *HU9*: Edición de consultas previas.
-- *HU10*: Ajuste de parámetros del sistema.
-- *HU11*: Creación de múltiples conversaciones.
-- *HU12*: Limpieza del chat.
-- *HU13*: Inclusión de citas en las respuestas.
+- *HU1*: Enviar consultas
+- *HU2*: Enviar archivos PDF
+- *HU3*: Generar respuestas
+- *HU4*: Procesar archivos
+- *HU5*: Buscar documentos relevantes
+- *HU6*: Mostrar documentos recuperados y sus puntuaciones
+- *HU7*: Regenerar respuesta
+- *HU8*: Dar retroalimentación de una respuesta
+- *HU9*: Editar una consulta previa
+- *HU10*: Ajustar los parámetros del sistema
+- *HU11*: Crear múltiples conversaciones
+- *HU12*: Limpiar el chat
+- *HU13*: Incluir citas en las respuestas
 
 === Requisitos no funcionales
-
-*Interfaz Gráfica*
-- *RnF1*: Los mensajes y respuestas deben seguir una estructura y lenguaje natural.
-
+// todo: extender
 *Usabilidad*
-- *RnF2*: Se podrá interactuar de forma fácil por cualquier usuario.
-- *RnF3*: Se podrá emplear cualquier idioma.
+- *RnF1*: Se podrá interactuar de forma fácil por cualquier usuario.
+- *RnF2*: Se podrá emplear cualquier idioma.
 
 *Accesibilidad*
-- *RnF4*: Las funcionalidades del sistema estarán disponibles en todo momento.
+- *RnF3*: Las funcionalidades del sistema estarán disponibles en todo momento.
 
 *Rendimiento*
-- *RnF5*: El sistema permitirá que multiple usuarios lo empleen a la vez.
-- *RnF6*: Los tiempos de respuesta no serán demasiado largos.
-
-// todo: arreglar
+- *RnF4*: El sistema permitirá que multiple usuarios lo empleen a la vez.
 
 *Legales*
-- *RnF7*: Las herramientas seleccionadas para el desarrollo de la propuesta de solución estarán respaldadas por licencias libres.
+- *RnF5*: Las herramientas seleccionadas para el desarrollo de la propuesta de solución estarán respaldadas por licencias libres.
 
 *Hardware* 
-- *RnF8*: El sistema debe ejecutarse en una computadora con procesador mayor a Intel Core i7 7700k u homólogos.
-- *RnF9*: El sistema debe ejecutarse en una computadora con memoria RAM mínima de 4 Gigabytes.
-- *RnF10*: El sistema debe ejecutarse en una computadora con GPU superior a Nvidia 1050ti u homólogos.
-- *RnF11*: El sistema debe ejecutarse en una computadora con memoria VRAM mínima de 4 Gigabytes.
+- *RnF6*: El sistema debe ejecutarse en una computadora con procesador mayor a Intel Core i7 7700k u homólogos.
+- *RnF7*: El sistema debe ejecutarse en una computadora con memoria RAM mínima de 4 Gigabytes.
+- *RnF8*: El sistema debe ejecutarse en una computadora con GPU Nvidia.
+- *RnF9*: El sistema debe ejecutarse en una computadora con GPU superior a Nvidia 1050ti.
+- *RnF10*: El sistema debe ejecutarse en una computadora con memoria VRAM mínima de 4 Gigabytes.
 
 == Descripción de las historias de usuario
 
 En este capítulo se definen los requisitos funcionales y no funcionales del sistema, los cuales describen, respectivamente, las funcionalidades que debe ofrecer la aplicación y las restricciones o cualidades que debe cumplir (como rendimiento, usabilidad y seguridad). En la metodología XP, estos requisitos se especifican mediante historias de usuario, redactadas en un lenguaje claro y accesible por el cliente, permitiendo encapsular de forma concisa lo que el sistema debe realizar. Este enfoque facilita la priorización, estimación y validación de cada historia, garantizando una comunicación efectiva entre desarrolladores y usuarios, y permitiendo iteraciones de desarrollo ágiles y adaptables a las necesidades reales @sommerville_ingenierisoftware_2005.
 
 
+#let table_user_story(number, name, priority, risk, user, points, iterations, responsable, description, observations, picture: none) = {
+  let rows = (
+      // header
+      table.header(
+        table.cell(colspan: 2, fill: color.rgb(204, 204, 255))[*Historia de Usuario*]
+      ),
 
+      // hu number + name
+      [*Número:* #number],[*Nombre:* #name],
 
-Tabla 1. HU1 – Envío de consultas
-Historia de Usuario
+      // user
+      table.cell(colspan: 2)[*Usuario:* #user], 
 
-    Código: HU1
-    Nombre: Envío de consultas
-    Referencia: —
-    Prioridad: Alta
-    Iteración asignada: 1
-    Puntos Estimados: 1 semana
-    Descripción: Permite al usuario escribir su consulta en el sistema y enviarla para obtener respuestas.
+      // priority + risk
+      [*Prioridad de negocio:* #priority],[*Riesgo en desarrollo:* #risk],
 
-Tabla 2. HU2 – Generación de respuestas
-Historia de Usuario
+      // points + iterations
+      [*Puntos estimados:* #points],[*Iteración asignada:* #iterations],
 
-    Código: HU2
-    Nombre: Generación de respuestas
-    Referencia: depende de HU1
-    Prioridad: Alta
-    Iteración asignada: 1
-    Puntos Estimados: 1 semana
-    Descripción: El sistema debe procesar la consulta y generar una respuesta coherente, presentándola al usuario de forma clara y útil.
+      // responsable
+      table.cell(colspan: 2)[*Programador Responsable:* #responsable],
 
-Tabla 3. HU3 – Envío de archivos PDF
-Historia de Usuario
+      // description
+      table.cell(colspan: 2)[*Descripción:* #description],
 
-    Código: HU3
-    Nombre: Envío de archivos PDF
-    Referencia: —
-    Prioridad: Media
-    Iteración asignada: 2
-    Puntos Estimados: 1 semana
-    Descripción: El usuario puede adjuntar archivos PDF al sistema para su posterior análisis y uso en las respuestas.
+      // observations
+      table.cell(colspan: 2)[*Observaciones:* #observations],
+  )
 
-Tabla 4. HU4 – Procesamiento de archivos
-Historia de Usuario
+  // picture 
+  if picture != none {
+    rows.push(
+      table.cell(colspan: 2)[
+        *Prototipo Interfaz:* \
+        #align(center, image(picture, width: 60%))
+      ]
+    ) 
+  }
 
-    Código: HU4
-    Nombre: Procesamiento de archivos
-    Referencia: depende de HU3
-    Prioridad: Alta
-    Iteración asignada: 2
-    Puntos Estimados: 1 semana
-    Descripción: El sistema procesa los PDF, extrayendo su contenido y preparándolo para su indexación y posterior consulta.
+  figure(
+    table(
+      align: left,
+      columns: (2fr, 3fr),
+      stroke: .5pt + black,
+      ..rows
+    ),
+    caption: [Historia de usuario #number]
+  )
+}
 
-Tabla 5. HU5 – Búsqueda de documentos relevantes
-Historia de Usuario
+#table_user_story(1, [Enviar consultas],
+  [Alta], [Bajo],
+  [Investigador],
+  1, 1,
+  [Joaquin Enrique Rivas Sánchez],
+  [El usuario puede escribir y enviar consultas al sistema.], 
+  [],
+  picture: "Images/hu-enviar-consulta.png"
+)
 
-    Código: HU5
-    Nombre: Búsqueda de documentos relevantes
-    Referencia: depende de HU4
-    Prioridad: Alta
-    Iteración asignada: 3
-    Puntos Estimados: 2 semanas
-    Descripción: El sistema combina representaciones densas y dispersas para encontrar los documentos más pertinentes según la consulta, utilizando una suma de pesos para equilibrar ambas búsquedas.
+#table_user_story(2, [Enviar archivos PDF],
+  [Media], [Bajo],
+  [Investigador],
+  1, 1,
+  [Joaquin Enrique Rivas Sánchez],
+  [El usuario puede enviar archivos PDF al sistema para su procesamiento de hasta 300 megabytes.], 
+  [En caso de intentar enviar otros formatos de archivo, se mostrara un mensaje de advertencia.],
+  picture: "Images/hu-enviar-pdf.png",
+)
 
-Tabla 6. HU6 – Visualización de resultados y score
-Historia de Usuario
+#table_user_story(3, [Generar respuestas],
+  [Alta], [Medio],
+  [],
+  2, 1,
+  [Joaquin Enrique Rivas Sánchez],
+  [El sistema genera respuestas basadas en las consultas realizadas por el usuario.], 
+  [En caso de fallar se muestra un mensaje de error.]
+)
 
-    Código: HU6
-    Nombre: Visualización de resultados y score
-    Referencia: depende de HU5
-    Prioridad: Media
-    Iteración asignada: 3
-    Puntos Estimados: 1 semana
-    Descripción: Muestra al usuario los documentos recuperados junto con una puntuación de relevancia, ayudándole a comprender por qué se seleccionaron esos resultados.
+#table_user_story(4, [Procesar archivos],
+  [Alta], [Alto],
+  [Investigador],
+  3, 2,
+  [Joaquin Enrique Rivas Sánchez],
+  [El sistema procesa los archivos enviados y almacena la información extraída.], 
+  []
+)
 
-Tabla 7. HU7 – Regeneración de respuestas
-Historia de Usuario
+#table_user_story(5, [Buscar documentos relevantes],
+  [Alta], [Alta],
+  [],
+  2, 2,
+  [Joaquin Enrique Rivas Sánchez],
+  [El sistema identifica y recupera documentos pertinentes en función de la consulta realizada.], 
+  [En caso de no encontrar documentos relevantes no devuelve nada.]
+)
 
-    Código: HU7
-    Nombre: Regeneración de respuestas
-    Referencia: depende de HU2
-    Prioridad: Media
-    Iteración asignada: 4
-    Puntos Estimados: 1 semana
-    Descripción: Permite al usuario solicitar al sistema una nueva respuesta en caso de que la inicial no satisfaga sus necesidades.
+#table_user_story(6, [Mostrar documentos recuperados],
+  [Media], [Bajo],
+  [Investigador],
+  1, 1,
+  [Joaquin Enrique Rivas Sánchez],
+  [El sistema muestra una lista de documentos con sus respectivas puntuaciones.], 
+  [En caso de no recibir documentos recuperados no se mostrara nada],
+  picture: "Images/hu-mostrar-chunks.png"
+)
 
-Tabla 8. HU8 – Retroalimentación sobre respuestas
-Historia de Usuario
+#table_user_story(7, [Regenerar respuesta],
+  [Media], [Bajo],
+  [Investigador],
+  1, 1,
+  [Joaquin Enrique Rivas Sánchez],
+  [El usuario puede solicitar al sistema que regenere una respuesta si la inicial no satisface sus necesidades.], 
+  [],
+  picture: "Images/hu-regenerate.png"
+)
 
-    Código: HU8
-    Nombre: Retroalimentación sobre respuestas
-    Referencia: depende de HU2
-    Prioridad: Media
-    Iteración asignada: 4
-    Puntos Estimados: 1 semana
-    Descripción: El usuario puede calificar o comentar la calidad de la respuesta, ayudando al sistema a refinar sus resultados y mejorar con el tiempo.
+#table_user_story(8, [Dar retroalimentación de una respuesta],
+  [Media], [Bajo],
+  [Investigador],
+  1, 1,
+  [Joaquin Enrique Rivas Sánchez],
+  [El usuario puede proporcionar retroalimentación sobre las respuestas del sistema. Los criterios para retroalimentar son los siguientes: Me gusta, No me gusta, Alucinación, Inapropiado, Dañino.], 
+  [],
+  picture: "Images/hu-retroalimentacion.png"
+)
 
-Tabla 9. HU9 – Edición de consultas previas
-Historia de Usuario
+#table_user_story(9, [Editar una consulta previa],
+  [Media], [Bajo],
+  [Investigador],
+  1, 1,
+  [Joaquin Enrique Rivas Sánchez],
+  [El sistema permite la edición de consultas y genera nuevas respuestas basadas en los cambios.], 
+  [],
+  picture: "Images/hu-editar-consulta.png"
+)
 
-    Código: HU9
-    Nombre: Edición de consultas previas
-    Referencia: depende de HU1
-    Prioridad: Media
-    Iteración asignada: 5
-    Puntos Estimados: 1 semana
-    Descripción: El usuario puede modificar una consulta anterior para refinar su búsqueda sin tener que iniciar un nuevo hilo de conversación.
+#table_user_story(10, [Ajustar los parámetros del sistema],
+  [Baja], [Medio],
+  [Investigador],
+  2, 2,
+  [Joaquin Enrique Rivas Sánchez],
+  [El usuario accede a opciones de configuración para modificar parámetros específicos. Los parámetros incluyen: 
+    - Selección del modelo LLM
+    - Temperatura del modelo
+    - Máximo de tokens de salida
+    - Penalización de frecuencia y de presencia
+    - top-p, top-k
+    - Prompt del sistema
+    - Estilo del lenguaje
+    ], 
+  [],
+  picture: "Images/hu-model-params.png"
+)
 
-Tabla 10. HU10 – Ajuste de parámetros del sistema
-Historia de Usuario
+#table_user_story(11, [Crear múltiples conversaciones],
+  [Media], [Bajo],
+  [Investigador],
+  1, 1,
+  [Joaquin Enrique Rivas Sánchez],
+  [El usuario puede iniciar múltiples conversaciones independientes para gestionar diferentes temas o consultas.], 
+  [Cada conversación maneja su propio historial y contexto.],
+  picture: "Images/hu-nuevos-chats.png"
+)
 
-    Código: HU10
-    Nombre: Ajuste de parámetros del sistema
-    Referencia: —
-    Prioridad: Baja
-    Iteración asignada: 5
-    Puntos Estimados: 1 semana
-    Descripción: El usuario puede configurar opciones como el peso de las búsquedas densas y dispersas, así como otros parámetros de rendimiento, para personalizar el comportamiento del sistema.
+#table_user_story(12, [Limpiar el chat],
+  [Baja], [Bajo],
+  [Investigador],
+  1, 1,
+  [Joaquin Enrique Rivas Sánchez],
+  [El usuario puede limpiar el historial del chat para comenzar una nueva conversación.], 
+  [],
+  picture: "Images/hu-limpiar-chat.png"
+)
 
-Tabla 11. HU11 – Gestión de múltiples conversaciones
-Historia de Usuario
-
-    Código: HU11
-    Nombre: Gestión de múltiples conversaciones
-    Referencia: depende de HU1
-    Prioridad: Media
-    Iteración asignada: 6
-    Puntos Estimados: 2 semanas
-    Descripción: Permite al usuario mantener varias conversaciones paralelas con el sistema, facilitando la organización de diferentes contextos y temas de consulta.
-
-Tabla 12. HU12 – Limpieza del chat
-Historia de Usuario
-
-    Código: HU12
-    Nombre: Limpieza del chat
-    Referencia: depende de HU11
-    Prioridad: Baja
-    Iteración asignada: 6
-    Puntos Estimados: 1 semana
-    Descripción: El usuario puede eliminar el historial de la conversación para iniciar una sesión limpia, sin referencias a interacciones anteriores.
-
-Tabla 13. HU13 – Inclusión de citas en las respuestas
-Historia de Usuario
-
-    Código: HU13
-    Nombre: Inclusión de citas en las respuestas
-    Referencia: depende de HU2
-    Prioridad: Media
-    Iteración asignada: 7
-    Puntos Estimados: 1 semana
-    Descripción: El sistema debe proporcionar referencias o citas en las respuestas, cuando corresponda, para sustentar la información y permitir su verificación por parte del usuario.
+#table_user_story(13, [Incluir citas en las respuestas],
+  [Alta], [Medio],
+  [],
+  2, 2,
+  [Joaquin Enrique Rivas Sánchez],
+  [El sistema incluye citas de fuentes relevantes en las respuestas para respaldar la información proporcionada.], 
+  []
+  // todo: add picture
+)
 
 
 == Diseño 

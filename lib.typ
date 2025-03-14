@@ -17,19 +17,21 @@
   faculty: [Your Faculty],
   paper-size: "a4",
   author: (), 
-  tutor: (),
+  advisors: (),
   date: none,
   date-format: "[month repr:long] [day padding:zero], [year repr:full]",
   abstract: none, 
   keywords: (),
-  table-of-contents: outline(),
+  table-of-contents: (
+    enable: false,
+    title: "",
+  ),
   appendix: (
     enabled: false,
     title: "",
     heading-numbering-format: "",
     body: none,
   ),
-
   // Display an index of tables
   table-index: (
     enabled: false,
@@ -40,163 +42,125 @@
     enabled: false,
     title: "",
   ),
-
+  watermark: none, 
   bibliography: none,
   body
 ) = {  
-  // Set the document's metadata.
-  set document(title: title, author: author)
-  // Set the body font.
-  set text(size: 12pt) // default is 11pt
+
+  // Metadata
+  set document(title: title, author: author, description: abstract, keywords: keywords)
+
+  // Body font.
+  set text(size: 12pt)
   // Set raw text font.
   show raw: set text(font: ("DejaVu Math TeX Gyre"), size: 9pt)
-  // Configure page size and margins.
+  // Show table captions on top
+  show figure.where(
+    kind: table
+  ): set figure.caption(position: top)
+  // Page Config.
   set page(
     paper: paper-size,
     margin: (bottom: 1.75cm, top: 2.25cm),
+    background: rotate(-45deg, 
+      text(120pt, fill: rgb(230, 230, 230))[*#watermark*]
+    ),
   )
-
-
+  set par(justify: true)
 
   // Cover page.
   page(
-    // UCI LOGO
-    // align(
-    //   center,
-    //   image("Images/uci_logo.jpg", width: 40%)
-    // ),
+    align(center, block(width: 90%)[
+        #image("Images/uci_logo.jpg", width: 40%)
 
-    align(
-      center,
-      block(width: 90%)[
-        #image("Images/uci_logo.jpg", width: 20%)
+        #v(2em)
 
-        #let v-space = v(2em, weak: true)
+        // University
         #text(size: 10pt)[Universidad de las Ciencias Informáticas]
+
         #v(-0.5em)
+
+        // Faculty
         #text(size: 8pt)[#faculty]
 
-        // TITLE
         #v(5em)
+
+        // Title
         #text(size: 18pt)[#title]
 
+        #v(5em)
+
+        // type of document
         #text[*Trabajo de diploma para optar por el título de  Ingeniero en Ciencias Informáticas*]
 
         #v(5em)
-        #v-space
-        #text(1.6em, [*Autor*: #author])
-        #v(0.5em)
-        #text(1.6em, [*Tutores*:])
-        #for t in tutor {
-          text(1.6em, t)
+
+        // authors
+        #text(size: 12pt, [Autor: #author])
+
+        // tutors
+        #text(size: 12pt, [Tutores:])
+        #for t in advisors {
+          text(size: 12pt, t)
         }
 
         #if date != none {
           v-space
           text(date.display(date-format))
         }
+        #v(15em)
+        #text(size: 12pt, [*La Habana, 2025*])
       ],
     ),
   )
 
 
-
+  set page()
   // Abstract
-  pagebreak()
-  set align(left)
-  par(justify: true)[
-    *RESUMEN* \
-    #abstract
-  ]
-  text[*Palabras Clave*: #keywords.join("; ")]
-  
+  heading[RESUMEN]
+  text[#abstract]
+  v(2pt)
+  // keywords
+  text[*Palabras clave*: #keywords.join(", ")]
 
-  
 
-  // Config Post-Cover
-  set par(justify: true)
-  set text(font: "New Computer Modern", size: 11pt)
-  set align(left)
 
   // Configure paragraph properties.
   // Default leading is 0.65em.
   // Default spacing is 1.2em.
-  set par(leading: 0.7em, spacing: 1.35em, justify: true, linebreaks: "optimized")
+  // set par(leading: 0.7em, spacing: 1.35em, justify: true, linebreaks: "optimized")
 
   // Add vertical space after headings.
-  show heading: it => {
-    it
-    v(2%, weak: true)
-  }
+  // show heading: it => {
+  //   it
+  //   v(2%, weak: true)
+  // }
 
 
-
-  // Display index of contents.
-  if table-of-contents != none {
+  // Outline
+  if table-of-contents.enable != none {
     pagebreak()
-    table-of-contents
+    outline(title: table-of-contents.at("title", default: "Outline"))
   }
 
-  // Display index of tables.
-  if table-index != none {
-    pagebreak()
-    outline(
-      title: table-index.at("title", default: "Índice de Tablas"), 
-      target: figure.where(kind: table)
-    )
-  }
-
-  // Display index of figures.
-  if figure-index != none {
+  // Outline - Figures
+  if figure-index.enabled != none {
     pagebreak()
     outline(
-      title: figure-index.at("title", default: "Índice de Figuras"), 
+      title: figure-index.at("title", default: "Figures Index"), 
       target: figure.where(kind: image)
     )
   }
 
+  // Outline - Tables
+  if table-index != none {
+    pagebreak()
+    outline(
+      title: table-index.at("title", default: "Tables Index"), 
+      target: figure.where(kind: table)
+    )
+  }
 
-
-
-
-
-
-  // Configure page numbering and footer.
-  set page(
-    footer: context {
-      // Get current page number.
-      let i = counter(page).at(here()).first()
-
-      // Align right for even pages and left for odd.
-      let is-odd = calc.odd(i)
-      let aln = if is-odd {
-        right
-      } else {
-        left
-      }
-
-      // Are we on a page that starts a chapter?
-      let target = heading.where(level: 1)
-      if query(target).any(it => it.location().page() == i) {
-        return align(aln)[#i]
-      }
-
-      // Find the chapter of the section we are currently in.
-      let before = query(target.before(here()))
-      if before.len() > 0 {
-        let current = before.last()
-        let gap = 1.75em
-        let chapter = upper(text(size: 0.68em, current.body))
-        if current.numbering != none {
-          if is-odd {
-            align(aln)[#chapter #h(gap) #i]
-          } else {
-            align(aln)[#i #h(gap) #chapter]
-          }
-        }
-      }
-    },
-  )
 
   // Display inline code in a small box that retains the correct baseline.
   show raw.where(block: false): box.with(
@@ -235,6 +199,7 @@
     body
   }
 
+
   // Display appendix before the bibliography.
   if appendix.enabled {
     pagebreak()
@@ -258,12 +223,14 @@
     appendix.body
   }
 
+
   // Display bibliography
   if bibliography != none {
     pagebreak()
     show std-bibliography: set text(0.85em)
     // Use default paragraph properties for bibliography.
     show std-bibliography: set par(leading: 0.65em, justify: false, linebreaks: auto)
+
     bibliography
   }
 }
@@ -283,24 +250,7 @@
   return none
 }
 
-// #let HEADER (
-//   text-size,
-//   lang-chapter,
-//   ship-part-page: true,
-//   body-matter-material
-// ) = {
-//   // Page settings adjustments
-//   set page(
-//     numbering: "1",
-//     footer: context {
-//       let cur-pag-num = counter(page).at(here()).first()
-//       let ALIGN = if calc.even(cur-pag-num) { left } else { right }
-//       set align(ALIGN)
-//       [#counter(page).display("1")]
-//     },
-//     header: [],
-//   )
-// }
+
 
 #let BODY-MATTER(
   text-size,
@@ -325,10 +275,7 @@
   )
 
   // Heading numbering and outlining controls
-  set heading(
-    numbering: "1.1.1.",
-    outlined: true,
-  )
+  set heading(numbering: "1.", outlined: true)
 
   // Main headings in BODY-MATTER
   show heading.where(level: 1): it => {
