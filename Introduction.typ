@@ -32,9 +32,9 @@ de Cuba
 
 Para dar cumplimiento al objetivo propuesto se proponen un conjunto de *objetivos específicos*:
 
-1. Realizar estudio del estado del arte sobre el objeto de estudio y campo de acción.
-2. Elaborar una propuesta de solución al problema tratado.
-3. Validar que la propuesta responde a los objetivos planteados
++ Realizar estudio del estado del arte sobre el objeto de estudio y campo de acción.
++ Elaborar una propuesta de solución al problema tratado.
++ Validar que la propuesta responde a los objetivos planteados
 
 == Métodos de investigación
 

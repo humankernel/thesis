@@ -316,9 +316,9 @@ A continuación se detallan las tecnologías y herramientas utilizadas asi como 
 *BAAI/bge-m3*: es un modelo avanzado de embeddings #footnote[Los embeddings son representaciones numéricas de datos que capturan el significado o características de objetos como palabras, imágenes o conceptos en un espacio multidimensional. Elementos con significados similares se ubican cerca en el espacio vectorial, esto permite la búsqueda por cercanía]. Destaca por su versatilidad en tres dimensiones clave.
 
 - Multifuncionalidad: Combina tres métodos de recuperación en un solo modelo:
-  1. Embeddings Densos: Vectores compactos para búsqueda semántica.
-  2. Recuperación léxica (sparse): Ponderación de tokens al estilo BM25.
-  3. Interacción multi-vector (Col-BERT): Múltiples vectores por texto para mayor precisión.
+  + Embeddings Densos: Vectores compactos para búsqueda semántica.
+  + Recuperación léxica (sparse): Ponderación de tokens al estilo BM25.
+  + Interacción multi-vector (Col-BERT): Múltiples vectores por texto para mayor precisión.
 
 - Multilingüístico: Soporta más de 100 idiomas. Rendimiento optimizado para lenguas como inglés, español, chino, francés y árabe.
 

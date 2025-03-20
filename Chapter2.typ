@@ -143,7 +143,7 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
 )
 
 #table_user_story(2, [Enviar archivos PDF],
-  [Media], [Bajo],
+  [Alta], [Bajo],
   [Investigador],
   1, 1,
   [Joaquin Enrique Rivas Sánchez],
@@ -164,7 +164,7 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
 #table_user_story(4, [Procesar archivos],
   [Alta], [Alto],
   [Investigador],
-  3, 2,
+  3, 1,
   [Joaquin Enrique Rivas Sánchez],
   [El sistema procesa los archivos enviados y almacena la información extraída.], 
   []
@@ -173,7 +173,7 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
 #table_user_story(5, [Buscar documentos relevantes],
   [Alta], [Alta],
   [],
-  2, 2,
+  2, 1,
   [Joaquin Enrique Rivas Sánchez],
   [El sistema identifica y recupera documentos pertinentes en función de la consulta realizada.], 
   [En caso de no encontrar documentos relevantes no devuelve nada.]
@@ -182,7 +182,7 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
 #table_user_story(6, [Mostrar documentos recuperados],
   [Media], [Bajo],
   [Investigador],
-  1, 1,
+  1, 2,
   [Joaquin Enrique Rivas Sánchez],
   [El sistema muestra una lista de documentos con sus respectivas puntuaciones.], 
   [En caso de no recibir documentos recuperados no se mostrara nada],
@@ -192,7 +192,7 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
 #table_user_story(7, [Regenerar respuesta],
   [Media], [Bajo],
   [Investigador],
-  1, 1,
+  1, 2,
   [Joaquin Enrique Rivas Sánchez],
   [El usuario puede solicitar al sistema que regenere una respuesta si la inicial no satisface sus necesidades.], 
   [],
@@ -202,7 +202,7 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
 #table_user_story(8, [Dar retroalimentación de una respuesta],
   [Media], [Bajo],
   [Investigador],
-  1, 1,
+  1, 2,
   [Joaquin Enrique Rivas Sánchez],
   [El usuario puede proporcionar retroalimentación sobre las respuestas del sistema. Los criterios para retroalimentar son los siguientes: Me gusta, No me gusta, Alucinación, Inapropiado, Dañino.], 
   [],
@@ -212,7 +212,7 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
 #table_user_story(9, [Editar una consulta previa],
   [Media], [Bajo],
   [Investigador],
-  1, 1,
+  1, 2,
   [Joaquin Enrique Rivas Sánchez],
   [El sistema permite la edición de consultas y genera nuevas respuestas basadas en los cambios.], 
   [],
@@ -240,7 +240,7 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
 #table_user_story(11, [Crear múltiples conversaciones],
   [Media], [Bajo],
   [Investigador],
-  1, 1,
+  1, 2,
   [Joaquin Enrique Rivas Sánchez],
   [El usuario puede iniciar múltiples conversaciones independientes para gestionar diferentes temas o consultas.], 
   [Cada conversación maneja su propio historial y contexto.],
@@ -250,7 +250,7 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
 #table_user_story(12, [Limpiar el chat],
   [Baja], [Bajo],
   [Investigador],
-  1, 1,
+  1, 2,
   [Joaquin Enrique Rivas Sánchez],
   [El usuario puede limpiar el historial del chat para comenzar una nueva conversación.], 
   [],
@@ -266,6 +266,51 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
   []
   // todo: add picture
 )
+
+== Plan de iteraciones
+
+Habiendo identificado previamente las historias de usuario se debe crear el plan de iteraciones donde cada HU se convierte en tareas especificas de desarrollo y para cada uno se establecen pruebas de aceptación. En cada ciclo se analizan las pruebas fallidas para prevenir que no vuelvan a ocurrir y ser corregidas.
+
+Se acordaron 2 iteraciones que a continuación serán descritas:
+
+- *Iteración 1:* se desarrollan las HU 1,2,3,4,5 las cuales corresponden al envió de consultas y archivos pdf; la generación de respuestas; procesamiento de archivos; la búsqueda de documentos relevantes. Al finalizar la iteración se realizaran las pruebas de aceptación.
+
+- *Iteración 2:* se desarrollan las HU 6,7,8,9,10,11,12,13 las cuales corresponden a la capacidad de mostrar documentos recuperados; regenerar, dar retroalimentación de las respuestas; editar una consulta previa; ajustar los parámetros del sistema; crear multiples conversaciones; limpiar el chat y por ultimo incluir citas en las respuestas. Al finalizar la iteración se realizaran las pruebas de aceptación y la entrega final de la propuesta de solución. 
+
+En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo estimado por iteración asi como las HU a desarrollar. Se tomo como unidad de mediada que cada semana contaba de 5 días laborales de los cuales se trabajaran 8 horas cada día.
+
+#figure(
+  table(
+    align: left,
+    columns: (1.2fr, 0.4fr, 3fr, 2fr),
+    stroke: .5pt + black,
+    table.header(
+      table.cell(fill: color.rgb(204, 204, 255))[*Iteración*], 
+      table.cell(fill: color.rgb(204, 204, 255), colspan: 2)[*Historias de usuario*], 
+      table.cell(fill: color.rgb(204, 204, 255))[*Duración (semanas)*]
+    ),
+
+    table.cell(rowspan: 5, align: center)[1],
+    [1],[Enviar consultas]            ,table.cell(align: center)[1],
+    [2],[Enviar archivos PDF]         ,table.cell(align: center)[1],
+    [3],[Generar respuestas]          ,table.cell(align: center)[2],
+    [4],[Procesar archivos]           ,table.cell(align: center)[3],
+    [5],[Buscar documentos relevantes],table.cell(align: center)[2],
+
+    table.cell(rowspan: 8, align: center)[2],
+    [6] ,[Mostrar documentos recuperados]        ,table.cell(align: center)[1],
+    [7] ,[Regenerar respuesta]                   ,table.cell(align: center)[1],
+    [8] ,[Dar retroalimentación de una respuesta],table.cell(align: center)[1],
+    [9] ,[Editar una consulta previa]            ,table.cell(align: center)[1],
+    [10],[Ajustar los parámetros del sistema]    ,table.cell(align: center)[2],
+    [11],[Crear múltiples conversaciones]        ,table.cell(align: center)[1],
+    [12],[Limpiar el chat]                       ,table.cell(align: center)[1],
+    [13],[Incluir citas en las respuestas]       ,table.cell(align: center)[2],
+
+    table.cell(colspan: 2)[*Total*],[],table.cell(align: center)[19]
+  ),
+  caption: [Estimación de esfuerzo por historia de usuario]
+)<hu-estimation>
 
 
 == Diseño 
