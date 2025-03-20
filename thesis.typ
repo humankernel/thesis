@@ -1,4 +1,5 @@
 #import "lib.typ": conf, BODY-MATTER
+#import "@preview/hydra:0.6.0": hydra
 
 #set text(lang: "es")
 
@@ -31,6 +32,12 @@ artículos científicos],
 )
 
 #show: BODY-MATTER.with(10pt)
+
+
+#set page(header: context {
+  align(right, emph("Capítulo " + hydra(1)))
+  line(length: 100%)
+})
 
 #include "Introduction.typ"
 #include "Chapter1.typ"
