@@ -58,6 +58,15 @@
   )
   set par(justify: true)
 
+
+  //  table style
+  // set size and header-color
+  show table: set text(size: 9pt, font: "DejaVu Math TeX Gyre")
+  set table(
+    fill: (x, y) => if y == 0 { color.rgb(204, 204, 255) },
+  )
+
+
   // Cover page.
   page(
     align(center, block(width: 90%)[
@@ -308,7 +317,7 @@
   let rows = (
       // header
       table.header(
-        table.cell(colspan: 2, fill: color.rgb(204, 204, 255))[*Historia de Usuario*]
+        table.cell(colspan: 2)[*Historia de Usuario*]
       ),
 
       // hu number + name

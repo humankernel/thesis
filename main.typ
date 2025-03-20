@@ -37,6 +37,18 @@ artículos científicos],
   line(length: 100%)
 })
 
+// = Declaración de autoría
+
+// Declaramos ser autores de la presente tesis y reconocemos a la Universidad de las Ciencias Informáticas
+// los derechos patrimoniales sobre esta, con carácter exclusivo.
+
+// Para que así conste firmamos la presente a los \_\_\_ dias del mes de \_\_\_\_\_\_\_\_\_ del año \_\_\_\_\_\_
+
+// #block(width: 150pt)[
+//   #line(length: 100%)
+//   #align(center)[Signature]
+// ]
+
 #include "Introduction.typ"
 #include "Chapter1.typ"
 #include "Chapter2.typ"

@@ -285,9 +285,9 @@ En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo es
     columns: (1.2fr, 0.4fr, 3fr, 2fr),
     stroke: .5pt + black,
     table.header(
-      table.cell(fill: color.rgb(204, 204, 255))[*Iteración*], 
-      table.cell(fill: color.rgb(204, 204, 255), colspan: 2)[*Historias de usuario*], 
-      table.cell(fill: color.rgb(204, 204, 255))[*Duración (semanas)*]
+      [*Iteración*], 
+      table.cell(colspan: 2)[*Historias de usuario*], 
+      [*Duración (semanas)*]
     ),
 
     table.cell(rowspan: 5, align: center)[1],
@@ -318,16 +318,52 @@ En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo es
   #line(length: 100%),
 ]
 
-== Diseño 
+// == Tarjetas CRC
 
-=== Arquitectura de software
+== Arquitectura de software
 
-=== Patrones de diseño 
+La arquitectura de software se refiere a la estructura organizativa de un sistema de software, que incluye sus componentes principales y las relaciones entre ellos. Es el diseño de alto nivel que guía la evolución y el desarrollo del sistema, asegurando que cumpla con sus objetivos funcionales y no funcionales. Un patrón arquitectónico es una solución recurrente a problemas comunes en la construcción de software, proporcionando una estructura predefinida que se puede aplicar en diferentes contextos, ayudando a resolver desafíos de diseño. Finalmente, un estilo arquitectónico es un conjunto de reglas y restricciones que define la organización de los componentes del sistema y las interacciones entre ellos, reflejando un enfoque particular para abordar problemas de diseño en una categoría de sistemas. Un estilo puede incluir varios patrones arquitectónicos que estructuran el sistema de acuerdo con principios y prácticas específicas @richards2020fundamentals. En la propuesta de solución se hizo uso de la arquitectura por capas
 
-=== Diagrama de clases
+*Arquitectura por Capas*
 
-no si es XP
+== Patrones de diseño 
 
-== Evaluación
+Un patrón de diseño es una solución reutilizable y probada para problemas comunes de diseño en el desarrollo de software. A diferencia de los patrones arquitectónicos, que se enfocan en la estructura general del sistema, los patrones de diseño abordan problemas específicos en la implementación y organización del código a nivel de componentes y clases. Estos patrones ayudan a mejorar la mantenibilidad, la escalabilidad y la flexibilidad del software, proporcionando estructuras estandarizadas que facilitan la comunicación entre desarrolladores. La clasificación en creacionales, estructurales y de comportamiento es la más ampliamente utilizada @GangOfFour.
+
+=== Patrones GRASP (General Responsibility Assignment Software Patterns) 
+
+Fueron introducidos por Craig Larman en @larman2002applying y buscan guiar a los diseñadores en la toma de decisiones sobre cómo distribuir responsabilidades entre clases y objetos. Los nueve 
+
+*Experto*: Este patrón recomienda que la responsabilidad de realizar una tarea o implementar un método debe recaer sobre la clase que tiene toda la información necesaria para llevarla a cabo.
+
+#figure(
+  image("Images/expert.svg"),
+  caption: [Patrón Experto (Fuente: Elaboración propia)]
+)
+
+*Alta cohesión*: Este patrón recomienda mantener cada clase enfocada en una única responsabilidad bien definida
+
+#figure(
+  image("Images/high-cohesion.svg"),
+  caption: [Patrón Alta Cohesión (Fuente: Elaboración propia)]
+)
+
+
+=== Patrones GoF
+
+*Singleton*: es un patrón de diseño creacional que garantiza que solo exista una instancia de una clase determinada en toda la aplicación y proporciona un punto de acceso global a ella. Este patrón es útil cuando se necesita controlar el acceso a un recurso único o cuando ciertos datos deben estar disponibles para todos los objetos de la aplicación @GangOfFour. En la solución se ve reflejada en la clase `EmbeddingModel`, `RerankerModel` y `LLMModel` ya que es necesario que exista una unica instancia de estas clases.
+
+// == Modelo de datos 
+
+// Desde el punto de vista de una aplicación informática, el modelado de datos es el proceso de definir, estructurar y organizar los datos que se utilizarán en el sistema. Implica representar cómo los datos se almacenan, se relacionan y se manipulan dentro de la aplicación, asegurando coherencia, integridad y eficiencia en su uso @Modelado.
+
+// == Diagrama de despliegue
+
 
 == Conclusiones parciales
+
+Se llegaron a las siguientes conclusiones:
+- La descripción general de la propuesta de solución ayudo a sentar las bases para la comprensión del flujo de la información y el contexto de la solución.
+- Se definieron las funcionalidades especificas del sistema a traves de las historias de usuario asi como los requisitos no funcionales.
+- Se obtuvo una planificación del tiempo de desarrollo a traves del plan de iteraciones asi como el orden en el que se implementaran las tareas.
+- Se implementaron patrones de diseño con el fin de garantizar una mayor extensibilidad y mantenibilidad de la solución.
