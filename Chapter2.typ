@@ -1,4 +1,5 @@
 #import "@preview/fletcher:0.5.6" as fletcher: diagram, node, edge
+#import "lib.typ": table_user_story
 #import fletcher.shapes: house, hexagon
 
 = Propuesta de solución
@@ -108,7 +109,7 @@ El usuario inicia la interacción proporcionando una consulta (query), que el si
 // todo: extender
 *Usabilidad*
 - *RnF1*: Se podrá interactuar de forma fácil por cualquier usuario.
-- *RnF2*: Se podrá emplear cualquier idioma.
+- *RnF2*: Se podrá emplear el idioma Ingles y Español.
 
 *Accesibilidad*
 - *RnF3*: Las funcionalidades del sistema estarán disponibles en todo momento.
@@ -130,56 +131,6 @@ El usuario inicia la interacción proporcionando una consulta (query), que el si
 
 En este capítulo se definen los requisitos funcionales y no funcionales del sistema, los cuales describen, respectivamente, las funcionalidades que debe ofrecer la aplicación y las restricciones o cualidades que debe cumplir (como rendimiento, usabilidad y seguridad). En la metodología XP, estos requisitos se especifican mediante historias de usuario, redactadas en un lenguaje claro y accesible por el cliente, permitiendo encapsular de forma concisa lo que el sistema debe realizar. Este enfoque facilita la priorización, estimación y validación de cada historia, garantizando una comunicación efectiva entre desarrolladores y usuarios, y permitiendo iteraciones de desarrollo ágiles y adaptables a las necesidades reales @sommerville_ingenierisoftware_2005.
 
-
-#let table_user_story(number, name, priority, risk, user, points, iterations, responsable, description, observations, picture: none) = {
-  let rows = (
-      // header
-      table.header(
-        table.cell(colspan: 2, fill: color.rgb(204, 204, 255))[*Historia de Usuario*]
-      ),
-
-      // hu number + name
-      [*Número:* #number],[*Nombre:* #name],
-
-      // user
-      table.cell(colspan: 2)[*Usuario:* #user], 
-
-      // priority + risk
-      [*Prioridad de negocio:* #priority],[*Riesgo en desarrollo:* #risk],
-
-      // points + iterations
-      [*Puntos estimados:* #points],[*Iteración asignada:* #iterations],
-
-      // responsable
-      table.cell(colspan: 2)[*Programador Responsable:* #responsable],
-
-      // description
-      table.cell(colspan: 2)[*Descripción:* #description],
-
-      // observations
-      table.cell(colspan: 2)[*Observaciones:* #observations],
-  )
-
-  // picture 
-  if picture != none {
-    rows.push(
-      table.cell(colspan: 2)[
-        *Prototipo Interfaz:* \
-        #align(center, image(picture, width: 60%))
-      ]
-    ) 
-  }
-
-  figure(
-    table(
-      align: left,
-      columns: (2fr, 3fr),
-      stroke: .5pt + black,
-      ..rows
-    ),
-    caption: [Historia de usuario #number]
-  )
-}
 
 #table_user_story(1, [Enviar consultas],
   [Alta], [Bajo],

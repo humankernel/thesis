@@ -302,3 +302,56 @@
 
   body
 }
+
+
+
+
+#let table_user_story(number, name, priority, risk, user, points, iterations, responsable, description, observations, picture: none) = {
+  let rows = (
+      // header
+      table.header(
+        table.cell(colspan: 2, fill: color.rgb(204, 204, 255))[*Historia de Usuario*]
+      ),
+
+      // hu number + name
+      [*Número:* #number],[*Nombre:* #name],
+
+      // user
+      table.cell(colspan: 2)[*Usuario:* #user], 
+
+      // priority + risk
+      [*Prioridad de negocio:* #priority],[*Riesgo en desarrollo:* #risk],
+
+      // points + iterations
+      [*Puntos estimados:* #points],[*Iteración asignada:* #iterations],
+
+      // responsable
+      table.cell(colspan: 2)[*Programador Responsable:* #responsable],
+
+      // description
+      table.cell(colspan: 2)[*Descripción:* #description],
+
+      // observations
+      table.cell(colspan: 2)[*Observaciones:* #observations],
+  )
+
+  // picture 
+  if picture != none {
+    rows.push(
+      table.cell(colspan: 2)[
+        *Prototipo Interfaz:* \
+        #align(center, image(picture, width: 60%))
+      ]
+    ) 
+  }
+
+  figure(
+    table(
+      align: left,
+      columns: (2fr, 3fr),
+      stroke: .5pt + black,
+      ..rows
+    ),
+    caption: [Historia de usuario #number]
+  )
+}
