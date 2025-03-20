@@ -1,8 +1,8 @@
 #import "@preview/fletcher:0.5.6" as fletcher: diagram, node, edge
-#import "lib.typ": table_user_story
+#import "template.typ": table_user_story
 #import fletcher.shapes: house, hexagon
 
-= Propuesta de solución
+= Propuesta de solución <chapter2>
 
 Este capítulo se enfoca en la formulación y desarrollo de la solución propuesta, derivada de un riguroso proceso de investigación. Bajo el marco metodológico adoptado, se identifican y establecen los requisitos funcionales y no funcionales que definirán las características esenciales del sistema. Paralelamente, se examina la arquitectura de base que sustentará la implementación, generando los artefactos correspondientes a la fase de análisis y diseño.
 
@@ -312,6 +312,11 @@ En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo es
   caption: [Estimación de esfuerzo por historia de usuario]
 )<hu-estimation>
 
+#show heading.where(level: 1): set block[
+  #line(length: 100%),
+  heading
+  #line(length: 100%),
+]
 
 == Diseño 
 

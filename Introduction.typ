@@ -54,12 +54,12 @@ Para alcanzar el conocimiento necesario que permita cumplir con el objetivo esta
 El presente trabajo está dividido en los siguientes tres capítulos que recogen todo lo abordado en la
 investigación.
 
-*Capítulo 1*: Se centra en la fundamentación teórica y conceptos fundamentales relacionados con el objeto de estudio y campo de acción. Se realiza un análisis de las soluciones similares y se selecciona la metodología de desarrollo de software y las herramientas y tecnologías propuestas para la propuesta de solución.
+*@chapter1*: Se centra en la fundamentación teórica y conceptos fundamentales relacionados con el objeto de estudio y campo de acción. Se realiza un análisis de las soluciones similares y se selecciona la metodología de desarrollo de software y las herramientas y tecnologías propuestas para la propuesta de solución.
 
-*Capítulo 2*: Se realiza la fundamentación de la propuesta de solución, los requisitos funcionales y no funcionales, se realiza el diseño ingenieril donde se describen las buenas practicas asi como los patrones de diseño.
+*@chapter2*: Se realiza la fundamentación de la propuesta de solución, los requisitos funcionales y no funcionales, se realiza el diseño ingenieril donde se describen las buenas practicas asi como los patrones de diseño.
 
 
-*Capítulo 3*: En este capítulo se abordan los procesos de implementación de la solución propuesta, detallando los estándares utilizados. Además, se describen las pruebas realizadas para evaluar su funcionamiento, fiabilidad y desempeño, garantizando que cumpla con los objetivos planteados en la investigación.
+*@chapter3*: En este capítulo se abordan los procesos de implementación de la solución propuesta, detallando los estándares utilizados. Además, se describen las pruebas realizadas para evaluar su funcionamiento, fiabilidad y desempeño, garantizando que cumpla con los objetivos planteados en la investigación.
 
 
 Finalmente son presentadas las conclusiones, recomendaciones, referencias bibliográficas.

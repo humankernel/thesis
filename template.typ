@@ -12,43 +12,33 @@
 #let stroke-color = luma(200)
 #let fill-color = luma(250)
 
-#let conf(
-  title: [Your Title],
-  faculty: [Your Faculty],
-  paper-size: "a4",
-  author: (), 
+#let template(
+  lang: "en",
+  title: [],
+  faculty: [],
+  authors: (), 
   advisors: (),
   date: none,
   date-format: "[month repr:long] [day padding:zero], [year repr:full]",
-  abstract: none, 
+  abstract: [], 
   keywords: (),
-  table-of-contents: (
-    enable: false,
-    title: "",
-  ),
+  table-of-contents: (enable: false, title: ""),
+  table-index: (enabled: false, title: ""),
+  figure-index: (enabled: false, title: ""),
+  watermark: none, 
   appendix: (
     enabled: false,
     title: "",
     heading-numbering-format: "",
     body: none,
   ),
-  // Display an index of tables
-  table-index: (
-    enabled: false,
-    title: "", 
-  ),
-  // Display an index of figures
-  figure-index: (
-    enabled: false,
-    title: "",
-  ),
-  watermark: none, 
   bibliography: none,
   body
 ) = {  
+  set text(lang: lang)
 
   // Metadata
-  set document(title: title, author: author, description: abstract, keywords: keywords)
+  set document(title: title, author: authors, description: abstract, keywords: keywords)
 
   // Body font.
   set text(size: 12pt)
@@ -60,7 +50,7 @@
   ): set figure.caption(position: top)
   // Page Config.
   set page(
-    paper: paper-size,
+    paper: "a4",
     margin: (bottom: 1.75cm, top: 2.25cm),
     background: rotate(-45deg, 
       text(120pt, fill: rgb(230, 230, 230))[*#watermark*]
@@ -96,7 +86,7 @@
         #v(5em)
 
         // authors
-        #text(size: 12pt, [Autor: #author])
+        #text(size: 12pt, [Autor: #authors])
 
         // tutors
         #text(size: 12pt, [Tutores:])
@@ -187,7 +177,7 @@
   // will only apply to body.
   {
     // Configure heading numbering.
-    set heading(numbering: "1.")
+    set heading(numbering: "1.", supplement: [Capítulo])
 
     // Start chapters on a new page.
     show heading.where(level: 1): it => {
@@ -277,6 +267,14 @@
   // Heading numbering and outlining controls
   set heading(numbering: "1.", outlined: true)
 
+  // show heading.where(level: 1): it => {
+  //   align(right)[
+  //     #line(length: 100%)
+  //     #block[#it.body]
+  //     #line(length: 100%)
+  //   ]
+  // }
+
   // Main headings in BODY-MATTER
   show heading.where(level: 1): it => {
     // Layout
@@ -299,7 +297,7 @@
     )
     line(length: 100%, stroke: 0.5pt)
   }
-
+  
   body
 }
 

@@ -1,13 +1,12 @@
-#import "lib.typ": conf, BODY-MATTER
+#import "template.typ": template, BODY-MATTER
 #import "@preview/hydra:0.6.0": hydra
 
-#set text(lang: "es")
-
-#show: conf.with(
+#show: template.with(
+  lang: "es",
   title: [Desarrollo de una herramienta basada en RAG y LLMs para optimizar el análisis de
 artículos científicos],
   faculty: [VERTEX: INTERACTIVE 3D ENVIRONMENTS, FACULTAD 4],
-  author: ("Joaquin Rivas Sánchez"),
+  authors: ("Joaquin Rivas Sánchez"),
   advisors: ("Msc. Angel Alberto Vazquez Sánchez", "Msc. Lisset Salazar Gómez"),
   abstract: [#lorem(80)],
   keywords: ("Aprendizaje Profundo", "RAG", "Procesamiento de Lenguaje Natural", "Contexto Cubano", "Código Abierto"),
@@ -32,7 +31,6 @@ artículos científicos],
 )
 
 #show: BODY-MATTER.with(10pt)
-
 
 #set page(header: context {
   align(right, emph("Capítulo " + hydra(1)))
