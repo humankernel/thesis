@@ -176,6 +176,12 @@ Es una representación vectorial de palabras en un espacio numérico continuo. C
 *Cosine Similarity*:
 Es una medida de similitud entre dos vectores que calcula el coseno del ángulo entre ellos. En el contexto de los word embeddings, se utiliza para determinar cuán similares son dos palabras o documentos. Un valor cercano a 1 indica que los vectores son muy similares (es decir, las palabras tienen contextos o significados parecidos), mientras que valores cercanos a 0 o negativos indican poca o ninguna similitud @mikolov2013efficientestimationwordrepresentations.
 
+// *Embeddings Dispersos*:
+
+// *Embeddings ColBERT*:
+
+// *Reranking*: 
+
 $"cosine similarity" = S_c (A, B) := cos(theta) = (A dot B) / (||A||||B||) = (sum_(i=1) A_i B_i) / ( sqrt(sum_(i=1)^n) A_i^2 dot sqrt(sum_(i=1)^n B_i^2) ) $
 
 === Comparativa
@@ -268,7 +274,21 @@ Por último, en la *fase de pruebas*, se verifica de manera continua la funciona
 
 A continuación se detallan las tecnologías y herramientas utilizadas asi como la Metodología del desarrollo. 
 
-// === Herramienta CASE
+=== Herramienta CASE
+
+*PlantUML*: es una herramienta de software de código abierto diseñada para crear diagramas a partir de texto simple. Esta herramienta permite a los usuarios escribir especificaciones de diagramas en un lenguaje de descripción simple y generar visualmente diagramas UML, así como otros tipos de diagramas como mapas mentales, diagramas de Gantt, BPMN, y más
+
+Características Principales:
+
+- Lenguaje Basado en Texto: Utiliza descripciones textuales para generar diagramas, lo que facilita la automatización y la integración con sistemas de documentación y desarrollo
+
+- Amplia Compatibilidad de Diagramas: Soporta varios tipos de diagramas UML, incluyendo diagramas de secuencia, clases, casos de uso, actividad, entre otros
+
+- Integración con IDEs: Se integra fácilmente con muchos entornos de desarrollo integrado (IDEs) y editores de texto, así como sistemas de control de versiones
+
+- Generación Automática de Diagramas: Una de sus principales ventajas es la capacidad para automatizar la generación de diagramas a partir de descripciones de texto plano, lo que facilita la integración con flujos de trabajo de desarrollo @PlanetUML.
+
+
 === Lenguaje de Programación
 
 *Python v3.12*: es un lenguaje de programación multiparadigma que prioriza la legibilidad del código y la productividad. Aunque soporta programación orientada a objetos (OOP), también integra enfoques funcionales y procedurales, lo que lo hace versátil para abordar problemas complejos.
@@ -355,7 +375,7 @@ A continuación se detallan las tecnologías y herramientas utilizadas asi como 
 
 == Conclusiones parciales
 
-Se dieron cumplimiento a los primeros objetivos específicos. por lo que se llego a las siguientes conclusiones:
+Se dieron cumplimiento a los primeros objetivos específicos, por lo que se llego a las siguientes conclusiones:
 
 - El análisis de los conceptos asociados estableció una base teórica sólida que facilitó la comprensión profunda de la problemática y los mecanismos subyacentes, permitiendo identificar las herramientas y técnicas más adecuadas para el proyecto.
 
