@@ -26,7 +26,7 @@ artículos científicos],
   bibliography: bibliography(
     "refs.bib",
     title: "Bibliografía",
-    style: "american-physiological-society"
+    style: "american-psychological-association"
   )
 )
 
