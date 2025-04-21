@@ -20,9 +20,11 @@ eficientemente PDFs complejos (con tablas, ecuaciones o gráficos) y la falta de
 temas específicos de interés para Cuba, lo que reduce su utilidad práctica en escenarios reales
 de investigación. 
 
-A partir de la problematica anteriormente descrita se plantea como *problema de investigación*: ¿Cómo diseñar una herramienta de IA accesible, eficiente y localizable que permita a
+// TODO: referenciar
+
+A partir de la problematica anteriormente descrita se plantea como *problema de investigación*: ¿Cómo desarrollar una herramienta de IA accesible, eficiente y localizable que permita a
 investigadores cubanos analizar documentos científicos en PDF de forma automatizada,
-aprovechando LLMs y RAG, sin depender de infraestructura costosa o conexión estable a
+aprovechando LLMs y Generación-Aumentada por Recuperación (RAG), sin depender de infraestructura costosa o conexión estable a
 internet?, teniendo como *objeto de estudio*: Modelos del lenguaje grandes (LLM)
 Como *campo de acción*: Extensión de LLMs basado en RAG.
 
