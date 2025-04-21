@@ -190,7 +190,7 @@ La @finetuning-v-rag compara los dos enfoques anteriormente mencionados: Fine-Tu
 
 #figure(
     table(
-        columns: (auto, auto, auto),
+        columns: (2fr, 3fr, 3fr),
         inset: 10pt,
         align: horizon,
         table.header(
@@ -217,7 +217,11 @@ nuevos conocimientos, posibles preocupaciones
     caption: [Comparativa entre Fine-Tuning y RAG]
 )<finetuning-v-rag>
 
-Teniendo en cuenta lo anterior la arquitectura RAG para este proyecto es la mas adecuada.
+A partir de la @finetuning-v-rag, se pueden extraer varias conclusiones clave sobre las ventajas y desventajas de cada enfoque. El Fine-Tuning es una técnica poderosa cuando se busca un rendimiento altamente especializado en tareas específicas, especialmente aquellas que requieren una estructura o estilo constante en las respuestas. Sin embargo, su principal desventaja radica en los altos costos computacionales y en la dificultad de incorporar nuevo conocimiento de manera ágil, lo cual lo hace menos flexible ante entornos dinámicos donde la información cambia frecuentemente.
+
+Por otro lado, el enfoque RAG (Retrieval-Augmented Generation) demuestra ser más adecuado para escenarios donde se necesita acceder a información actualizada o contextual, ya que permite integrar fuentes externas en tiempo real sin requerir reentrenamiento del modelo base. Aunque presenta una mayor latencia debido al proceso de recuperación de información y conlleva mayor complejidad técnica, su flexibilidad y menor costo computacional lo hacen más escalable y adaptable a cambios rápidos.
+
+Considerando las necesidades del proyecto —especialmente la incorporación dinámica de conocimiento y la eficiencia en recursos—, la arquitectura RAG se presenta como la opción más conveniente, al equilibrar rendimiento con adaptabilidad y escalabilidad.
 
 
 == Estudio de sistemas a nivel internacional
@@ -347,17 +351,24 @@ Características Principales:
 
 === Bibliotecas
 
-*llama-cpp v0.3.17*: es un proyecto de código abierto que permite ejecutar modelos de lenguaje grandes (LLMs) de manera eficiente en hardware convencional, sin necesidad de GPUs potentes. Implementado en C/C++, optimiza el uso de CPU y RAM.
+*vLLM v0.8.1*: es una biblioteca de código abierto diseñada para ofrecer inferencia de modelos de lenguaje grandes (LLM) de manera eficiente, especialmente en entornos con GPU, optimizando el uso de memoria y recursos de hardware. Implementada principalmente en Python y C++, vLLM se ha convertido en un motor de inferencia de alto rendimiento ampliamente adoptado en la industria @vLLM.
 
-*Ventajas clave*:
+Ventajas clave:
 
-- Formato GGUF: Cuantiza modelos para equilibrar rendimiento y precisión.
-    
-- Soporte multiplataforma: Funciona en Windows, Linux, macOS y hasta dispositivos móviles, con soporte para aceleración GPU.
+- Procesamiento por lotes continuo: Permite procesar múltiples solicitudes simultáneamente, reutilizando cálculos comunes mediante una caché de KV (key-value), lo que mejora significativamente la eficiencia y reduce la latencia.
 
-- Eficiencia y privacidad: Optimizado para CPU, evita el alto consumo de energía y mantiene los datos locales.
+- Gestión eficiente de memoria GPU: Gracias a mecanismos como PagedAttention y técnicas como PyTorch Compile/CUDA Graph, vLLM maximiza el uso de la memoria disponible, permitiendo servir más usuarios y contextos largos con menos hardware.
 
-- Flexibilidad y comunidad activa: Compatible con múltiples modelos y en constante desarrollo. @llama-cpp
+- Compatibilidad y flexibilidad: Soporta múltiples arquitecturas y modelos populares de código abierto (como Llama 3, Mistral, Mixtral, CodeLlama), integra APIs compatibles con OpenAI y facilita el despliegue tanto en la nube como en servidores propios.
+
+- Reducción de costos de hardware: Al optimizar el uso de GPU, permite ejecutar modelos grandes con menos recursos, disminuyendo la necesidad de hardware costoso y el consumo energético.
+
+- Escalabilidad y despliegue: Admite inferencia distribuida, paralelismo de tensores, despliegue con Docker, NVIDIA Triton, Ray y SkyPilot, y se adapta fácilmente a diferentes tamaños de modelos y cargas de trabajo.
+
+- Innovación y comunidad activa: Proyecto open source con una comunidad activa que impulsa mejoras continuas, transparencia y personalización.
+
+- Privacidad y control: Permite el autoalojamiento, ofreciendo mayor control sobre los datos y la privacidad frente a servicios de terceros @vLLM.
+
 
 *Gradio v5.20.1*: es una biblioteca de Python de código abierto diseñada para crear interfaces web interactivas para modelos de machine learning y aplicaciones de inteligencia artificial. Permite a los desarrolladores construir y desplegar interfaces gráficas de manera rápida y sencilla, sin necesidad de conocimientos avanzados en desarrollo web
 
