@@ -2,6 +2,10 @@
 #import "template.typ": table_user_story
 #import fletcher.shapes: house, hexagon
 
+#import "@preview/codly:1.3.0": *
+#import "@preview/codly-languages:0.1.1": *
+#show: codly-init.with()
+
 = Propuesta de solución <chapter2>
 
 Este capítulo se enfoca en la formulación y desarrollo de la solución propuesta, derivada de un riguroso proceso de investigación. Bajo el marco metodológico adoptado, se identifican y establecen los requisitos funcionales y no funcionales que definirán las características esenciales del sistema. Paralelamente, se examina la arquitectura de base que sustentará la implementación, generando los artefactos correspondientes a la fase de análisis y diseño.
@@ -33,8 +37,8 @@ El usuario inicia la interacción proporcionando una consulta (query), que el si
         mark-scale: 70%,
         spacing: (5pt, 15pt),
 
-        blob((0,0), [query], name: <query>, tint: color.silver),
-        blob((1,0), [pdf], name: <pdf>, tint: color.silver),
+        blob((0,0), [Pregunta], name: <query>, tint: color.silver),
+        blob((1,0), [PDF/s], name: <pdf>, tint: color.silver),
         node(<pdf.north-west>, [
           #rect(
             image("Images/pdf.svg", height: 7pt),
@@ -81,6 +85,10 @@ El usuario inicia la interacción proporcionando una consulta (query), que el si
         node([LLM], enclose: ((0, 8), (1,8)), stroke: red, fill: red.lighten(90%), name: <llm>, width: 170pt),
 
         edge(<p>, "->", <llm>),
+
+        node([Respuesta], enclose: ((0, 9), (1,9)), name: <res>, stroke: silver, fill: silver.lighten(90%), width: 170pt),
+
+        edge(<llm>, "->", <res>),
     ),
     caption: [Propuesta de Solución (Elaboración Propia)]
 )<prototype>
@@ -326,13 +334,45 @@ La arquitectura de software se refiere a la estructura organizativa de un sistem
 
 *Arquitectura por Capas*
 
+La arquitectura en capas es un patrón estructural que organiza un sistema en niveles jerárquicos, donde cada capa solo se comunica con la capa inmediatamente superior o inferior. Esta regla refuerza la separación de responsabilidades, facilita el mantenimiento y permite una evolución más controlada del sistema. Un aspecto clave de esta arquitectura es la distinción entre capas abiertas y cerradas: en una *capa cerrada*, el flujo debe pasar secuencialmente por cada capa, sin poder ser saltada; en cambio, una *capa abierta* permite que otras capas superiores accedan directamente a ella, lo que flexibiliza el diseño pero puede debilitar el aislamiento entre niveles @richards2020fundamentals.
+
+Para la propuesta de solución se definieron 4 capas (@layered):
+
+1. *Capa de Presentación (UI)*: Implementada con Gradio, esta capa gestiona la interacción con el usuario, permitiéndole introducir consultas y visualizar las respuestas del sistema.
+
+2. *Capa de Lógica*: Orquesta el flujo general de la aplicación, conectando los distintos componentes.
+
+3. *Capa de Inferencia (AI/ML)*: Aquí se realiza la generación de respuestas mediante modelos de lenguaje. Esta capa encapsula la lógica relacionada con los clientes LLM y su ejecución.
+
+4. *Capa de Persistencia*: Representada por una 'base del conocimiento' (VectorDB) almacenada en memoria.
+
+#figure(
+    diagram(
+      	edge-stroke: 1pt,
+        node-corner-radius: 5pt,
+        edge-corner-radius: 5pt,
+        mark-scale: 70%,
+        spacing: (5pt, 15pt),
+
+        blob((0,0), [UI], name: <ui>, tint: color.red),
+        blob((0,1), [Lógica], name: <logic>, tint: color.red),
+        blob((0,2), [AI/ML], name: <ai>, tint: color.green),
+        blob((0,3), [Persistencia], name: <persist>, tint: color.red),
+
+        edge(<ui>, <logic>, "->"),
+        edge(<logic>, <ai>, "->"),
+        edge(<ai>, <persist>, "->"),
+    ),
+    caption: [Capas del Sistema (Elaboración Propia)]
+)<layered>
+
 == Patrones de diseño 
 
-Un patrón de diseño es una solución reutilizable y probada para problemas comunes de diseño en el desarrollo de software. A diferencia de los patrones arquitectónicos, que se enfocan en la estructura general del sistema, los patrones de diseño abordan problemas específicos en la implementación y organización del código a nivel de componentes y clases. Estos patrones ayudan a mejorar la mantenibilidad, la escalabilidad y la flexibilidad del software, proporcionando estructuras estandarizadas que facilitan la comunicación entre desarrolladores. La clasificación en creacionales, estructurales y de comportamiento es la más ampliamente utilizada @GangOfFour.
+Un patrón de diseño es una solución reutilizable y probada para problemas comunes de diseño en el desarrollo de software. A diferencia de los patrones arquitectónicos, que se enfocan en la estructura general del sistema, los patrones de diseño abordan problemas específicos en la implementación y organización del código a nivel de componentes y clases. Estos patrones ayudan a mejorar el rendimiento, mantenibilidad, la escalabilidad y la flexibilidad del software, proporcionando estructuras estandarizadas que facilitan la comunicación entre desarrolladores @GangOfFour.
 
 === Patrones GRASP (General Responsibility Assignment Software Patterns) 
 
-Fueron introducidos por Craig Larman en @larman2002applying y buscan guiar a los diseñadores en la toma de decisiones sobre cómo distribuir responsabilidades entre clases y objetos. Los nueve 
+Fueron introducidos por Craig Larman en @larman2002applying y buscan guiar a los diseñadores en la toma de decisiones sobre cómo distribuir responsabilidades entre clases y objetos. 
 
 *Experto*: Este patrón recomienda que la responsabilidad de realizar una tarea o implementar un método debe recaer sobre la clase que tiene toda la información necesaria para llevarla a cabo.
 
@@ -341,24 +381,134 @@ Fueron introducidos por Craig Larman en @larman2002applying y buscan guiar a los
   caption: [Patrón Experto (Fuente: Elaboración propia)]
 )
 
-*Alta cohesión*: Este patrón recomienda mantener cada clase enfocada en una única responsabilidad bien definida
+*Alta cohesión*: Este patrón recomienda mantener cada clase enfocada en una única responsabilidad bien definida.
 
 #figure(
   image("Images/high-cohesion.svg"),
   caption: [Patrón Alta Cohesión (Fuente: Elaboración propia)]
 )
 
+// TODO: bajo acoplamiento
 
-=== Patrones GoF
+== Patrón Generador
 
-*Singleton*: es un patrón de diseño creacional que garantiza que solo exista una instancia de una clase determinada en toda la aplicación y proporciona un punto de acceso global a ella. Este patrón es útil cuando se necesita controlar el acceso a un recurso único o cuando ciertos datos deben estar disponibles para todos los objetos de la aplicación @GangOfFour. En la solución se ve reflejada en la clase `EmbeddingModel`, `RerankerModel` y `LLMModel` ya que es necesario que exista una unica instancia de estas clases.
+El patrón Generador se utiliza para crear iteradores de una manera simple y eficiente en memoria. En lugar de construir y devolver una colección completa de elementos (lo que podría consumir mucha memoria o tiempo), un generador produce los elementos uno por uno, bajo demanda, utilizando la palabra clave `yield`. En el contexto de aplicaciones interactivas como esta, es fundamental para el streaming de respuestas, permitiendo enviar actualizaciones de estado o fragmentos de la respuesta al cliente a medida que están disponibles, en lugar de esperar a que todo el proceso termine. // TODO: ref
 
-// == Modelo de datos 
+#codly(highlights: (
+  (line: 5, start: 5, end: none, fill: green),
+  (line: 18, start: 5, end: none, fill: green),
+), languages: codly-languages)
+```python
+def create_query_plan(
+    query: str, plan: QueryPlan
+) -> Generator[ChatMessageAndChunk, None, None]:
+    # Mensaje indicando el inicio de la operación
+    yield (
+        ChatMessage(
+            role="assistant",
+            content=f"Creating Query Plan for {query}",
+            metadata={
+                "title": "✍ Creating Query Plan",
+                "status": "pending",
+            },
+        ),
+        [],
+    )
+    # ... (Lógica para generar el plan con LLM) ...
+    # Mensaje indicando el fin de y el resultado
+    yield (
+        ChatMessage(
+            role="assistant",
+            content=str(plan),
+            metadata={ # ... metadata ...},
+        ),
+        [],
+    )
+```
 
-// Desde el punto de vista de una aplicación informática, el modelado de datos es el proceso de definir, estructurar y organizar los datos que se utilizarán en el sistema. Implica representar cómo los datos se almacenan, se relacionan y se manipulan dentro de la aplicación, asegurando coherencia, integridad y eficiencia en su uso @Modelado.
+== Máquina de Estados
 
-// == Diagrama de despliegue
+Una Máquina de Estados es un patrón que permite a un objeto alterar su comportamiento cuando su estado interno cambia. Se utiliza para modelar sistemas que pueden existir en un número finito de estados y transicionan entre ellos en respuesta a eventos o condiciones. Es útil para gestionar flujos de control complejos y secuencias de operaciones ordenadas. En este código, el proceso general de la función `ask` sigue una secuencia (planificar, recuperar, generar, validar, refinar) que puede iterar hasta alcanzar un estado final ('completo'). @Finite-State-Machines.
 
+#codly(highlights: (
+  (line: 1, start: 0, end: 25, fill: green),
+  (line: 2, start: 11, end: 24, fill: green),
+  (line: 6, start: 38, end: 42, fill: green),
+  (line: 9, start: 12, end: 25, fill: green),
+  (line: 10, start: 44, end: 48, fill: green),
+  (line: 15, start: 7, end: 18, fill: green),
+))
+```python   
+state = GenerationState() # Inicializa el objeto que contendrá el estado
+while not state.complete and iterations < max_iterations:
+    # ... (Pasos de planificación, recuperación, generación) ...
+
+    # El paso de validación actualiza explícitamente el estado
+    yield from validate_answer(plan, state) # Puede cambiar state.complete
+
+    # Si el estado aún no es completo, se refina el plan para la siguiente iteración
+    if not state.complete:
+        yield from refine_query_plan(plan, state)
+
+    iterations += 1
+
+# Al salir del bucle, se considera que se ha alcanzado un estado final
+yield state.answer, chunks
+```
+
+== Gestión de Configuración
+
+Consiste en separar los datos de configuración (parámetros que pueden variar entre entornos como desarrollo o producción, rutas de los modelos, etc.) del código fuente de la aplicación. Esto mejora la flexibilidad, portabilidad y mantenibilidad, ya que permite modificar el comportamiento de la aplicación sin cambiar el código, simplemente ajustando las variables de entorno o configuración. (Referencia conceptual: Externalización de configuración, Principio de Separación de Intereses) @SWEBOK.
+
+#codly(highlights: (
+  (line: 11, start: 31, end: 50, fill: green),
+))
+```python
+class Settings(BaseModel):
+    EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "BAAI/bge-m3")
+    EMBEDDING_TOKEN_LIMIT: int = 8190
+    RERANKER_MODEL: str = os.getenv("RERANKER_MODEL", "BAAI/bge-reranker-v2-m3")
+    LLM_MODEL: str = os.getenv("LLM_MODEL", "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")
+    DTYPE: str = os.getenv("DTYPE", "float16")
+    ...
+
+# otro archivo.py
+from settings import settings
+llm_model = OpenAIClient() if settings.ENVIRONMENT == "dev" else vLLMClient()
+```
+
+== Inyección de Dependencias
+
+Es un patrón de diseño en el que un objeto recibe las otras instancias de objetos (sus "dependencias") que necesita, desde una fuente externa, en lugar de crearlas internamente. Esto promueve el bajo acoplamiento entre componentes y mejora la testeabilidad, ya que las dependencias pueden ser fácilmente reemplazadas por implementaciones alternativas o mocks durante las pruebas. Es una forma de implementar el principio de Inversión de Control (IoC) @Inversion-of-control.
+
+#codly(highlights: (
+  (line: 4, start: 5, end: 21, fill: green),
+  (line: 15, start: 40, end: 41, fill: green),
+  (line: 17, start: 5, end: 29, fill: green),
+  (line: 20, start: 46, end: 47, fill: green),
+))
+```python
+def ask(
+    message: Message,
+    history: list[ChatMessage],
+    db: KnowledgeBase, # <-- 'db' es una dependencia inyectada
+    temperature: float,
+    max_tokens: int,
+    top_p: float,
+    frequency_penalty: float,
+    presence_penalty: float,
+    max_iterations: int = 3,
+) -> Generator[ChatMessageAndChunk, None, None]:
+    query, files = extract_message_content(message)
+   
+    if files:
+        yield from insert_files(files, db) # <- Pasa la dependencia 'db'
+
+    use_rag = not db.is_empty
+    if use_rag:
+        # ...
+        yield from iterative_retrieval(plan, db, chunks)
+```
 
 == Conclusiones parciales
 
