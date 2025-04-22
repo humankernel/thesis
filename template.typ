@@ -90,7 +90,7 @@
         #v(5em)
 
         // type of document
-        #text[*Trabajo de diploma para optar por el título de  Ingeniero en Ciencias Informáticas*]
+        #text[*Trabajo de diploma para optar por el título de \ Ingeniero en Ciencias Informáticas*]
 
         #v(5em)
 
@@ -360,5 +360,20 @@
       ..rows
     ),
     caption: [Historia de usuario #number]
+  )
+}
+
+#let unit_test(code: str, desc: str, input: str, expected: str, result: str) = {
+  figure(
+    table(
+      columns: (1fr, 4fr),
+      align: left,
+      table.header(table.cell(colspan: 2)[Caso de Prueba #code]),
+      table.cell(colspan: 2)[*Descripción*: #desc],
+      [Entrada],[#input],
+      [Salida Esperada],[#expected],
+      table.cell(colspan: 2)[Evaluación de la Prueba: #result]
+    ),
+    caption: [Caso de Prueba #code]
   )
 }
