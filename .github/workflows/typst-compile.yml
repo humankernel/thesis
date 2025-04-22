@@ -1,12 +1,9 @@
-name: Compile Typst Documents
-on: [push]
+name: Compile Thesis.pdf
+on: push
 jobs:
-  build:
+  render-paper:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Compile Typst Files
-      uses: ammar-ahmed22/compile-typst-action@v1
-      with:
-        source_paths: 'main.typ'
-        output_paths: 'main.pdf'
+      - uses: actions/checkout@v4
+      - uses: typst-community/setup-typst@v4
+      - run: typst compile main.typ Thesis.pdf
