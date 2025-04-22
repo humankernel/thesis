@@ -1,4 +1,4 @@
-name: Compile Thesis.pdf
+name: Compile Document
 on: push
 jobs:
   render-paper:
@@ -6,4 +6,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: typst-community/setup-typst@v4
-      - run: typst compile main.typ Thesis.pdf
+      - run: typst compile main.typ main.pdf
+      - uses: actions/upload-artifact@v4
+      with:
+        name: main
+        path: main.pdf
