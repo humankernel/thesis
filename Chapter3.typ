@@ -1,4 +1,6 @@
 #import "@preview/lilaq:0.2.0" as lq
+#import "template.typ": unit_test
+
 
 = Implementación y realización de pruebas <chapter3>
 
@@ -249,7 +251,88 @@ $ "M" = (P * 4B) / (32 \/ Q) * 1.2 = (1.5 * 4B) / (32 \/ 8) * 1.2 = 1.80 $
 
 Las pruebas de unidad constituyen la primera línea de defensa para garantizar la calidad del sistema, validando el comportamiento correcto de funciones y componentes individuales de forma aislada. Estas pruebas se enfocan en unidades mínimas de código —como funciones, clases o métodos— con el objetivo de detectar errores lo antes posible en el ciclo de desarrollo. En este proyecto, se implementaron pruebas de unidad para cubrir los componentes clave del sistema, asegurando que cada parte funcione según lo esperado bajo diversas condiciones. Además, se utilizaron técnicas como la inyección de dependencias y el uso de mocks para aislar correctamente el entorno de ejecución y evitar efectos colaterales @pressman2019software. A continuación, se describen los módulos evaluados y los criterios utilizados para definir los casos de prueba.
 
-// TODO
+Los módulos evaluados incluyen:
+
++ Componente de compresión de contexto: se validó que la reducción de contexto conserve la información relevante y no introduzca distorsiones.
+
++ Constructor de prompts: se verificó la correcta integración de los distintos elementos del prompt, así como la gestión de tokens.
+
++ Cliente LLM: se evaluó su comportamiento ante distintas configuraciones de generación y la correcta gestión de errores.
+
++ Sistema de recuperación: se comprobó que las consultas devuelvan resultados coherentes con los criterios esperados de relevancia.
+
++ Módulo de puntuación: se validó la aplicación correcta de las métricas y su influencia en el ordenamiento final.
+
+Para cada componente, se definieron casos de prueba que cubren tanto escenarios típicos como
+condiciones límite o errores esperados. Se utilizaron técnicas de aislamiento mediante mocks
+para simular dependencias externas como llamadas a modelos, permitiendo así verificar el
+comportamiento interno sin efectos colaterales ni dependencias del entorno.
+
+Algunos ejemplos se muestran a continuación:
+
+#unit_test(code: "1", 
+  desc: "Verifica que la función `compress_history` conserve todo el historial si está dentro del límite de tokens.",
+  input: "Historial de chat con 3 mensajes cortos, límite de 100 tokens.",
+  expected: "La función devuelve una lista con los 3 mensajes sin truncar.",
+  result: "Satisfactoria"
+)
+
+#unit_test(code: "2", 
+  desc: "Evalúa que `generate_answer` utilice correctamente el modelo para generar respuestas en flujo.",
+  input: "Consulta 'What is AI?', historial de 3 mensajes, 2 chunks de contexto y modelo simulado.",
+  expected: "Se genera una secuencia de respuestas en orden: 'Step 1', 'Step 2', 'Answer'.",
+  result: "Satisfactoria"
+)
+
+#unit_test(code: "3", 
+  desc: "Verifica que el modelo de embeddings puede codificar entradas múltiples y devuelve vectores dense, sparse y colbert correctamente.",
+  input: "Lista de textos: ['text1', 'text2', 'text3'], con flags return_dense=True, return_sparse=True, return_colbert=True",
+  expected: "Diccionario con claves 'dense', 'sparse' y 'colbert' con tres elementos cada uno.",
+  result: "Satisfactoria"
+)
+
+#unit_test(code: "4", 
+  desc: "Prueba que dense_similarity devuelve una matriz de similitud con la forma esperada (consultas vs documentos).",
+  input: "Vectores densos de 1 consulta y 2 documentos aleatorios",
+  expected: "Matriz de salida de forma (1, 2).",
+  result: "Satisfactoria"
+)
+
+#unit_test(code: "5", 
+  desc: "Valida el cálculo de similitud ColBERT tomando el promedio del mejor match por token de la query.",
+  input: "1 query (2 tokens) y 1 passage (3 tokens) con vectores explícitos y normalizados.",
+  expected: "Similitud promedio esperada: 0.95.",
+  result: "Satisfactoria"
+)
+
+
+#figure(
+  lq.diagram(
+    ylabel: [Pruebas],
+    xlabel: [Iteraciones],
+    width: 5cm,
+    height: 6cm,
+    ylim: (0, 70),
+    legend: (position: (100% + .5em, 0%)),
+    lq.bar(
+      offset: -0.2, width: 0.4,
+      (1, 2),
+      (54, 62),
+      label: [Aceptadas]
+    ),
+    lq.bar(
+      offset: 0.2, width: 0.4,
+      (1, 2),
+      (8, 0),
+      label: [Erroneas]
+    ),
+    lq.place(0.8, 55, align: bottom)[54],
+    lq.place(1.2, 9, align: bottom)[8],
+    lq.place(1.8, 63, align: bottom)[62],
+    lq.place(2.2, 1, align: bottom)[0],
+  ),
+  caption: [Resultados de las pruebas unitarias por iteracion (Elaboración propia)]
+)<unit-test-results>
 
 == Conclusiones parciales
 
