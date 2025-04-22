@@ -370,9 +370,9 @@ Para la propuesta de solución se definieron 4 capas (@layered):
 
 Un patrón de diseño es una solución reutilizable y probada para problemas comunes de diseño en el desarrollo de software. A diferencia de los patrones arquitectónicos, que se enfocan en la estructura general del sistema, los patrones de diseño abordan problemas específicos en la implementación y organización del código a nivel de componentes y clases. Estos patrones ayudan a mejorar el rendimiento, mantenibilidad, la escalabilidad y la flexibilidad del software, proporcionando estructuras estandarizadas que facilitan la comunicación entre desarrolladores @GangOfFour.
 
-=== Patrones GRASP (General Responsibility Assignment Software Patterns) 
+=== Patrones GRASP
 
-Fueron introducidos por Craig Larman en @larman2002applying y buscan guiar a los diseñadores en la toma de decisiones sobre cómo distribuir responsabilidades entre clases y objetos. 
+Los patrones GRASP (General Responsibility Assignment Software Patterns) fueron introducidos por Craig Larman en @larman2002applying y buscan guiar a los diseñadores en la toma de decisiones sobre cómo distribuir responsabilidades entre clases y objetos. 
 
 *Experto*: Este patrón recomienda que la responsabilidad de realizar una tarea o implementar un método debe recaer sobre la clase que tiene toda la información necesaria para llevarla a cabo.
 
