@@ -1,5 +1,6 @@
-#import "@preview/fletcher:0.5.6" as fletcher: diagram, node, edge
 #import "template.typ": table_user_story
+
+#import "@preview/fletcher:0.5.6" as fletcher: diagram, node, edge
 #import fletcher.shapes: house, hexagon
 
 #import "@preview/codly:1.3.0": *
@@ -14,9 +15,9 @@ Este capítulo se enfoca en la formulación y desarrollo de la solución propues
 
 Luego de llevar a cabo un análisis exhaustivo de los conceptos y herramientas clave que se emplearán en esta investigación, se presenta la propuesta de solución en la @prototype, la cual se describe de la siguiente manera.
 
-El usuario inicia la interacción proporcionando una consulta (query), que el sistema reformula para mejorar su claridad. A la par, el PDF se divide en fragmentos manejables, y tanto la consulta como los fragmentos se convierten en representaciones vectoriales de dos tipos: densas (que capturan la relación semántica profunda) y dispersas (que se basan más en la coincidencia de términos clave). La búsqueda híbrida combina ambas representaciones mediante una suma de pesos, equilibrando la relevancia semántica con la coincidencia exacta de términos. Los fragmentos más relevantes se almacenan en una base de datos vectorial (VectorDB) para posibles futuras consultas y luego pasan por un proceso de refinamiento y filtrado. En esta etapa, se comprime el contexto ("Context Zip") eliminando información innecesaria para optimizar la eficiencia del modelo de lenguaje (LLM). Finalmente, el LLM utiliza el contexto seleccionado para generar una respuesta precisa y alineada con la consulta del usuario.
+// TODO: update this text important!!
 
-// todo: debería incluir la parte web? 
+El usuario inicia la interacción proporcionando una pregunta, que el sistema reformula para mejorar su claridad. A la par, el PDF se divide en fragmentos manejables, y tanto la consulta como los fragmentos se convierten en representaciones vectoriales de dos tipos: densas (que capturan la relación semántica profunda) y dispersas (que se basan más en la coincidencia de términos clave). La búsqueda híbrida combina ambas representaciones mediante una suma de pesos, equilibrando la relevancia semántica con la coincidencia exacta de términos. Los fragmentos más relevantes se almacenan en una base de datos vectorial (VectorDB) para posibles futuras consultas y luego pasan por un proceso de refinamiento y filtrado. En esta etapa, se comprime el contexto ("Context Zip") eliminando información innecesaria para optimizar la eficiencia del modelo de lenguaje (LLM). Finalmente, el LLM utiliza el contexto seleccionado para generar una respuesta precisa y alineada con la consulta del usuario.
 
 #let blob(pos, label, tint: white, ..args) = (
   node(
@@ -69,17 +70,13 @@ El usuario inicia la interacción proporcionando una consulta (query), que el si
         edge((0, 2),"->", (0, 4)),
         edge(<db>,"->",(1,4)), // multiple
 
-        blob((1, 5), [Rerank], name: <rr>, tint: color.olive),
+        blob((1, 5.5), [Rerank], name: <rr>, tint: color.olive),
 
         edge((1,4),"->",<rr>), // multiple
 
-        blob((1, 6), [Context Zip], name: <cc>, tint: color.olive),
-
-        edge(<rr>,"->",<cc>), // multiple rand
-
         node([Prompt], enclose: ((0, 7), (1,7)), stroke: blue, fill: blue.lighten(90%), name: <p>, width: 170pt),
 
-        edge(<cc>,"->",(1,7)),
+        edge(<rr>,"->",(1,7)),
         edge((0,4),"->",(0, 7)),
 
         node([LLM], enclose: ((0, 8), (1,8)), stroke: red, fill: red.lighten(90%), name: <llm>, width: 170pt),
@@ -89,11 +86,10 @@ El usuario inicia la interacción proporcionando una consulta (query), que el si
         node([Respuesta], enclose: ((0, 9), (1,9)), name: <res>, stroke: silver, fill: silver.lighten(90%), width: 170pt),
 
         edge(<llm>, "->", <res>),
+        edge(<llm.west>, "-->", <rewrite.west>, `retry`), // TODO:
     ),
     caption: [Propuesta de Solución (Elaboración Propia)]
 )<prototype>
-
-// == Modelo conceptual
 
 == Requisitos de software
 
@@ -114,7 +110,7 @@ El usuario inicia la interacción proporcionando una consulta (query), que el si
 - *HU13*: Incluir citas en las respuestas
 
 === Requisitos no funcionales
-// todo: extender
+
 *Usabilidad*
 - *RnF1*: Se podrá interactuar de forma fácil por cualquier usuario.
 - *RnF2*: Se podrá emplear el idioma Ingles y Español.
@@ -138,7 +134,6 @@ El usuario inicia la interacción proporcionando una consulta (query), que el si
 == Descripción de las historias de usuario
 
 En este capítulo se definen los requisitos funcionales y no funcionales del sistema, los cuales describen, respectivamente, las funcionalidades que debe ofrecer la aplicación y las restricciones o cualidades que debe cumplir (como rendimiento, usabilidad y seguridad). En la metodología XP, estos requisitos se especifican mediante historias de usuario, redactadas en un lenguaje claro y accesible por el cliente, permitiendo encapsular de forma concisa lo que el sistema debe realizar. Este enfoque facilita la priorización, estimación y validación de cada historia, garantizando una comunicación efectiva entre desarrolladores y usuarios, y permitiendo iteraciones de desarrollo ágiles y adaptables a las necesidades reales @sommerville_ingenierisoftware_2005.
-
 
 #table_user_story(1, [Enviar consultas],
   [Alta], [Bajo],
@@ -253,7 +248,7 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
   [El usuario puede iniciar múltiples conversaciones independientes para gestionar diferentes temas o consultas.], 
   [Cada conversación maneja su propio historial y contexto.],
   picture: "Images/hu-nuevos-chats.png"
-)
+) // TODO: update picture
 
 #table_user_story(12, [Limpiar el chat],
   [Baja], [Bajo],
@@ -272,16 +267,17 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
   [Joaquin Enrique Rivas Sánchez],
   [El sistema incluye citas de fuentes relevantes en las respuestas para respaldar la información proporcionada.], 
   []
-  // todo: add picture
-)
+)  // todo: add picture or remove
 
 == Plan de iteraciones
 
 Habiendo identificado previamente las historias de usuario se debe crear el plan de iteraciones donde cada HU se convierte en tareas especificas de desarrollo y para cada uno se establecen pruebas de aceptación. En cada ciclo se analizan las pruebas fallidas para prevenir que no vuelvan a ocurrir y ser corregidas.
 
+// TODO: ^ pruebas de aceptación
+
 Se acordaron 2 iteraciones que a continuación serán descritas:
 
-- *Iteración 1:* se desarrollan las HU 1,2,3,4,5 las cuales corresponden al envió de consultas y archivos pdf; la generación de respuestas; procesamiento de archivos; la búsqueda de documentos relevantes. Al finalizar la iteración se realizaran las pruebas de aceptación.
+- *Iteración 1:* se desarrollan las HU 1,2,3,4,5 las cuales corresponden al envió de consultas y archivos PDF; la generación de respuestas; procesamiento de archivos; la búsqueda de documentos relevantes. Al finalizar la iteración se realizaran las pruebas de aceptación.
 
 - *Iteración 2:* se desarrollan las HU 6,7,8,9,10,11,12,13 las cuales corresponden a la capacidad de mostrar documentos recuperados; regenerar, dar retroalimentación de las respuestas; editar una consulta previa; ajustar los parámetros del sistema; crear multiples conversaciones; limpiar el chat y por ultimo incluir citas en las respuestas. Al finalizar la iteración se realizaran las pruebas de aceptación y la entrega final de la propuesta de solución. 
 
@@ -290,20 +286,19 @@ En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo es
 #figure(
   table(
     align: left,
-    columns: (1.2fr, 0.4fr, 3fr, 2fr),
+    columns: (1.2fr, 0.4fr, 4fr, 2fr),
     stroke: .5pt + black,
     table.header(
       [*Iteración*], 
       table.cell(colspan: 2)[*Historias de usuario*], 
       [*Duración (semanas)*]
     ),
-
     table.cell(rowspan: 5, align: center)[1],
-    [1],[Enviar consultas]            ,table.cell(align: center)[1],
-    [2],[Enviar archivos PDF]         ,table.cell(align: center)[1],
-    [3],[Generar respuestas]          ,table.cell(align: center)[2],
-    [4],[Procesar archivos]           ,table.cell(align: center)[3],
-    [5],[Buscar documentos relevantes],table.cell(align: center)[2],
+    [1],[Enviar consultas]                       ,table.cell(align: center)[1],
+    [2],[Enviar archivos PDF]                    ,table.cell(align: center)[1],
+    [3],[Generar respuestas]                     ,table.cell(align: center)[2],
+    [4],[Procesar archivos]                      ,table.cell(align: center)[3],
+    [5],[Buscar documentos relevantes]           ,table.cell(align: center)[2],
 
     table.cell(rowspan: 8, align: center)[2],
     [6] ,[Mostrar documentos recuperados]        ,table.cell(align: center)[1],
@@ -326,9 +321,10 @@ En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo es
   #line(length: 100%),
 ]
 
-// == Tarjetas CRC
-
 == Arquitectura de software
+
+// TODO: is the Layered Arch correct?
+// TODO: in any case AI/ML layer does not interact with the Persistence Layer
 
 La arquitectura de software se refiere a la estructura organizativa de un sistema de software, que incluye sus componentes principales y las relaciones entre ellos. Es el diseño de alto nivel que guía la evolución y el desarrollo del sistema, asegurando que cumpla con sus objetivos funcionales y no funcionales. Un patrón arquitectónico es una solución recurrente a problemas comunes en la construcción de software, proporcionando una estructura predefinida que se puede aplicar en diferentes contextos, ayudando a resolver desafíos de diseño. Finalmente, un estilo arquitectónico es un conjunto de reglas y restricciones que define la organización de los componentes del sistema y las interacciones entre ellos, reflejando un enfoque particular para abordar problemas de diseño en una categoría de sistemas. Un estilo puede incluir varios patrones arquitectónicos que estructuran el sistema de acuerdo con principios y prácticas específicas @richards2020fundamentals. En la propuesta de solución se hizo uso de la arquitectura por capas
 
@@ -344,7 +340,7 @@ Para la propuesta de solución se definieron 4 capas (@layered):
 
 3. *Capa de Inferencia (AI/ML)*: Aquí se realiza la generación de respuestas mediante modelos de lenguaje. Esta capa encapsula la lógica relacionada con los clientes LLM y su ejecución.
 
-4. *Capa de Persistencia*: Representada por una 'base del conocimiento' (VectorDB) almacenada en memoria.
+4. *Capa de Persistencia*: Representada por una 'base del conocimiento' (Vector DB) almacenada en memoria.
 
 #figure(
     diagram(
@@ -359,9 +355,9 @@ Para la propuesta de solución se definieron 4 capas (@layered):
         blob((0,2), [AI/ML], name: <ai>, tint: color.green),
         blob((0,3), [Persistencia], name: <persist>, tint: color.red),
 
-        edge(<ui>, <logic>, "->"),
-        edge(<logic>, <ai>, "->"),
-        edge(<ai>, <persist>, "->"),
+        edge(<ui>, <logic>, "<->"),
+        edge(<logic>, <ai>, "<->"),
+        edge(<ai>, <persist>, "<->"),
     ),
     caption: [Capas del Sistema (Elaboración Propia)]
 )<layered>
@@ -370,27 +366,27 @@ Para la propuesta de solución se definieron 4 capas (@layered):
 
 Un patrón de diseño es una solución reutilizable y probada para problemas comunes de diseño en el desarrollo de software. A diferencia de los patrones arquitectónicos, que se enfocan en la estructura general del sistema, los patrones de diseño abordan problemas específicos en la implementación y organización del código a nivel de componentes y clases. Estos patrones ayudan a mejorar el rendimiento, mantenibilidad, la escalabilidad y la flexibilidad del software, proporcionando estructuras estandarizadas que facilitan la comunicación entre desarrolladores @GangOfFour.
 
-=== Patrones GRASP
+// === Patrones GRASP
 
-Los patrones GRASP (General Responsibility Assignment Software Patterns) fueron introducidos por Craig Larman en @larman2002applying y buscan guiar a los diseñadores en la toma de decisiones sobre cómo distribuir responsabilidades entre clases y objetos. 
+// Los patrones GRASP (General Responsibility Assignment Software Patterns) fueron introducidos por Craig Larman en @larman2002applying y buscan guiar a los diseñadores en la toma de decisiones sobre cómo distribuir responsabilidades entre clases y objetos. 
 
-*Experto*: Este patrón recomienda que la responsabilidad de realizar una tarea o implementar un método debe recaer sobre la clase que tiene toda la información necesaria para llevarla a cabo.
+// *Experto*: Este patrón recomienda que la responsabilidad de realizar una tarea o implementar un método debe recaer sobre la clase que tiene toda la información necesaria para llevarla a cabo.
 
-#figure(
-  image("Images/expert.svg"),
-  caption: [Patrón Experto (Fuente: Elaboración propia)]
-)
+// #figure(
+//   image("Images/expert.svg"),
+//   caption: [Patrón Experto (Fuente: Elaboración propia)]
+// )
 
-*Alta cohesión*: Este patrón recomienda mantener cada clase enfocada en una única responsabilidad bien definida.
+// *Alta cohesión*: Este patrón recomienda mantener cada clase enfocada en una única responsabilidad bien definida.
 
-#figure(
-  image("Images/high-cohesion.svg"),
-  caption: [Patrón Alta Cohesión (Fuente: Elaboración propia)]
-)
+// #figure(
+//   image("Images/high-cohesion.svg"),
+//   caption: [Patrón Alta Cohesión (Fuente: Elaboración propia)]
+// )
 
 // TODO: bajo acoplamiento
 
-== Patrón Generador
+=== Patrón Generador
 
 El patrón Generador se utiliza para crear iteradores de una manera simple y eficiente en memoria. En lugar de construir y devolver una colección completa de elementos (lo que podría consumir mucha memoria o tiempo), un generador produce los elementos uno por uno, bajo demanda, utilizando la palabra clave `yield`. En el contexto de aplicaciones interactivas como esta, es fundamental para el streaming de respuestas, permitiendo enviar actualizaciones de estado o fragmentos de la respuesta al cliente a medida que están disponibles, en lugar de esperar a que todo el proceso termine. // TODO: ref
 
@@ -426,7 +422,7 @@ def create_query_plan(
     )
 ```
 
-== Máquina de Estados
+=== Máquina de Estados
 
 Una Máquina de Estados es un patrón que permite a un objeto alterar su comportamiento cuando su estado interno cambia. Se utiliza para modelar sistemas que pueden existir en un número finito de estados y transicionan entre ellos en respuesta a eventos o condiciones. Es útil para gestionar flujos de control complejos y secuencias de operaciones ordenadas. En este código, el proceso general de la función `ask` sigue una secuencia (planificar, recuperar, generar, validar, refinar) que puede iterar hasta alcanzar un estado final ('completo'). @Finite-State-Machines.
 
@@ -456,9 +452,9 @@ while not state.complete and iterations < max_iterations:
 yield state.answer, chunks
 ```
 
-== Gestión de Configuración
+=== Gestión de Configuración
 
-Consiste en separar los datos de configuración (parámetros que pueden variar entre entornos como desarrollo o producción, rutas de los modelos, etc.) del código fuente de la aplicación. Esto mejora la flexibilidad, portabilidad y mantenibilidad, ya que permite modificar el comportamiento de la aplicación sin cambiar el código, simplemente ajustando las variables de entorno o configuración. (Referencia conceptual: Externalización de configuración, Principio de Separación de Intereses) @SWEBOK.
+Consiste en separar los datos de configuración (parámetros que pueden variar entre entornos como desarrollo o producción, rutas de los modelos, etc.) del código fuente de la aplicación. Esto mejora la flexibilidad, portabilidad y mantenibilidad, ya que permite modificar el comportamiento de la aplicación sin cambiar el código, simplemente ajustando las variables de entorno o configuración @SWEBOK.
 
 #codly(highlights: (
   (line: 11, start: 31, end: 50, fill: green),
@@ -466,7 +462,6 @@ Consiste en separar los datos de configuración (parámetros que pueden variar e
 ```python
 class Settings(BaseModel):
     EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "BAAI/bge-m3")
-    EMBEDDING_TOKEN_LIMIT: int = 8190
     RERANKER_MODEL: str = os.getenv("RERANKER_MODEL", "BAAI/bge-reranker-v2-m3")
     LLM_MODEL: str = os.getenv("LLM_MODEL", "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")
     DTYPE: str = os.getenv("DTYPE", "float16")
@@ -477,14 +472,14 @@ from settings import settings
 llm_model = OpenAIClient() if settings.ENVIRONMENT == "dev" else vLLMClient()
 ```
 
-== Inyección de Dependencias
+=== Inyección de Dependencias
 
 Es un patrón de diseño en el que un objeto recibe las otras instancias de objetos (sus "dependencias") que necesita, desde una fuente externa, en lugar de crearlas internamente. Esto promueve el bajo acoplamiento entre componentes y mejora la testeabilidad, ya que las dependencias pueden ser fácilmente reemplazadas por implementaciones alternativas o mocks durante las pruebas. Es una forma de implementar el principio de Inversión de Control (IoC) @Inversion-of-control.
 
 #codly(highlights: (
-  (line: 4, start: 5, end: 21, fill: green),
+  (line: 4,  start: 5,  end: 21, fill: green),
   (line: 15, start: 40, end: 41, fill: green),
-  (line: 17, start: 5, end: 29, fill: green),
+  (line: 17, start: 5,  end: 29, fill: green),
   (line: 20, start: 46, end: 47, fill: green),
 ))
 ```python
