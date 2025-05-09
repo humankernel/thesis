@@ -1,40 +1,88 @@
-#import "@preview/lilaq:0.2.0" as lq
 #import "template.typ": unit_test
-
+#import "@preview/lilaq:0.2.0" as lq
 
 = Implementación y realización de pruebas <chapter3>
 
-// - [ ] una breve explicación del objetivo que persigue el capítulo, 
-// - [ ] los principales contenidos que aborda, 
-// - [ ] la estructura que puede encontrar el lector en su composición
-// - [ ] un breve texto introductorio a las temáticas principales que aborda el capítulo
-
 Este capítulo presenta la implementación de la solución propuesta y las pruebas realizadas para evaluar su funcionamiento. Se detallan los mecanismos empleados para la verificación del sistema, así como los resultados obtenidos. Además, se analiza la transformación alcanzada en el objeto de estudio y la factibilidad técnica de la solución.
-
-// CAP 3.1
-// - [ ] el diseño de los mecanismos utilizados para la verificación y validación de la solución propuesta
-// - [ ] su ejecución y los resultados obtenidos
-
-// CAP 3.2
-// - [ ] la aplicación de los métodos y técnicas científicos que demuestran la transformación lograda por la solución propuesta en el objeto de estudio, es decir los datos que demuestren el tránsito del estado actual descrito en el capítulo 1 al estado deseado de dicho objeto
-
-// CAP 3.3
-// - [ ] estudio de factibilidad para la realización de la solución propuesta que igualmente demuestra la viabilidad de la solución desarrollada
-
 
 == Tareas de Ingeniería
 
-// same fucking shit that HU
+// TODO:
 
 == Evaluación 
 
 La evaluación de aplicaciones que integran LLMs exige protocolos más estrictos que el software convencional, pues sus salidas son inherentemente no deterministas #footnote([Cada invocación puede generar respuestas distintas incluso con el mismo prompt]). Por ello, se recurre a métricas cuantitativas (e.g., exactitud, coherencia, robustez) y a revisiones humanas estructuradas para calibrar tanto la fidelidad de los resultados como su adecuación al contexto de uso @RAGAS. 
 
-En el caso de sistemas RAG, la evaluación se fragmenta en dos componentes:
+Para realizar las evaluación se creo una herramienta externa (@rag-eval) cuyo objetivo principal fue automatizar el proceso de generación del conjunto de datos (dataset) de prueba. A partir de esta herramienta, se construyó un dataset específico bajo condiciones controladas. Este conjunto de datos presenta las siguientes características principales:
 
-1. *Retrieval*: métricas como Precisión\@k o MRR miden la idoneidad y posición de los documentos recuperados.
+- Incluye un total de 80 pares pregunta-respuesta (4 pares por cada tema), cada uno acompañado por su correspondiente id de contexto recuperado.
 
-2. *Generation*: indicadores de fidelidad y relevancia de la respuesta garantizan que el texto generado refleje correctamente la información recuperada.
+- Las preguntas fueron generadas de forma automática (usando un LLM), y están orientadas a distintos dominios (ver @dataset).
+
+- El dataset fue conformado de diferentes artículos de Wikipedia en version ingles y espanol.
+
+- El dataset fue estructurado en formato `.jsonl`, lo que facilita su uso en procesos automáticos de evaluación y su integración con herramientas como RAGAS.
+
+#figure(
+  table(
+    columns: (1fr, 2fr),
+    [Area], [Temas],
+    [Matemáticas], [Números Primos, Algebra lineal, Calculo, Probabilidad],
+    [Ciencias de la Computación], [Algoritmo, Estructura de datos, Inteligencia artificial, Programación de computadoras],
+    [Biología], [Célula (biología), Genética, Evolución, Ecología],
+    [Física], [Mecánica clásica, Electromagnetismo, Mecánica cuántica, Termodinámica],
+    [General], [Batman, Perro salchicha, Teoría conspirativa, Religión]
+  ),
+  caption: [Documentos seleccionados (Elaboración propia)]
+)<dataset>
+
+A continuación se definen las métricas de evaluación utilizadas.
+
+=== Métricas de Generación
+
+Las métricas de generación definidas tienen como fin valorar la calidad de las respuestas producidas una vez incorporada la información recuperada. Su objetivo es comprobar que las respuestas no solo sean coherentes y precisas, sino que atiendan de forma directa la pregunta planteada @Yu_2025. 
+
+A continuación, se describen las principales métricas introducidas por RAGAS @RAGAS:
+
+- *Faithfulness*: Una respuesta es fiel cuando no introduce hechos ajenos o inexactitudes que no estén respaldadas por las fuentes consultadas. Esta metrica es especialmente util para ayudar a detectar las alucinaciones @RAGAS.
+
+    Para implementarla se siguen los siguientes pasos:
+
+    1. Extraer afirmaciones atómicas de la respuesta generada utilizando un modelo de lenguaje (LLM).
+
+    2. Para cada afirmación, determinar si puede inferirse del contexto recuperado.
+
+    $ "Faithfulness" = "# de afirmaciones correctas" / "# total de afirmaciones" $
+
+// -------------------------
+// TODO: fix 
+- *Factual Correctness*:
+- *Relevancia de la respuesta*: Que tan bien la respuesta responde la pregunta del usuario @RAGAS.
+
+    Para implementarla se siguen los siguientes pasos:
+
+    1. Usar un LLM para generar posibles preguntas a las que la respuesta podría corresponder.
+
+    2. Calcular vectores de embedding tanto para la pregunta original como para las preguntas generadas.
+
+    3. Calcular la similitud de coseno entre estos embeddings.
+
+    4. Tomar el promedio de las similitudes como la puntuación de relevancia de la respuesta.
+
+$ "Answer Relevance" = "Promedio de la similitud del coseno entre la pregunta original y generada" $
+
+// -------------------------
+
+- *Context Recall*: Determina si la información recuperada es suficiente para responder la pregunta, y no contiene contenido excesivamente irrelevante @RAGAS.
+
+Para implementarla se siguen los siguientes pasos:
+
+1. Usar un LLM para identificar afirmaciones que son relevantes para responder la pregunta.
+
+2. Calcular de la siguiente forma
+
+$ "Context Relevance" = "# de afirmaciones relevantes" / "# total de afirmaciones" $
+
 
 === Métricas de Recuperación
 
@@ -85,50 +133,6 @@ Luego, el 'Mean Average Precision' se obtiene promediando el _AP_ sobre todas la
 
 $ "MAP" = 1 / N sum_(q=1)^N "AP"(q) $
 
-=== Métricas de Generación
-
-Las métricas de generación tienen como fin valorar la calidad de las respuestas producidas una vez incorporada la información recuperada. Su objetivo es comprobar que las respuestas no solo sean coherentes y precisas, sino que atiendan de forma directa la pregunta planteada @Yu_2025. 
-
-A continuación, se describen las principales métricas introducidas por RAGAS @RAGAS:
-
-- *Fidelidad*: Una respuesta es fiel cuando no introduce hechos ajenos o inexactitudes que no estén respaldadas por las fuentes consultadas. Esta metrica es especialmente util para ayudar a detectar las alucinaciones @RAGAS.
-
-    Para implementarla se siguen los siguientes pasos:
-
-    1. Extraer afirmaciones atómicas de la respuesta generada utilizando un modelo de lenguaje (LLM).
-
-    2. Para cada afirmación, determinar si puede inferirse del contexto recuperado.
-
-    $ "Faithfulness" = "# de afirmaciones correctas" / "# total de afirmaciones" $
-
-// -------------------------
-
-- *Relevancia de la respuesta*: Que tan bien la respuesta responde la pregunta del usuario @RAGAS.
-
-    Para implementarla se siguen los siguientes pasos:
-
-    1. Usar un LLM para generar posibles preguntas a las que la respuesta podría corresponder.
-
-    2. Calcular vectores de embedding tanto para la pregunta original como para las preguntas generadas.
-
-    3. Calcular la similitud de coseno entre estos embeddings.
-
-    4. Tomar el promedio de las similitudes como la puntuación de relevancia de la respuesta.
-
-$ "Answer Relevance" = "Promedio de la similitud del coseno entre la pregunta original y generada" $
-
-// -------------------------
-
-- *Relevancia del contexto*: Determina si la información recuperada es suficiente para responder la pregunta, y no contiene contenido excesivamente irrelevante @RAGAS.
-
-Para implementarla se siguen los siguientes pasos:
-
-1. Usar un LLM para identificar afirmaciones que son relevantes para responder la pregunta.
-
-2. Calcular de la siguiente forma
-
-$ "Context Relevance" = "# de afirmaciones relevantes" / "# total de afirmaciones" $
-
 === Resultados
 
 En la @gen-params se muestran los parámetros de generación utilizados.
@@ -147,10 +151,41 @@ En la @gen-params se muestran los parámetros de generación utilizados.
     caption: [Parámetros de Generación]
 )<gen-params>
 
-=== Resultados
+// Generation Results
+
+#let context_recall_score = 0.9781
+#let faithfulness = 0.4543
+#let factual_correctness = 0.6242
+
+Los resultados obtenidos (@ragas-results) a través de la evaluación con RAGAS reflejan un rendimiento sólido en el componente de recuperación de contexto, pero revelan importantes deficiencias en la fase de generación de respuestas. 
+- El puntaje de `Context Recall` fue alto (#context_recall_score), lo que indica que el sistema es eficaz para recuperar información relevante; en otras palabras, el modelo accede correctamente a los datos necesarios para responder la mayoría de las preguntas. 
+
+- No obstante, la métrica `Faithfulness` fue baja (#faithfulness), lo que evidencia un problema serio: el modulo generador frecuentemente produce respuestas que no están plenamente fundamentadas en el contexto proporcionado. Esto sugiere que el modelo recurre a conocimientos previos aprendidos durante el preentrenamiento, ignora partes clave del contexto, o interpreta información de manera imprecisa. En consecuencia, se compromete la confianza del usuario, ya que las respuestas pueden contener afirmaciones incorrectas o incluso alucinaciones. 
+
+- Esta situación también se refleja en el puntaje de `Factual Correctness` (#factual_correctness), que indica una precisión moderada: las respuestas son parcialmente correctas, aunque inconsistentes. La generación es adecuada en algunos casos, pero no puede garantizarse una fidelidad completa con la información recuperada. 
+
+En conjunto, estos resultados conducen a tres implicaciones clave: (1) la recuperación funciona de forma confiable y robusta; (2) el modelo generador requiere ajustes para mejorar la fidelidad a la evidencia contextual; y (3) es necesario implementar medidas correctivas como el perfeccionamiento de los prompts (instrucciones explícitas para que el modelo solo utilice el contexto dado), garantizar la claridad y relevancia de los fragmentos recuperados, realizar fine-tuning con datos del dominio específico y, finalmente, aplicar filtros o mecanismos de control para reducir la generación de contenido erróneo o no verificado. En suma, el sistema muestra un buen potencial, pero necesita mejoras significativas en la etapa de generación para alcanzar una mayor precisión y confiabilidad.
+
+#figure(
+  lq.diagram(
+    xaxis: (
+      ticks: ("faithfulness", "context recall", "factual correctness")
+        .map(rotate.with(-45deg, reflow: true))
+        .enumerate(),
+      subticks: none,
+    ),
+    lq.bar(
+      range(3),
+      (0.4543, 0.9781, 0.6242)
+    ),
+    lq.place(0, 0.35, align: bottom)[0.4543],
+    lq.place(1, 0.85, align: bottom)[0.9781],
+    lq.place(2, 0.5, align: bottom)[0.6242],
+  ),
+  caption: [Resultados de RAGAS (Elaboración propia)]
+)<ragas-results>
 
 // TODO: Retrieval Results
-// TODO: Generation Results
 
 == Pruebas de Rendimiento
 
@@ -163,9 +198,9 @@ Las pruebas fueron ejecutadas en el siguiente hardware:
 - 16GB RAM
 - RTX 2070 (8GB VRAM)
 
-=== Embeddings: Tiempos
+=== Embeddings: Tiempos // TODO: add memory
 
-Para evaluar el rendimiento del componente de generación de embeddings del sistema, se desarrolló un script que mide el tiempo promedio de codificación de un conjunto de oraciones bajo diferentes configuraciones del modelo de embeddings. Las pruebas se realizaron sobre tres conjuntos de entrada: corto (2 oraciones - 17 tokens), medio (100 oraciones - 850 tokens) y largo (1000 oraciones - 8500 tokens), utilizando distintos tamaños de lote ('batch') #footnote([El batching es una técnica que consiste en procesar múltiples entradas al mismo tiempo en lugar de una por una, optimizando así el uso de recursos y acelerando la inferencia en modelos.]).
+Para evaluar el rendimiento del componente de generación de embeddings del sistema, se desarrolló un script que mide el tiempo promedio de codificación de un conjunto de oraciones bajo diferentes configuraciones del modelo de embeddings. Las pruebas se realizaron sobre tres conjuntos de entrada: corto (2 oraciones - 17 tokens), medio (100 oraciones - 850 tokens) y largo (1000 oraciones - 8500 tokens), utilizando distintos tamaños de lote ('batch') #footnote([El batching es una técnica que consiste en procesar múltiples entradas al mismo tiempo, optimizando así el uso de recursos y acelerando la inferencia en modelos.]).
 
 Se consideraron cinco configuraciones del modelo: 
 1. solo embeddings densos
@@ -204,12 +239,13 @@ En la @emb-tests se muestra los resultados, donde crear los embeddings para 1000
   caption: [Benchmark Embeddings (Elaboración propia)]
 )<emb-tests>
 
-// === Reranker: Memoria y Tiempo
+=== Reranker: Tiempos y Memoria
+
 // TODO: hacer las del reranker o quitarlas
 
 === LLM: Tiempos y Memoria
 
-Para cuantificar de forma precisa el rendimiento del componente de generación de texto, se implementó un script que simula tres escenarios de uso mediante conjuntos de prompts de distinta longitud (Short #sym.tilde 34 tokens, Medium #sym.tilde 128 tokens y Long #sym.tilde 342 tokens). Tras realizar una fase de calentamiento de tres invocaciones al modelo, el script ejecuta cinco iteraciones cronometradas con `timeit` y calcula dos métricas fundamentales: la latencia #footnote([Tiempo total que tarda el sistema en procesar una petición y ofrecer la respuesta completa]) y el throughput #footnote([Tasa de producción del sistema, expresada como la cantidad de unidades procesadas (en este caso, tokens) por segundo]).
+Para cuantificar de forma precisa el rendimiento del componente de generación de texto, se implementó un script que simula tres escenarios de uso mediante conjuntos de prompts de distinta longitud (Short #sym.tilde 34 tokens, Medium #sym.tilde 128 tokens y Long #sym.tilde 342 tokens). Tras realizar una fase de calentamiento de tres invocaciones al modelo, el script ejecuta cinco iteraciones cronometradas con `timeit` y calcula dos métricas fundamentales: la latencia #footnote([Tiempo total que tarda el sistema en procesar una petición y ofrecer la respuesta completa]) y el throughput #footnote([Tasa de producción del sistema, expresada como la cantidad de unidades procesadas (en este caso, tokens por segundo]).
 
 #figure(
   lq.diagram(
@@ -226,7 +262,7 @@ Para cuantificar de forma precisa el rendimiento del componente de generación d
 
 Los resultados (@llm-tests) muestran que, al aumentar la longitud del prompt, la latencia crece de 2,03 s (Short) a 3,50 s (Long), mientras que el throughput pasa de 16,7 tok/s a 97,8 tok/s. Esto indica que el modelo procesa lotes más grandes de forma más eficiente —generando muchos más tokens por segundo— aunque a costa de un ligero aumento en el tiempo total de respuesta, que en todo caso se mantiene dentro de un rango aceptable para aplicaciones interactivas.
 
-Mas rendimiento puede ser obtenido si se optimizan los parámetros de vLLM y se hace uso de batching, adicionalmente el uso de formatos cuantizados '.gguf' tiene un soporte experimental y no esta completamente optimizado. 
+Mas rendimiento puede ser obtenido si se optimizan los parámetros de vLLM y se hace uso de batching, adicionalmente el uso de formatos cuantizados `.gguf` tiene un soporte experimental y no esta completamente optimizado. 
 
 Por otro lado en cuestión de consumo de memoria, se puede utilizar la siguiente formula para determinar la cantidad de VRAM o RAM requerida para ejecutar el modelo. Para ejecutar un modelo de 1.5B de parámetros con una cuantización de 8 bits el calculo seria el siguiente.
 
@@ -271,38 +307,38 @@ comportamiento interno sin efectos colaterales ni dependencias del entorno.
 Algunos ejemplos se muestran a continuación:
 
 #unit_test(code: "1", 
-  desc: "Verifica que la función `compress_history` conserve todo el historial si está dentro del límite de tokens.",
-  input: "Historial de chat con 3 mensajes cortos, límite de 100 tokens.",
-  expected: "La función devuelve una lista con los 3 mensajes sin truncar.",
-  result: "Satisfactoria"
+  desc: [Verifica que la función `compress_history` conserve todo el historial si está dentro del límite de tokens.],
+  input: [Historial de chat con 3 mensajes cortos, límite de 100 tokens.],
+  expected: [La función devuelve una lista con los 3 mensajes sin truncar.],
+  result: [Satisfactoria]
 )
 
 #unit_test(code: "2", 
-  desc: "Evalúa que `generate_answer` utilice correctamente el modelo para generar respuestas en flujo.",
-  input: "Consulta 'What is AI?', historial de 3 mensajes, 2 chunks de contexto y modelo simulado.",
-  expected: "Se genera una secuencia de respuestas en orden: 'Step 1', 'Step 2', 'Answer'.",
+  desc: [Evalúa que `generate_answer` utilice correctamente el modelo para generar respuestas en flujo.],
+  input: [Consulta 'What is AI?', historial de 3 mensajes, 2 chunks de contexto y modelo simulado.],
+  expected: [Se genera una secuencia de respuestas en orden: 'Step 1', 'Step 2', 'Answer'.],
   result: "Satisfactoria"
 )
 
 #unit_test(code: "3", 
-  desc: "Verifica que el modelo de embeddings puede codificar entradas múltiples y devuelve vectores dense, sparse y colbert correctamente.",
-  input: "Lista de textos: ['text1', 'text2', 'text3'], con flags return_dense=True, return_sparse=True, return_colbert=True",
-  expected: "Diccionario con claves 'dense', 'sparse' y 'colbert' con tres elementos cada uno.",
-  result: "Satisfactoria"
+  desc: [Verifica que el modelo de embeddings puede codificar entradas múltiples y devuelve vectores `dense`, `sparse` y `colbert` correctamente.],
+  input: [Lista de textos: `['text1', 'text2', 'text3']`, con flags `return_dense=True`, `return_sparse=True`, `return_colbert=True`],
+  expected: [Diccionario con claves `dense`, `sparse` y `colbert` con tres elementos cada uno.],
+  result: [Satisfactoria]
 )
 
 #unit_test(code: "4", 
-  desc: "Prueba que dense_similarity devuelve una matriz de similitud con la forma esperada (consultas vs documentos).",
-  input: "Vectores densos de 1 consulta y 2 documentos aleatorios",
-  expected: "Matriz de salida de forma (1, 2).",
-  result: "Satisfactoria"
+  desc: [Prueba que dense_similarity devuelve una matriz de similitud con la forma esperada (consultas vs documentos).],
+  input: [Vectores densos de 1 consulta y 2 documentos aleatorios],
+  expected: [Matriz de salida de forma `(1, 2)`.],
+  result: [Satisfactoria]
 )
 
 #unit_test(code: "5", 
-  desc: "Valida el cálculo de similitud ColBERT tomando el promedio del mejor match por token de la query.",
-  input: "1 query (2 tokens) y 1 passage (3 tokens) con vectores explícitos y normalizados.",
-  expected: "Similitud promedio esperada: 0.95.",
-  result: "Satisfactoria"
+  desc: [Valida el cálculo de similitud `ColBERT` tomando el promedio de la mejor coincidencia por token de la pregunta.],
+  input: [1 pregunta (2 tokens) y 1 fragmento de texto (3 tokens) con vectores explícitos y normalizados.],
+  expected: [Similitud promedio esperada: 0.95.],
+  result: [Satisfactoria]
 )
 
 
@@ -324,25 +360,21 @@ Algunos ejemplos se muestran a continuación:
       offset: 0.2, width: 0.4,
       (1, 2),
       (8, 0),
-      label: [Erroneas]
+      label: [Erróneas]
     ),
     lq.place(0.8, 55, align: bottom)[54],
     lq.place(1.2, 9, align: bottom)[8],
     lq.place(1.8, 63, align: bottom)[62],
     lq.place(2.2, 1, align: bottom)[0],
   ),
-  caption: [Resultados de las pruebas unitarias por iteracion (Elaboración propia)]
+  caption: [Resultados de las pruebas unitarias por iteración (Elaboración propia)]
 )<unit-test-results>
 
 == Conclusiones parciales
 
-// - lista de conclusiones en este capítulo por lo general van dirigidas a establecer los argumentos y resultados que demuestran la veracidad, factibilidad y fiabilidad de la solución propuesta en términos de los datos obtenidos al aplicar técnicas y métodos de verificación y validación de software, técnicas y métodos de validación científica de la transformación o impacto sobre el objeto de estudio; así como la factibilidad económica de la solución propuesta
-
 A partir del proceso de implementación y verificación de la solución propuesta, se derivan las siguientes conclusiones:
 
 - Las pruebas de unidad y los mecanismos de evaluación sistemática aplicados demuestran que cada componente del sistema funciona conforme a lo esperado.
-
-// - Los resultados cuantitativos obtenidos mediante métricas de recuperación y generación evidencian una mejora sustancial en la capacidad del sistema para responder consultas a partir de información distribuida. Esto valida que la solución logra efectivamente el tránsito desde el estado actual del objeto de estudio hacia un estado más avanzado y funcional.
 
 - Las pruebas de rendimiento revelan tiempos de respuesta adecuados incluso con entradas de gran tamaño, así como un uso eficiente de recursos computacionales.
 
