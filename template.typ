@@ -219,7 +219,7 @@
 
   // Bibliography -------------------------------------------------------------------
   if bibliography != none {
-    page(bibliography) // TODO: fix heading style 
+    page(bibliography)
   }
 }
 
