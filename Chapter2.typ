@@ -15,9 +15,7 @@ Este capítulo se enfoca en la formulación y desarrollo de la solución propues
 
 Luego de llevar a cabo un análisis exhaustivo de los conceptos y herramientas clave que se emplearán en esta investigación, se presenta la propuesta de solución en la @prototype, la cual se describe de la siguiente manera.
 
-// TODO: update this text important!!
-
-El usuario inicia la interacción proporcionando una pregunta, que el sistema reformula para mejorar su claridad. A la par, el PDF se divide en fragmentos manejables, y tanto la consulta como los fragmentos se convierten en representaciones vectoriales de dos tipos: densas (que capturan la relación semántica profunda) y dispersas (que se basan más en la coincidencia de términos clave). La búsqueda híbrida combina ambas representaciones mediante una suma de pesos, equilibrando la relevancia semántica con la coincidencia exacta de términos. Los fragmentos más relevantes se almacenan en una base de datos vectorial (VectorDB) para posibles futuras consultas y luego pasan por un proceso de refinamiento y filtrado. En esta etapa, se comprime el contexto ("Context Zip") eliminando información innecesaria para optimizar la eficiencia del modelo de lenguaje (LLM). Finalmente, el LLM utiliza el contexto seleccionado para generar una respuesta precisa y alineada con la consulta del usuario.
+El sistema permite al usuario indexar documentos PDF que son segmentados en fragmentos más pequeños (chunks). A cada fragmento se le calculan representaciones vectoriales (embeddings), las cuales se almacenan en una base de datos vectorial en memoria. Cuando el usuario realiza una consulta, esta se reformula en preguntas más específicas, que también se convierten en embeddings. Luego, el sistema ejecuta una búsqueda híbrida (semántica y léxica) para recuperar los k fragmentos más relevantes desde la base vectorial. Estos se reordenan según su pertinencia y se combinan con la consulta original para formar un prompt que es procesado por el modelo de lenguaje (LLM), el cual genera una respuesta. Si la respuesta no resuelve completamente la consulta, el sistema puede formular nuevas preguntas basadas en la información aún no cubierta, repitiendo el ciclo hasta alcanzar una respuesta satisfactoria o agotar un número máximo de iteraciones. Este enfoque permite enriquecer dinámicamente el contexto ofrecido al modelo, mejorando la precisión y pertinencia de las respuestas.
 
 #let blob(pos, label, tint: white, ..args) = (
   node(
@@ -38,55 +36,30 @@ El usuario inicia la interacción proporcionando una pregunta, que el sistema re
         mark-scale: 70%,
         spacing: (5pt, 15pt),
 
-        blob((0,0), [Pregunta], name: <query>, tint: color.silver),
-        blob((1,0), [PDF/s], name: <pdf>, tint: color.silver),
-        node(<pdf.north-west>, [
-          #rect(
-            image("Images/pdf.svg", height: 7pt),
-            fill: color.silver,
-            stroke: 0.5pt + color.silver.darken(20%),
-            radius: 3pt,
-            inset: 2.5pt
-          )
-        ] ),
-
-        blob((0,1), [Rewrite], name: <rewrite>, tint: color.olive),
+        blob((0,0), [Query],     name: <query>,   tint: color.silver),
+        blob((0,1), [Decompose], name: <decompose>, tint: color.olive),
+        blob((1,0), [PDF/s], name: <pdf>,   tint: color.silver),
         blob((1,1), [Split], name: <split>, tint: color.olive),
-      
-        edge(<pdf>, "->", <split>),
-        edge(<query>, "->", <rewrite>),
-
         node([Embedding], enclose: ((0,2), (1,2)), stroke: red, fill: red.lighten(90%), name: <e>, width: 170pt),
-
-        edge(<rewrite>, "->", (0,2)),
-        edge(<split>, "->", (1,2)),
-
         blob((1, 3), [VectorDB], name: <db>, tint: color.aqua),
-
-        edge((1,2),"->",<db>), // multiple
-
         node([Hybrid Search], enclose: ((0, 4), (1,4)), stroke: olive, fill: olive.lighten(90%), name: <hs>, width: 170pt),
+        node([Rerank], enclose: ((0, 5), (1,5)), stroke: olive, fill: olive.lighten(90%), name: <rr>, width: 170pt),
+        node([Prompt], enclose: ((0, 6), (1,6)), stroke: blue, fill: blue.lighten(90%), name: <p>, width: 170pt),
+        node([LLM], enclose: ((0, 7), (1,7)), stroke: red, fill: red.lighten(90%), name: <llm>, width: 170pt),
+        node([Answer], enclose: ((0, 8), (1,8)), name: <res>, stroke: silver, fill: silver.lighten(90%), width: 170pt),
 
-        edge((0, 2),"->", (0, 4)),
-        edge(<db>,"->",(1,4)), // multiple
-
-        blob((1, 5.5), [Rerank], name: <rr>, tint: color.olive),
-
-        edge((1,4),"->",<rr>), // multiple
-
-        node([Prompt], enclose: ((0, 7), (1,7)), stroke: blue, fill: blue.lighten(90%), name: <p>, width: 170pt),
-
-        edge(<rr>,"->",(1,7)),
-        edge((0,4),"->",(0, 7)),
-
-        node([LLM], enclose: ((0, 8), (1,8)), stroke: red, fill: red.lighten(90%), name: <llm>, width: 170pt),
-
-        edge(<p>, "->", <llm>),
-
-        node([Respuesta], enclose: ((0, 9), (1,9)), name: <res>, stroke: silver, fill: silver.lighten(90%), width: 170pt),
-
-        edge(<llm>, "->", <res>),
-        edge(<llm.west>, "-->", <rewrite.west>, `retry`), // TODO:
+        edge(<query>,     "->",   <decompose>),
+        edge(<pdf>,       "->",   <split>),
+        edge(<decompose>, "->",   (0,2)),
+        edge(<split>,     "->",   (1,2)),
+        edge((1,2),       "->",   <db>),
+        edge((0, 2),      "->",   (0, 4)),
+        edge(<db>,        "->",   (1,4)),
+        edge(<hs>,       "->",    <rr>),
+        edge(<rr>,        "->",   <p>),
+        edge(<p>,         "->",   <llm>),
+        edge(<llm>,       "->",   <res>),
+        edge(<llm.west>,  "->",   <decompose.west>, `retry`, bend: 40deg),
     ),
     caption: [Propuesta de Solución (Elaboración Propia)]
 )<prototype>
@@ -248,7 +221,7 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
   [El usuario puede iniciar múltiples conversaciones independientes para gestionar diferentes temas o consultas.], 
   [Cada conversación maneja su propio historial y contexto.],
   picture: "Images/hu-nuevos-chats.png"
-) // TODO: update picture
+)
 
 #table_user_story(12, [Limpiar el chat],
   [Baja], [Bajo],
@@ -271,15 +244,13 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
 
 == Plan de iteraciones
 
-Habiendo identificado previamente las historias de usuario se debe crear el plan de iteraciones donde cada HU se convierte en tareas especificas de desarrollo y para cada uno se establecen pruebas de aceptación. En cada ciclo se analizan las pruebas fallidas para prevenir que no vuelvan a ocurrir y ser corregidas.
-
-// TODO: ^ pruebas de aceptación
+Habiendo identificado previamente las historias de usuario se debe crear el plan de iteraciones donde cada HU se convierte en tareas especificas de desarrollo y para cada uno se establecen pruebas. En cada ciclo se analizan las pruebas fallidas para prevenir que no vuelvan a ocurrir y ser corregidas.
 
 Se acordaron 2 iteraciones que a continuación serán descritas:
 
-- *Iteración 1:* se desarrollan las HU 1,2,3,4,5 las cuales corresponden al envió de consultas y archivos PDF; la generación de respuestas; procesamiento de archivos; la búsqueda de documentos relevantes. Al finalizar la iteración se realizaran las pruebas de aceptación.
+- *Iteración 1:* se desarrollan las HU 1,2,3,4,5 las cuales corresponden al envió de consultas y archivos PDF; la generación de respuestas; procesamiento de archivos; la búsqueda de documentos relevantes. Al finalizar la iteración se realizaran las pruebas.
 
-- *Iteración 2:* se desarrollan las HU 6,7,8,9,10,11,12,13 las cuales corresponden a la capacidad de mostrar documentos recuperados; regenerar, dar retroalimentación de las respuestas; editar una consulta previa; ajustar los parámetros del sistema; crear multiples conversaciones; limpiar el chat y por ultimo incluir citas en las respuestas. Al finalizar la iteración se realizaran las pruebas de aceptación y la entrega final de la propuesta de solución. 
+- *Iteración 2:* se desarrollan las HU 6,7,8,9,10,11,12,13 las cuales corresponden a la capacidad de mostrar documentos recuperados; regenerar, dar retroalimentación de las respuestas; editar una consulta previa; ajustar los parámetros del sistema; crear multiples conversaciones; limpiar el chat y por ultimo incluir citas en las respuestas. Al finalizar la iteración se realizaran las pruebas faltantes y la entrega final de la propuesta de solución. 
 
 En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo estimado por iteración asi como las HU a desarrollar. Se tomo como unidad de mediada que cada semana contaba de 5 días laborales de los cuales se trabajaran 8 horas cada día.
 
@@ -323,9 +294,6 @@ En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo es
 
 == Arquitectura de software
 
-// TODO: is the Layered Arch correct?
-// TODO: in any case AI/ML layer does not interact with the Persistence Layer
-
 La arquitectura de software se refiere a la estructura organizativa de un sistema de software, que incluye sus componentes principales y las relaciones entre ellos. Es el diseño de alto nivel que guía la evolución y el desarrollo del sistema, asegurando que cumpla con sus objetivos funcionales y no funcionales. Un patrón arquitectónico es una solución recurrente a problemas comunes en la construcción de software, proporcionando una estructura predefinida que se puede aplicar en diferentes contextos, ayudando a resolver desafíos de diseño. Finalmente, un estilo arquitectónico es un conjunto de reglas y restricciones que define la organización de los componentes del sistema y las interacciones entre ellos, reflejando un enfoque particular para abordar problemas de diseño en una categoría de sistemas. Un estilo puede incluir varios patrones arquitectónicos que estructuran el sistema de acuerdo con principios y prácticas específicas @richards2020fundamentals. En la propuesta de solución se hizo uso de la arquitectura por capas
 
 *Arquitectura por Capas*
@@ -366,29 +334,9 @@ Para la propuesta de solución se definieron 4 capas (@layered):
 
 Un patrón de diseño es una solución reutilizable y probada para problemas comunes de diseño en el desarrollo de software. A diferencia de los patrones arquitectónicos, que se enfocan en la estructura general del sistema, los patrones de diseño abordan problemas específicos en la implementación y organización del código a nivel de componentes y clases. Estos patrones ayudan a mejorar el rendimiento, mantenibilidad, la escalabilidad y la flexibilidad del software, proporcionando estructuras estandarizadas que facilitan la comunicación entre desarrolladores @GangOfFour.
 
-// === Patrones GRASP
-
-// Los patrones GRASP (General Responsibility Assignment Software Patterns) fueron introducidos por Craig Larman en @larman2002applying y buscan guiar a los diseñadores en la toma de decisiones sobre cómo distribuir responsabilidades entre clases y objetos. 
-
-// *Experto*: Este patrón recomienda que la responsabilidad de realizar una tarea o implementar un método debe recaer sobre la clase que tiene toda la información necesaria para llevarla a cabo.
-
-// #figure(
-//   image("Images/expert.svg"),
-//   caption: [Patrón Experto (Fuente: Elaboración propia)]
-// )
-
-// *Alta cohesión*: Este patrón recomienda mantener cada clase enfocada en una única responsabilidad bien definida.
-
-// #figure(
-//   image("Images/high-cohesion.svg"),
-//   caption: [Patrón Alta Cohesión (Fuente: Elaboración propia)]
-// )
-
-// TODO: bajo acoplamiento
-
 === Patrón Generador
 
-El patrón Generador se utiliza para crear iteradores de una manera simple y eficiente en memoria. En lugar de construir y devolver una colección completa de elementos (lo que podría consumir mucha memoria o tiempo), un generador produce los elementos uno por uno, bajo demanda, utilizando la palabra clave `yield`. En el contexto de aplicaciones interactivas como esta, es fundamental para el streaming de respuestas, permitiendo enviar actualizaciones de estado o fragmentos de la respuesta al cliente a medida que están disponibles, en lugar de esperar a que todo el proceso termine. // TODO: ref
+En este proyecto, el patrón Generador (Generator) se emplea para implementar iteradores ligeros que evitan la creación de colecciones completas en memoria. Gracias a él, la interfaz gráfica puede recibir actualizaciones parciales—por ejemplo, fragmentos de respuesta o estados de avance—en cuanto estén disponibles, en lugar de esperar a que todo el procesamiento de datos finalice. Esto resulta esencial para el streaming de resultados en aplicaciones interactivas, pues mejora la capacidad de respuesta y la experiencia del usuario @vanrossum2011python.
 
 #codly(highlights: (
   (line: 5, start: 5, end: none, fill: green),
