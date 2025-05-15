@@ -11,7 +11,7 @@
   advisors: ("Msc. Angel Alberto Vazquez Sánchez", 
              "Msc. Lisset Salazar Gómez"),
 
-  abstract: [#lorem(80)],
+  abstract: [La presente tesis de grado propone una herramienta de código abierto, basada en modelos de lenguaje de gran tamaño (LLMs) y en la técnica de Generación Aumentada por Recuperación (RAG), para facilitar el análisis semiautomático de artículos científicos en PDF, adaptada al contexto tecnológico y lingüístico de Cuba. Enfrentando limitaciones como baja conectividad, restricciones geopolíticas y falta de recursos, la solución utiliza Python, vLLM y Gradio, con modelos como DeepSeek y BAAI/bge m3, permitiendo una búsqueda híbrida eficaz en español. Desarrollada bajo la metodología Extreme Programming (XP), la herramienta incluye módulos de compresión de contexto, reformulación de consultas y generación de respuestas. Evaluaciones con RAGAS revelaron un alto nivel de recuperación contextual pero una fidelidad moderada en las respuestas, validando la viabilidad técnica del sistema y sentando las bases para futuras mejoras.],
   keywords: ("Aprendizaje Profundo", 
              "RAG", 
              "Procesamiento de Lenguaje Natural", 
@@ -29,7 +29,6 @@
 )
 
 // TODO: fix template
-// TODO: add abstract, conclusions, ...
 // TODO: fix orthography and grammar
 
 #include "Introduction.typ"
