@@ -13,20 +13,20 @@ Un *modelo de aprendizaje automático* es un sistema computacional diseñado par
 
 #figure(
     diagram(
-        node-stroke: teal + 0.3pt,
-        node-fill: gradient.radial(white, teal, radius: 200%),
+        node-stroke: color.red + 0.3pt,
+        node-fill: gradient.radial(color.white, color.red, radius: 100%),
 
-        node((0,0), [inputs], name: <inputs>, radius: 2em),
-        node((0,1), [weights], name: <weights>, radius: 2em),
-        node((1,0), [model], name: <model>, radius: 2em, shape: "rect"),
-        node((2, 0), [results], name: <results>, radius: 2.1em),
-        node((3, 0), [perf], name: <perf>, radius: 2em),
+        node((0,0),  [inputs],  name: <inputs>,  radius: 2em),
+        node((0,1),  [weights], name: <weights>, radius: 2em),
+        node((1,0),  [model],   name: <model>,   radius: 2em, shape: "rect"),
+        node((2, 0), [results], name: <results>, radius: 2em),
+        node((3, 0), [perf],    name: <perf>,    radius: 2em),
 
-        edge(<inputs>, "->", <model>),
+        edge(<inputs>,  "->", <model>),
         edge(<weights>, "->", <model>),
-        edge(<model>, "->", <results>),
+        edge(<model>,   "->", <results>),
         edge(<results>, "->", <perf>),
-        edge(<perf>, "->", <weights>, bend: 40deg),
+        edge(<perf>,    "->", <weights>, bend: 40deg),
     ),
     caption: [Esquema general del proceso de aprendizaje profundo @Gugger2020-on]
 )<ml-diagram>
