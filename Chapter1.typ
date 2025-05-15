@@ -176,13 +176,10 @@ Es una representación vectorial de palabras en un espacio numérico continuo. C
 *Cosine Similarity*:
 Es una medida de similitud entre dos vectores que calcula el coseno del ángulo entre ellos. En el contexto de los word embeddings, se utiliza para determinar cuán similares son dos palabras o documentos. Un valor cercano a 1 indica que los vectores son muy similares (es decir, las palabras tienen contextos o significados parecidos), mientras que valores cercanos a 0 o negativos indican poca o ninguna similitud @mikolov2013efficientestimationwordrepresentations.
 
-// TODO: *Embeddings Dispersos*:
-
-// TODO: *Embeddings ColBERT*:
-
-// TODO: *Reranking*: 
-
 $"cosine similarity" = S_c (A, B) := cos(theta) = (A dot B) / (||A||||B||) = (sum_(i=1) A_i B_i) / ( sqrt(sum_(i=1)^n) A_i^2 dot sqrt(sum_(i=1)^n B_i^2) ) $
+
+*Reranking*: 
+Es un paso de post-procesamiento en sistemas de recuperación por etapas que reordena el listado inicial de candidatos para elevar los más relevantes al tope. Tras una primera recuperación (ej., BM25 o búsqueda semántica), un modelo especializado (como un cross-encoder) evalúa de nuevo cada par consulta-documento, ajustando el ranking según criterios más finos de relevancia. En pipelines RAG, el reranking maximiza el recall efectivo al reducir el ruido ingresado al LLM, mejorando la calidad de las respuestas generadas. Una estrategia habitual consiste en aplicar un segundo modelo entrenado con datos anotados para discriminar con mayor precisión los fragmentos más útiles antes de la generación de texto @rerankers. 
 
 === Comparativa
 
@@ -324,8 +321,6 @@ Características Principales:
 - Tipado dinámico: Aunque favorece la flexibilidad, puede generar errores en tiempo de ejecución difíciles de depurar @castro2023landscapehighperformancepythondevelop.
 
 === Modelos LLM 
-
-// TODO: change to Qwen3
 
 *DeepSeek-R1-Distill-Qwen-1.5B-Q8_0*: es una versión cuantizada #footnote[Técnica de compresión que reduce la precisión numérica de los pesos del modelo. Esto disminuye significativamente el tamaño del modelo y sus requisitos computacionales, lo que lo hace más eficiente en términos de memoria y energía] y distilada #footnote[Técnica que permite transferir el conocimiento de un modelo grande y complejo, denominado "modelo profesor", a un modelo más pequeño y eficiente, conocido como "modelo alumno". Este proceso busca reducir el tamaño y la complejidad del modelo original sin comprometer significativamente su rendimiento] del modelo de lenguaje DeepSeek-R1, diseñada para ser más eficiente y compacta mientras mantiene un rendimiento sólido, especialmente en tareas de razonamiento.
 
