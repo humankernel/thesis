@@ -54,10 +54,7 @@ A continuación, se describen las principales métricas introducidas por RAGAS @
 
     $ "Faithfulness" = "# de afirmaciones correctas" / "# total de afirmaciones" $
 
-// -------------------------
-// TODO: fix 
-- *Factual Correctness*:
-- *Relevancia de la respuesta*: Que tan bien la respuesta responde la pregunta del usuario @RAGAS.
+- *Factual Correctness*: Que tan bien la respuesta responde la pregunta del usuario @RAGAS.
 
     Para implementarla se siguen los siguientes pasos:
 
@@ -84,54 +81,54 @@ Para implementarla se siguen los siguientes pasos:
 $ "Context Relevance" = "# de afirmaciones relevantes" / "# total de afirmaciones" $
 
 
-=== Métricas de Recuperación
+// === Métricas de Recuperación
 
-- *Precision\@k*: Esta métrica calcula la proporción de documentos relevantes entre los primeros k documentos recuperados por el sistema. Su objetivo es medir la capacidad del sistema para priorizar información útil en las primeras posiciones de la lista de resultados, lo cual es crucial dado que los usuarios suelen enfocarse en los primeros elementos presentados @Yu_2025.​
-$ "Precision@k" = "# de documentos relevantes en los primeros k resultados" / k $
+// - *Precision\@k*: Esta métrica calcula la proporción de documentos relevantes entre los primeros k documentos recuperados por el sistema. Su objetivo es medir la capacidad del sistema para priorizar información útil en las primeras posiciones de la lista de resultados, lo cual es crucial dado que los usuarios suelen enfocarse en los primeros elementos presentados @Yu_2025.​
+// $ "Precision@k" = "# de documentos relevantes en los primeros k resultados" / k $
 
-// -------------------------
+// // -------------------------
 
-- *Recall\@k*: Cuantifica la capacidad del sistema para recuperar el conjunto completo de documentos relevantes, calculando la proporción de documentos relevantes que se encuentran entre los k primeros resultados. Esta métrica evalúa qué tan exhaustivo es el sistema al recuperar información relevante @Yu_2025.
+// - *Recall\@k*: Cuantifica la capacidad del sistema para recuperar el conjunto completo de documentos relevantes, calculando la proporción de documentos relevantes que se encuentran entre los k primeros resultados. Esta métrica evalúa qué tan exhaustivo es el sistema al recuperar información relevante @Yu_2025.
 
-$ "Recall@k" = "# de documentos relevantes en los primeros k resultados" / "# total de documentos relevantes" $
+// $ "Recall@k" = "# de documentos relevantes en los primeros k resultados" / "# total de documentos relevantes" $
 
-// -------------------------
+// // -------------------------
 
-- *Mean Reciprocal Rank (MRR)*: Se utiliza para evaluar qué tan pronto un sistema presenta un documento relevante al usuario. Calcula el promedio del recíproco del rango del primer documento relevante para cada consulta, favoreciendo a los sistemas que muestran resultados útiles en posiciones tempranas del listado @Yu_2025.
+// - *Mean Reciprocal Rank (MRR)*: Se utiliza para evaluar qué tan pronto un sistema presenta un documento relevante al usuario. Calcula el promedio del recíproco del rango del primer documento relevante para cada consulta, favoreciendo a los sistemas que muestran resultados útiles en posiciones tempranas del listado @Yu_2025.
 
-$ "MRR" = 1 / N sum_(i=1)^N 1 / "rank"_i $
+// $ "MRR" = 1 / N sum_(i=1)^N 1 / "rank"_i $
 
-donde $"rank"_i$ es la posición del primer documento relevante para la consulta i, y _N_ es el número total de consultas evaluadas.
+// donde $"rank"_i$ es la posición del primer documento relevante para la consulta i, y _N_ es el número total de consultas evaluadas.
 
-Esta métrica es especialmente útil cuando el usuario espera encontrar rápidamente al menos una respuesta útil entre los primeros resultados.
+// Esta métrica es especialmente útil cuando el usuario espera encontrar rápidamente al menos una respuesta útil entre los primeros resultados.
 
-// -------------------------
+// // -------------------------
 
-- *Normalized Discounted Cumulative Gain (NDCG)*: Evalúa la calidad del ordenamiento considerando tanto la relevancia como la posición de los documentos. Asigna mayor peso a los documentos relevantes que aparecen en los primeros lugares, aplicando un factor de descuento. Es especialmente útil cuando la relevancia se clasifica en distintos niveles @Yu_2025.
+// - *Normalized Discounted Cumulative Gain (NDCG)*: Evalúa la calidad del ordenamiento considerando tanto la relevancia como la posición de los documentos. Asigna mayor peso a los documentos relevantes que aparecen en los primeros lugares, aplicando un factor de descuento. Es especialmente útil cuando la relevancia se clasifica en distintos niveles @Yu_2025.
 
-Primero se calcula la Ganancia Acumulada con Descuento (DCG\@k):
+// Primero se calcula la Ganancia Acumulada con Descuento (DCG\@k):
 
-$ "DCG@k" = sum_(i=1)^k (2^("rel"_i) - 1) / (log_2(i+1)) $
+// $ "DCG@k" = sum_(i=1)^k (2^("rel"_i) - 1) / (log_2(i+1)) $
 
-Luego, se normaliza utilizando la DCG ideal (IDCG\@k):
+// Luego, se normaliza utilizando la DCG ideal (IDCG\@k):
 
-$ "NDCG@k" = "DCG@k" / "IDCG@k" $
+// $ "NDCG@k" = "DCG@k" / "IDCG@k" $
 
-donde $"rel"_i​$ representa el nivel de relevancia del documento en la posición i.
+// donde $"rel"_i​$ representa el nivel de relevancia del documento en la posición i.
 
-// -------------------------
+// // -------------------------
 
-- *Mean Average Precision (MAP)*: Es una métrica que resume la precisión del sistema al recuperar todos los documentos relevantes para cada consulta. Calcula primero la precisión promedio (Average Precision) por consulta, y luego obtiene el promedio general sobre todas las consultas. Esta métrica refleja tanto la exactitud como la exhaustividad del sistema  @Yu_2025.
+// - *Mean Average Precision (MAP)*: Es una métrica que resume la precisión del sistema al recuperar todos los documentos relevantes para cada consulta. Calcula primero la precisión promedio (Average Precision) por consulta, y luego obtiene el promedio general sobre todas las consultas. Esta métrica refleja tanto la exactitud como la exhaustividad del sistema  @Yu_2025.
 
-Para una consulta individual _q_, la precisión promedio se define como:
+// Para una consulta individual _q_, la precisión promedio se define como:
 
-$ "AP"(q) = (sum_(i=1)^n P(i) * "rel"(i) ) / "# de documentos relevantes para q" $
+// $ "AP"(q) = (sum_(i=1)^n P(i) * "rel"(i) ) / "# de documentos relevantes para q" $
 
-donde $P(i)$ es la precisión en la posición _i_, y $"rel"(i)$ es una función indicadora que vale 1 si el documento en la posición ii es relevante, y 0 en caso contrario.
+// donde $P(i)$ es la precisión en la posición _i_, y $"rel"(i)$ es una función indicadora que vale 1 si el documento en la posición ii es relevante, y 0 en caso contrario.
 
-Luego, el 'Mean Average Precision' se obtiene promediando el _AP_ sobre todas las consultas _N_:
+// Luego, el 'Mean Average Precision' se obtiene promediando el _AP_ sobre todas las consultas _N_:
 
-$ "MAP" = 1 / N sum_(q=1)^N "AP"(q) $
+// $ "MAP" = 1 / N sum_(q=1)^N "AP"(q) $
 
 === Resultados
 
@@ -198,50 +195,6 @@ Las pruebas fueron ejecutadas en el siguiente hardware:
 - 16GB RAM
 - RTX 2070 (8GB VRAM)
 
-=== Embeddings: Tiempos // TODO: add memory
-
-Para evaluar el rendimiento del componente de generación de embeddings del sistema, se desarrolló un script que mide el tiempo promedio de codificación de un conjunto de oraciones bajo diferentes configuraciones del modelo de embeddings. Las pruebas se realizaron sobre tres conjuntos de entrada: corto (2 oraciones - 17 tokens), medio (100 oraciones - 850 tokens) y largo (1000 oraciones - 8500 tokens), utilizando distintos tamaños de lote ('batch') #footnote([El batching es una técnica que consiste en procesar múltiples entradas al mismo tiempo, optimizando así el uso de recursos y acelerando la inferencia en modelos.]).
-
-Se consideraron cinco configuraciones del modelo: 
-1. solo embeddings densos
-2. solo dispersos
-3. solo ColBERT
-4. combinación de densos + dispersos
-5. combinación completa (densos + dispersos + ColBERT).
-
-Para cada configuración, se realizó una fase de calentamiento inicial, seguida de 10 ejecuciones cronometradas, cuyo tiempo promedio fue registrado. Esta metodología permitió comparar el rendimiento relativo de cada variante del modelo bajo diferentes volúmenes de entrada.
-
-En la @emb-tests se muestra los resultados, donde crear los embeddings para 1000 oraciones no supera los *2 segundos*.
-
-#figure(
-  lq.diagram(
-    xlabel: [\# Oraciones],
-    ylabel: [Tiempo (seg)],
-    width: 10cm,
-    lq.plot(
-      (2, 100, 1000), 
-      (0.0271, 0.1839, 1.7538),
-      label: [batch 32]
-    ),
-
-    lq.plot(
-      (2, 100, 1000), 
-      (0.0264, 0.1418, 1.4945),
-      label: [batch 64]
-    ),
-    
-    lq.plot(
-      (2, 100, 1000), 
-      (0.0266, 0.1312, 1.2654),
-      label: [batch 256]
-      )
-  ),
-  caption: [Benchmark Embeddings (Elaboración propia)]
-)<emb-tests>
-
-=== Reranker: Tiempos y Memoria
-
-// TODO: hacer las del reranker o quitarlas
 
 === LLM: Tiempos y Memoria
 
@@ -282,6 +235,49 @@ $ "M" = (P * 4B) / (32 \/ Q) * 1.2 = (1.5 * 4B) / (32 \/ 8) * 1.2 = 1.80 $
   ),
   caption: [Memoria Requerida (GB)]
 )
+
+=== Embeddings: Tiempos y Memoria
+
+Para evaluar el rendimiento del componente de generación de embeddings del sistema, se desarrolló un script que mide el tiempo promedio de codificación de un conjunto de oraciones bajo diferentes configuraciones del modelo de embeddings. Las pruebas se realizaron sobre tres conjuntos de entrada: corto (2 oraciones - 17 tokens), medio (100 oraciones - 850 tokens) y largo (1000 oraciones - 8500 tokens), utilizando distintos tamaños de lote ('batch') #footnote([El batching es una técnica que consiste en procesar múltiples entradas al mismo tiempo, optimizando así el uso de recursos y acelerando la inferencia en modelos.]).
+
+Se consideraron cinco configuraciones del modelo: 
+1. solo embeddings densos
+2. solo dispersos
+3. solo ColBERT
+4. combinación de densos + dispersos
+5. combinación completa (densos + dispersos + ColBERT).
+
+Para cada configuración, se realizó una fase de calentamiento inicial, seguida de 10 ejecuciones cronometradas, cuyo tiempo promedio fue registrado. Esta metodología permitió comparar el rendimiento relativo de cada variante del modelo bajo diferentes volúmenes de entrada.
+
+En la @emb-tests se muestra los resultados, donde crear los embeddings para 1000 oraciones no supera los *2 segundos*.
+
+#figure(
+  lq.diagram(
+    xlabel: [\# Oraciones],
+    ylabel: [Tiempo (seg)],
+    width: 10cm,
+    lq.plot(
+      (2, 100, 1000), 
+      (0.0271, 0.1839, 1.7538),
+      label: [batch 32]
+    ),
+
+    lq.plot(
+      (2, 100, 1000), 
+      (0.0264, 0.1418, 1.4945),
+      label: [batch 64]
+    ),
+    
+    lq.plot(
+      (2, 100, 1000), 
+      (0.0266, 0.1312, 1.2654),
+      label: [batch 256]
+      )
+  ),
+  caption: [Benchmark Embeddings (Elaboración propia)]
+)<emb-tests>
+
+Se observo que el modelo de embeddings utilizado ocupa $approx$ 2GB VRAM 
 
 == Pruebas de Unidad
 
