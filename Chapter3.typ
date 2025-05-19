@@ -1,4 +1,4 @@
-#import "template.typ": unit_test
+#import "template.typ": table_engineering_task, unit_test, table_user_story
 #import "@preview/lilaq:0.2.0" as lq
 
 = Implementación y realización de pruebas <chapter3>
@@ -7,7 +7,126 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
 
 == Tareas de Ingeniería
 
-// TODO:
+
+#table_engineering_task(
+  number: 1,
+  hu_number: 1,
+  nombre: [Enviar consultas],
+  type: [Desarrollo],
+  points: 1,
+  start_date: datetime(year: 2025, month: 1, day: 3),
+  description: [Se realiza la integración de una caja de texto que contiene un botón de enviar, esta se encarga de enviar la consulta al componente que se encarga de procesarla.]
+)
+
+#table_engineering_task(
+  number: 2,
+  hu_number: 2,
+  nombre: [Enviar archivos PDF],
+  type: [Desarrollo],
+  points: 1,
+  start_date: datetime(year: 2025, month: 1, day: 10),
+  description: [En la caja de texto de enviar consulta se añade un botón para agregar un documento,este tiene un limite de 300mb. Cuando el usuario envía la consulta los archivos son procesados en el backend.] // TODO:
+)
+
+#table_engineering_task(
+  number: 3,
+  hu_number: 3,
+  nombre: [Generar respuestas],
+  type: [Desarrollo],
+  points: 2,
+  start_date: datetime(year: 2025, month: 1, day: 17),
+  description: [La consulta se divide en sub consultas, estas se utilizan para obtener documentos relevantes, luego con estos documentos se genera una respuesta, si la respuesta esta completa (la pregunta fue respondida) se le manda al usuario, sino se inicia una búsqueda de los elementos faltantes, esto se puede repetir hasta que se completa la respuesta o se alcanza el máximo numero de iteraciones.] // TODO:
+)
+
+#table_engineering_task(
+  number: 4,
+  hu_number: 4,
+  nombre: [Procesar archivos],
+  type: [Desarrollo],
+  points: 3,
+  start_date: datetime(year: 2025, month: 1, day: 31),
+  description: [Los archivos son divididos en pequeños pedazos que se encuentran dentro de un umbral de tokens que el modelo de embeddings puede leer, luego se generan los embeddings y se almacenan en la base de datos vectorial en memoria.] // TODO:
+)
+
+#table_engineering_task(
+  number: 5,
+  hu_number: 5,
+  nombre: [Buscar documentos relevantes],
+  type: [Desarrollo],
+  points: 2,
+  start_date: datetime(year: 2025, month: 2, day: 21),
+  description: [Se crean los embeddings de la consulta, estos se utilizan para encontrar en la base de datos embeddings que compartan cierta similitud semantica (mediante la similitud del coseno) asi como lexicográfica, luego estos se reordenan usando el modelo Reranker.]
+)
+
+#table_engineering_task(
+  number: 6,
+  hu_number: 6,
+  nombre: [Mostrar documentos recuperados],
+  type: [Desarrollo],
+  points: 1,
+  start_date: datetime(year: 2025, month: 3, day: 7),
+  description: [Los documentos recuperados son mostrados en una barra lateral derecha, en forma de lista donde cada elemento es colapsable.]
+)
+
+#table_engineering_task(
+  number: 7,
+  hu_number: 7,
+  nombre: [Regenerar respuesta],
+  type: [Desarrollo],
+  points: 1,
+  start_date: datetime(year: 2025, month: 3, day: 14),
+  description: [Se activa la opción de Gradio para regenerar la respuesta.] // TODO:
+)
+
+#table_engineering_task(
+  number: 8,
+  hu_number: 8,
+  nombre: [Dar retroalimentación de una respuesta],
+  type: [Desarrollo],
+  points: 1,
+  start_date: datetime(year: 2025, month: 3, day: 21),
+  description: [Se activa la opción de Gradio para dar retroalimentación, la cual se guarda en un archivo.] // TODO:
+)
+
+#table_engineering_task(
+  number: 9,
+  hu_number: 9,
+  nombre: [Editar una consulta previa],
+  type: [Desarrollo],
+  points: 1,
+  start_date: datetime(year: 2025, month: 3, day: 28),
+  description: [Se activa la opción de Gradio para dar editar la consulta.]
+)
+
+#table_engineering_task(
+  number: 10,
+  hu_number: 10,
+  nombre: [Ajustar los parámetros del sistema],
+  type: [Desarrollo],
+  points: 2,
+  start_date: datetime(year: 2025, month: 4, day: 4),
+  description: [Se implementa una barra lateral izquierda con varios campos para seleccionar los parámetros de generación, estos se almacenan en el local storage del navegador, y se le pasa a la logica del backend para instruir la generación.]
+)
+
+#table_engineering_task(
+  number: 11,
+  hu_number: 11,
+  nombre: [Crear múltiples conversaciones],
+  type: [Desarrollo],
+  points: 1,
+  start_date: datetime(year: 2025, month: 4, day: 18),
+  description: [Se activa la opción en Gradio para crear múltiples conversaciones.]
+)
+
+#table_engineering_task(
+  number: 12,
+  hu_number: 12,
+  nombre: [Limpiar el chat],
+  type: [Desarrollo],
+  points: 1,
+  start_date: datetime(year: 2025, month: 4, day: 25),
+  description: [Se activa la opción en Gradio para limpiar el chat.]
+)
 
 == Evaluación 
 
