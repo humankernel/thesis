@@ -4,7 +4,7 @@
 #let BODY-MATTER(ship-part-page: true, body) = {
   // Page settings adjustments
   set page(
-    numbering: "1",
+    // numbering: "1",
     footer: context {
       line(length: 100%, stroke: 0.5pt)
       text[
@@ -23,11 +23,14 @@
     pagebreak(weak: true)
 
     // CAPITULO N
-    align(right, {
-      text(size: 10pt)[CAPÍTULO ]
-      counter(heading).display("1")
-    })
-    
+    let n = int(counter(heading).display("1"))
+    if n > 0 and n < 4 {
+      align(right, {
+        text(size: 10pt)[CAPÍTULO ]
+        counter(heading).display("1")
+      })
+    }
+
     // Chapter title
     line(length: 100%, stroke: 0.5pt)
     block( 
@@ -259,6 +262,24 @@
       ..rows
     ),
     caption: [Historia de usuario #number]
+  )
+}
+
+
+#let table_engineering_task(number: int, hu_number: int, nombre: content, type: content, points: int, start_date: datetime, description: content) = {
+  let end_date = start_date + duration(days: points * 7)
+  figure(
+    table(
+      align: left,
+      columns: (2fr, 3fr),
+      stroke: .5pt + black,
+      table.header(table.cell(colspan: 2)[*Tarea de Ingeniería* - HU #hu_number]),
+      table.cell(colspan: 2)[*Nombre de Tarea:* #nombre], 
+      [*Tipo de Tarea:* #type],[*Puntos Estimados:* #points],
+      [*Fecha de inicio:* #start_date.display()],[*Fecha de fin:* #end_date.display()],
+      table.cell(colspan: 2)[*Descripción:* #description],
+    ),
+    caption: [Tarea de Ingeniería #number]
   )
 }
 
