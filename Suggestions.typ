@@ -1,9 +1,11 @@
 #set heading(numbering: none)
 = Recomendaciones
 
-- Extender usando Deep Research mediante agentes web que se integren con plataformas de investigación cubanas y repositorios académicos locales.
+- Extender mediante agentes web que se integren con plataformas de investigación cubanas y repositorios académicos locales.
 
-- Explorar lenguajes y técnicas de alto rendimiento (por ejemplo, C/C++ o Mojo) para optimizar el procesamiento y la compresión de contexto.
+- Explorar lenguajes y técnicas de alto rendimiento (por ejemplo, C/C++ o Mojo) para optimizar el procesamiento.
+
+- Integrar un mejor preprocesamiento de los archivos, utilizando OCR y detección del layout.
 
 - Evaluar arquitecturas distribuidas, desplegando modelos ligeros y especializados en nodos heterogéneos para mejorar escalabilidad y resiliencia.
 
