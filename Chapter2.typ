@@ -80,7 +80,7 @@ El sistema permite al usuario indexar documentos PDF que son segmentados en frag
 - *HU10*: Ajustar los parámetros del sistema
 - *HU11*: Crear múltiples conversaciones
 - *HU12*: Limpiar el chat
-- *HU13*: Incluir citas en las respuestas
+// - *HU13*: Incluir citas en las respuestas
 
 === Requisitos no funcionales
 
@@ -201,13 +201,9 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
   2, 2,
   [Joaquin Enrique Rivas Sánchez],
   [El usuario accede a opciones de configuración para modificar parámetros específicos. Los parámetros incluyen: 
-    - Selección del modelo LLM
     - Temperatura del modelo
     - Máximo de tokens de salida
     - Penalización de frecuencia y de presencia
-    - top-p, top-k
-    - Prompt del sistema
-    - Estilo del lenguaje
     ], 
   [],
   picture: "Images/hu-model-params.png"
@@ -233,14 +229,14 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
   picture: "Images/hu-limpiar-chat.png"
 )
 
-#table_user_story(13, [Incluir citas en las respuestas],
-  [Alta], [Medio],
-  [],
-  2, 2,
-  [Joaquin Enrique Rivas Sánchez],
-  [El sistema incluye citas de fuentes relevantes en las respuestas para respaldar la información proporcionada.], 
-  []
-)  // todo: add picture or remove
+// #table_user_story(13, [Incluir citas en las respuestas],
+//   [Alta], [Medio],
+//   [],
+//   2, 2,
+//   [Joaquin Enrique Rivas Sánchez],
+//   [El sistema incluye citas de fuentes relevantes en las respuestas para respaldar la información proporcionada.], 
+//   []
+// )
 
 == Plan de iteraciones
 
@@ -250,7 +246,7 @@ Se acordaron 2 iteraciones que a continuación serán descritas:
 
 - *Iteración 1:* se desarrollan las HU 1,2,3,4,5 las cuales corresponden al envió de consultas y archivos PDF; la generación de respuestas; procesamiento de archivos; la búsqueda de documentos relevantes. Al finalizar la iteración se realizaran las pruebas.
 
-- *Iteración 2:* se desarrollan las HU 6,7,8,9,10,11,12,13 las cuales corresponden a la capacidad de mostrar documentos recuperados; regenerar, dar retroalimentación de las respuestas; editar una consulta previa; ajustar los parámetros del sistema; crear multiples conversaciones; limpiar el chat y por ultimo incluir citas en las respuestas. Al finalizar la iteración se realizaran las pruebas faltantes y la entrega final de la propuesta de solución. 
+- *Iteración 2:* se desarrollan las HU 6,7,8,9,10,11,12 las cuales corresponden a la capacidad de mostrar documentos recuperados; regenerar, dar retroalimentación de las respuestas; editar una consulta previa; ajustar los parámetros del sistema; crear multiples conversaciones; limpiar el chat y por ultimo incluir citas en las respuestas. Al finalizar la iteración se realizaran las pruebas faltantes y la entrega final de la propuesta de solución. 
 
 En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo estimado por iteración asi como las HU a desarrollar. Se tomo como unidad de mediada que cada semana contaba de 5 días laborales de los cuales se trabajaran 8 horas cada día.
 
@@ -271,7 +267,7 @@ En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo es
     [4],[Procesar archivos]                      ,table.cell(align: center)[3],
     [5],[Buscar documentos relevantes]           ,table.cell(align: center)[2],
 
-    table.cell(rowspan: 8, align: center)[2],
+    table.cell(rowspan: 7, align: center)[2],
     [6] ,[Mostrar documentos recuperados]        ,table.cell(align: center)[1],
     [7] ,[Regenerar respuesta]                   ,table.cell(align: center)[1],
     [8] ,[Dar retroalimentación de una respuesta],table.cell(align: center)[1],
@@ -279,9 +275,9 @@ En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo es
     [10],[Ajustar los parámetros del sistema]    ,table.cell(align: center)[2],
     [11],[Crear múltiples conversaciones]        ,table.cell(align: center)[1],
     [12],[Limpiar el chat]                       ,table.cell(align: center)[1],
-    [13],[Incluir citas en las respuestas]       ,table.cell(align: center)[2],
+    // [13],[Incluir citas en las respuestas]       ,table.cell(align: center)[2],
 
-    table.cell(colspan: 2)[*Total*],[],table.cell(align: center)[19]
+    table.cell(colspan: 2)[*Total*],[],table.cell(align: center)[17]
   ),
   caption: [Estimación de esfuerzo por historia de usuario]
 )<hu-estimation>
