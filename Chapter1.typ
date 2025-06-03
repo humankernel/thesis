@@ -7,7 +7,7 @@ En el presente capítulo se describen los conceptos relevantes que conforman el 
 
 == Modelos de Lenguaje de Gran Tamaño (LLM)
 
-// Que es un modelo de Aprendizaje Automático?
+// ¿Qué es un modelo de Aprendizaje Automático?
 
 Un *modelo de aprendizaje automático* es un sistema computacional diseñado para aprender patrones y relaciones a partir de datos sin una programación explícita para cada tarea. Utiliza algoritmos estadísticos y técnicas de optimización para ajustar sus parámetros, permitiendo realizar predicciones o tomar decisiones basadas en la experiencia adquirida. Entre las categorías más comunes se encuentran el aprendizaje supervisado, el no supervisado y el aprendizaje por refuerzo. En el aprendizaje supervisado, el modelo es entrenado con datos etiquetados, es decir, cada entrada se encuentra asociada a una salida esperada. Este enfoque es ampliamente utilizado en tareas como la clasificación de texto, el reconocimiento de imágenes y la predicción de series temporales, ya que permite a los modelos aprender patrones a partir de ejemplos concretos. Por otro lado, en el aprendizaje no supervisado, el modelo trabaja con datos no etiquetados y debe identificar patrones o estructuras ocultas en los datos por sí mismo. Se emplea en problemas como la agrupación (clustering), la reducción de dimensionalidad y la detección de anomalías. Finalmente, el aprendizaje por refuerzo se basa en un sistema de recompensas en el que un agente interactúa con un entorno y aprende a tomar decisiones óptimas mediante prueba y error. Este enfoque ha demostrado ser particularmente efectivo en aplicaciones como el control de robots, la optimización de procesos y los juegos, donde el modelo mejora progresivamente su desempeño en función de la retroalimentación recibida @Goodfellow-et-al-2016.
 
@@ -31,14 +31,12 @@ Un *modelo de aprendizaje automático* es un sistema computacional diseñado par
     caption: [Esquema general del proceso de aprendizaje profundo @Gugger2020-on]
 )<ml-diagram>
 
-En el contexto del aprendizaje automático, @ml-diagram ilustra de manera esquemática el flujo de trabajo de un modelo de aprendizaje de profundo, se observa que el proceso comienza con la entrada de datos (inputs), que alimenta al modelo (model). El modelo genera predicciones o resultados (results), los cuales son evaluados mediante una métrica de desempeño (perf). Adicionalmente, el modelo ajusta sus parámetros a través de un mecanismo de pesos (weights), permitiendo la optimización y mejora progresiva del rendimiento @Gugger2020-on.
+En el contexto del aprendizaje automático, @ml-diagram ilustra de manera esquemática el flujo de trabajo de un modelo de aprendizaje profundo, se observa que el proceso comienza con la entrada de datos (inputs), que alimenta al modelo (model). El modelo genera predicciones o resultados (results), los cuales son evaluados mediante una métrica de desempeño (perf). Adicionalmente, el modelo ajusta sus parámetros a través de un mecanismo de pesos (weights), permitiendo la optimización y mejora progresiva del rendimiento @Gugger2020-on.
 
 // ¿Qué es un modelo del Lenguaje?
-
 Un *modelo de lenguaje* es una representación estadística o basada en redes neuronales que asigna probabilidades a secuencias de palabras, permitiendo predecir la siguiente palabra en un texto o generar textos coherentes. Inicialmente, se utilizaron modelos de n-gramas, pero el advenimiento de las técnicas de deep learning ha permitido construir modelos mucho más sofisticados que comprenden contextos largos y capturan matices semánticos y sintácticos complejos. Los modelos del lenguaje son la base para tareas de generación y comprensión de texto, siendo esenciales en aplicaciones como sistemas de traducción automática, resumen de textos y respuestas a preguntas @Goodfellow-et-al-2016.
 
-
-// El reciente desarrollo gracias a la introducción de la arquitectura Transformers? 
+// El reciente desarrollo gracias a la introducción de la arquitectura Transformers
 
 El desarrollo reciente en el campo de los modelos del lenguaje se debe en gran medida a la introducción de la arquitectura Transformer en 2017, presentada en el artículo "Attention is All You Need".
 
@@ -47,6 +45,7 @@ Esta arquitectura revolucionó el procesamiento del lenguaje natural al:
 - Eliminar la dependencia secuencial: A diferencia de las redes neuronales recurrentes (RNN) y las LSTM, los Transformers procesan todas las palabras en paralelo, lo que mejora la eficiencia en el entrenamiento.
 - Introducir el mecanismo de self-attention: Este mecanismo permite al modelo ponderar la importancia de cada palabra en una oración, capturando relaciones de largo alcance de manera efectiva.
 - Escalar a grandes volúmenes de datos: Gracias a su arquitectura, se han desarrollado modelos de gran tamaño (como GPT, BERT y sus variantes) que utilizan billones de parámetros, lo que ha impulsado su capacidad para comprender y generar lenguaje de manera sorprendente @vaswani2023attentionneed.
+
 
 Gracias a la arquitectura Transformer, los modelos de lenguaje han alcanzado un nivel sin precedentes de comprensión y generación de texto, superando enfoques tradicionales en términos de contextualización y manejo de dependencias a largo plazo @vaswani2023attentionneed. Esta evolución ha permitido aplicar estos modelos a una amplia variedad de tareas dentro del procesamiento del lenguaje natural, desde la generación automática de texto hasta sistemas avanzados de preguntas y respuestas, entre otras aplicaciones fundamentales para la inteligencia artificial moderna. A continuación, se detallan algunas de las principales tareas que estos modelos han revolucionado y los retos que aún persisten en su implementación
 
@@ -165,7 +164,7 @@ La @rag ilustra el flujo general de un sistema de Generación Aumentada por Recu
     Se muestran los documentos en PDF que, tras un proceso de extracción de información, se convierten en representaciones vectoriales (o word embeddings, denotadas como $e(x)$). Este paso permite crear una base de conocimiento indexada a partir de los textos originales.
 
 - *Recuperación* (recuadro celeste):
-    Aquí se representan las consultas del usuario ($x_1,x_2,x_3$), que también son transformadas en sus correspondientes embeddings $e(x)$. El círculo negro indica el cálculo de la similitud coseno (cosine similarity) entre los embeddings de la consulta y los de la base de conocimiento, con el fin de recuperar los top_k documentos más relevantes para cada pregunta.
+    Aquí se representan las consultas del usuario ($x_1,x_2,x_3$), que también son transformadas en sus correspondientes embeddings $e(x)$. El círculo negro indica el cálculo de la similitud coseno (cosine similarity) entre los embeddings de la consulta y los de la base de conocimiento, con el fin de recuperar los $"top"_k$ documentos más relevantes para cada pregunta.
 
 - *Generación* (recuadro azul):
     Finalmente, el modelo mm utiliza los documentos recuperados ($z_1,z_2,…,z_k$) y las consultas para producir las respuestas ($y_1,y_2,y_3$). Este paso corresponde a la fase de generación, donde se integran los resultados de la recuperación para brindar información coherente y contextualizada al usuario.
@@ -194,7 +193,7 @@ La @finetuning-v-rag compara los dos enfoques anteriormente mencionados: Fine-Tu
             [*Características*], [*Fine-Tuning*], [*RAG*],
         ),
         [Adaptación],
-        [Ajusta un modelo preentrenado sin necesidad de reentrenarlo completamente para cada nueva actualización de conocimiento],
+        [Ajusta un modelo preentrenado sin necesidad de reentrenar completamente para cada nueva actualización de conocimiento],
         [No requiere reentrenamiento o reajuste; permite agregar conocimiento externo en tiempo real],
         [Requerimientos Computacionales],
         [Altos: necesita grandes cantidades de datos y recursos computacionales para entrenar],
@@ -234,7 +233,7 @@ A partir del estudio de los sistemas internacionales detallados en la @compariso
             [*Servicio*], [*Accesibilidad*], [*Uso Limitado*], [*Localización*], [*Código Abierto*], [*Seguridad y Privacidad*]
         ),
         [Elicit],[Si],[20 Artículos / mes],[Ingles mayormente],[No],[Servidor remoto],
-        [ChatGPT],[Bloqueada],[No permite registrase desde Cuba],[Todos],[No],[Servidor remoto],
+        [ChatGPT],[Bloqueada],[No permite registrarse desde Cuba],[Todos],[No],[Servidor remoto],
         [ChatPDF],[Bloqueada],[2 pdf y 20 mensajes / dia ],[Todos],[No],[Servidor remoto],
         [Humata],[Si],[60 paginas / mes],[Ingles mayormente],[No],[Servidor remoto],
         [Scholarcy],[Bloqueada],[10 resúmenes],[Ingles mayormente],[No],[Servidor remoto],
@@ -254,7 +253,7 @@ Si bien las soluciones analizadas no resuelven integralmente los desafíos ident
 
 == Metodología de desarrollo de software
 
-Una metodología es un conjunto organizado de procedimientos, técnicas, herramientas y documentos auxiliares que guían a los desarrolladores en la implementación de sistemas de información. Se estructura en fases y subfases que facilitan la elección de las técnicas más adecuadas en cada etapa del proyecto, permitiendo una planificación, gestión, control y evaluación efectivas, y asegurando la calidad y coherencia del producto final @sommerville_ingenierisoftware_2005.
+Una metodología es un conjunto organizado de procedimientos, técnicas, herramientas y documentos auxiliares que guían a los desarrolladores en la implementación de sistemas de información. Se estructura en fases y subfases que facilitan la elección de las técnicas más adecuadas en cada etapa del proyecto, permitiendo una planificación, gestión, control y evaluación efectiva, y asegurando la calidad y coherencia del producto final @sommerville_ingenierisoftware_2005.
 
 Dado que el proyecto es pequeño, el tamaño del equipo consta es de un solo integrante, el tiempo es limitado, la metodología XP (Programación Extrema) es ideal porque permite recibir retroalimentación frecuente y realizar ajustes rápidos en el desarrollo. Su enfoque en ciclos iterativos cortos y pruebas constantes ayuda a garantizar que cada avance sea funcional y alineado con los objetivos del proyecto, optimizando el uso del tiempo y asegurando mejoras continuas sin desviaciones significativas.
 
@@ -273,22 +272,7 @@ Por último, en la *fase de pruebas*, se verifica de manera continua la funciona
 
 == Tecnologías a utilizar
 
-A continuación se detallan las tecnologías y herramientas utilizadas asi como la Metodología del desarrollo. 
-
-=== Herramienta CASE
-
-*PlantUML*: es una herramienta de software de código abierto diseñada para crear diagramas a partir de texto simple. Esta herramienta permite a los usuarios escribir especificaciones de diagramas en un lenguaje de descripción simple y generar visualmente diagramas UML, así como otros tipos de diagramas como mapas mentales, diagramas de Gantt, BPMN, y más
-
-Características Principales:
-
-- Lenguaje Basado en Texto: Utiliza descripciones textuales para generar diagramas, lo que facilita la automatización y la integración con sistemas de documentación y desarrollo
-
-- Amplia Compatibilidad de Diagramas: Soporta varios tipos de diagramas UML, incluyendo diagramas de secuencia, clases, casos de uso, actividad, entre otros
-
-- Integración con IDEs: Se integra fácilmente con muchos entornos de desarrollo integrado (IDEs) y editores de texto, así como sistemas de control de versiones
-
-- Generación Automática de Diagramas: Una de sus principales ventajas es la capacidad para automatizar la generación de diagramas a partir de descripciones de texto plano, lo que facilita la integración con flujos de trabajo de desarrollo @PlanetUML.
-
+A continuación se detallan las tecnologías y herramientas utilizadas así como la Metodología del desarrollo. 
 
 === Lenguaje de Programación
 
@@ -322,7 +306,7 @@ Características Principales:
 
 === Modelos LLM 
 
-*DeepSeek-R1-Distill-Qwen-1.5B-Q8_0*: es una versión cuantizada #footnote[Técnica de compresión que reduce la precisión numérica de los pesos del modelo. Esto disminuye significativamente el tamaño del modelo y sus requisitos computacionales, lo que lo hace más eficiente en términos de memoria y energía] y distilada #footnote[Técnica que permite transferir el conocimiento de un modelo grande y complejo, denominado "modelo profesor", a un modelo más pequeño y eficiente, conocido como "modelo alumno". Este proceso busca reducir el tamaño y la complejidad del modelo original sin comprometer significativamente su rendimiento] del modelo de lenguaje DeepSeek-R1, diseñada para ser más eficiente y compacta mientras mantiene un rendimiento sólido, especialmente en tareas de razonamiento.
+*DeepSeek-R1-Distill-Qwen-1.5B-Q8_0*: es una versión cuantizada #footnote[Técnica de compresión que reduce la precisión numérica de los pesos del modelo. Esto disminuye significativamente el tamaño del modelo y sus requisitos computacionales, lo que lo hace más eficiente en términos de memoria y energía] y destilada #footnote[Técnica que permite transferir el conocimiento de un modelo grande y complejo, denominado "modelo profesor", a un modelo más pequeño y eficiente, conocido como "modelo alumno". Este proceso busca reducir el tamaño y la complejidad del modelo original sin comprometer significativamente su rendimiento] del modelo de lenguaje DeepSeek-R1, diseñada para ser más eficiente y compacta mientras mantiene un rendimiento sólido, especialmente en tareas de razonamiento.
 
 *Ventajas*
 
@@ -379,11 +363,10 @@ Ventajas clave:
 
 - Personalización: Permite modificar el diseño, añadir temas personalizados y combinar múltiples componentes para crear interfaces complejas @gradio-app.
 
-// === Entorno de desarrollo integrado
 
 == Conclusiones parciales
 
-Se dieron cumplimiento a los primeros objetivos específicos, por lo que se llego a las siguientes conclusiones:
+Se dieron cumplimiento a los primeros objetivos específicos, por lo que se llegó a las siguientes conclusiones:
 
 - El análisis de los conceptos asociados estableció una base teórica sólida que facilitó la comprensión profunda de la problemática y los mecanismos subyacentes, permitiendo identificar las herramientas y técnicas más adecuadas para el proyecto.
 

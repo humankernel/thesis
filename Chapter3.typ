@@ -132,13 +132,13 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
 
 La evaluación de aplicaciones que integran LLMs exige protocolos más estrictos que el software convencional, pues sus salidas son inherentemente no deterministas #footnote([Cada invocación puede generar respuestas distintas incluso con el mismo prompt]). Por ello, se recurre a métricas cuantitativas (e.g., exactitud, coherencia, robustez) y a revisiones humanas estructuradas para calibrar tanto la fidelidad de los resultados como su adecuación al contexto de uso @RAGAS. 
 
-Para realizar las evaluación se creo una herramienta externa (@rag-eval) cuyo objetivo principal fue automatizar el proceso de generación del conjunto de datos (dataset) de prueba. A partir de esta herramienta, se construyó un dataset específico bajo condiciones controladas. Este conjunto de datos presenta las siguientes características principales:
+Para realizar la evaluación se creó una herramienta externa (@rag-eval) cuyo objetivo principal fue automatizar el proceso de generación del conjunto de datos (dataset) de prueba. A partir de esta herramienta, se construyó un dataset específico bajo condiciones controladas. Este conjunto de datos presenta las siguientes características principales:
 
 - Incluye un total de 80 pares pregunta-respuesta (4 pares por cada tema), cada uno acompañado por su correspondiente id de contexto recuperado.
 
 - Las preguntas fueron generadas de forma automática (usando un LLM), y están orientadas a distintos dominios (ver @dataset).
 
-- El dataset fue conformado de diferentes artículos de Wikipedia en version ingles y espanol.
+- El dataset fue conformado de diferentes artículos de Wikipedia en versión inglés y español
 
 - El dataset fue estructurado en formato `.jsonl`, lo que facilita su uso en procesos automáticos de evaluación y su integración con herramientas como RAGAS.
 
@@ -276,7 +276,7 @@ En la @gen-params se muestran los parámetros de generación utilizados.
 Los resultados obtenidos (@ragas-results) a través de la evaluación con RAGAS reflejan un rendimiento sólido en el componente de recuperación de contexto, pero revelan importantes deficiencias en la fase de generación de respuestas. 
 - El puntaje de `Context Recall` fue alto (#context_recall_score), lo que indica que el sistema es eficaz para recuperar información relevante; en otras palabras, el modelo accede correctamente a los datos necesarios para responder la mayoría de las preguntas. 
 
-- No obstante, la métrica `Faithfulness` fue baja (#faithfulness), lo que evidencia un problema serio: el modulo generador frecuentemente produce respuestas que no están plenamente fundamentadas en el contexto proporcionado. Esto sugiere que el modelo recurre a conocimientos previos aprendidos durante el preentrenamiento, ignora partes clave del contexto, o interpreta información de manera imprecisa. En consecuencia, se compromete la confianza del usuario, ya que las respuestas pueden contener afirmaciones incorrectas o incluso alucinaciones. 
+- No obstante, la métrica `Faithfulness` fue baja (#faithfulness), lo que evidencia un problema serio: el módulo generador frecuentemente produce respuestas que no están plenamente fundamentadas en el contexto proporcionado. Esto sugiere que el modelo recurre a conocimientos previos aprendidos durante el preentrenamiento, ignora partes clave del contexto, o interpreta información de manera imprecisa. En consecuencia, se compromete la confianza del usuario, ya que las respuestas pueden contener afirmaciones incorrectas o incluso alucinaciones. 
 
 - Esta situación también se refleja en el puntaje de `Factual Correctness` (#factual_correctness), que indica una precisión moderada: las respuestas son parcialmente correctas, aunque inconsistentes. La generación es adecuada en algunos casos, pero no puede garantizarse una fidelidad completa con la información recuperada. 
 
@@ -334,9 +334,9 @@ Para cuantificar de forma precisa el rendimiento del componente de generación d
 
 Los resultados (@llm-tests) muestran que, al aumentar la longitud del prompt, la latencia crece de 2,03 s (Short) a 3,50 s (Long), mientras que el throughput pasa de 16,7 tok/s a 97,8 tok/s. Esto indica que el modelo procesa lotes más grandes de forma más eficiente —generando muchos más tokens por segundo— aunque a costa de un ligero aumento en el tiempo total de respuesta, que en todo caso se mantiene dentro de un rango aceptable para aplicaciones interactivas.
 
-Mas rendimiento puede ser obtenido si se optimizan los parámetros de vLLM y se hace uso de batching, adicionalmente el uso de formatos cuantizados `.gguf` tiene un soporte experimental y no esta completamente optimizado. 
+Más rendimiento puede ser obtenido si se optimizan los parámetros de vLLM y se hace uso de batching, adicionalmente el uso de formatos cuantizados `.gguf` tiene un soporte experimental y no está completamente optimizado. 
 
-Por otro lado en cuestión de consumo de memoria, se puede utilizar la siguiente formula para determinar la cantidad de VRAM o RAM requerida para ejecutar el modelo. Para ejecutar un modelo de 1.5B de parámetros con una cuantización de 8 bits el calculo seria el siguiente.
+Por otro lado, en cuestión de consumo de memoria, se puede utilizar la siguiente fórmula para determinar la cantidad de VRAM o RAM requerida para ejecutar el modelo. Para ejecutar un modelo de 1.5B de parámetros con una cuantización de 8 bits, el cálculo sería el siguiente.
 
 $ "M" = (P * 4B) / (32 \/ Q) * 1.2 = (1.5 * 4B) / (32 \/ 8) * 1.2 = 1.80 $ 
 
@@ -345,7 +345,7 @@ $ "M" = (P * 4B) / (32 \/ Q) * 1.2 = (1.5 * 4B) / (32 \/ 8) * 1.2 = 1.80 $
     columns: (1fr, 5fr),
     stroke: 0.2pt,
     [Símbolo], [Descripción],
-    [$M$], [Memoria de la GPU expresada en Gigabytes],
+    [$M$], [Memoria de la GPU expresada en gigabytes],
     [$P$], [Cantidad de parámetros en el modelo],
     [$4B$], [4 bytes, expresando los bytes usados para cada parámetro],
     [$32$], [Hay 32 bits en 4 bytes],
@@ -396,7 +396,7 @@ En la @emb-tests se muestra los resultados, donde crear los embeddings para 1000
   caption: [Benchmark Embeddings (Elaboración propia)]
 )<emb-tests>
 
-Se observo que el modelo de embeddings utilizado ocupa $approx$ 2GB VRAM 
+Se observó que el modelo de embeddings utilizado ocupa $approx$ 2 GB VRAM.
 
 == Pruebas de Unidad
 
@@ -491,8 +491,8 @@ A partir del proceso de implementación y verificación de la solución propuest
 
 - Las pruebas de unidad y los mecanismos de evaluación sistemática aplicados demuestran que cada componente del sistema funciona conforme a lo esperado.
 
-- Las pruebas de rendimiento revelan tiempos de respuesta adecuados incluso con entradas de gran tamaño, así como un uso eficiente de recursos computacionales.
+- Las pruebas de rendimiento revelan tiempos de respuesta adecuados, incluso con entradas de gran tamaño, así como un uso eficiente de recursos computacionales.
 
-- Se incorporaron metodologías especializadas para la validación de sistemas con LLMs, que van más allá del paradigma tradicional del software. El uso de métricas de recuperación y generación aporta un marco sólido para la evaluación de sistemas RAG.
+- Se incorporaron metodologías especializadas para la validación de sistemas con LLM, que van más allá del paradigma tradicional del software. El uso de métricas de recuperación y generación aporta un marco sólido para la evaluación de sistemas RAG.
 
 En conjunto, estos elementos validan la veracidad, fiabilidad y factibilidad técnica de la solución desarrollada, sentando las bases para su posible extensión, adaptación o implementación en contextos reales.

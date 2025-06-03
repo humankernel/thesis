@@ -229,26 +229,18 @@ En este capítulo se definen los requisitos funcionales y no funcionales del sis
   picture: "Images/hu-limpiar-chat.png"
 )
 
-// #table_user_story(13, [Incluir citas en las respuestas],
-//   [Alta], [Medio],
-//   [],
-//   2, 2,
-//   [Joaquin Enrique Rivas Sánchez],
-//   [El sistema incluye citas de fuentes relevantes en las respuestas para respaldar la información proporcionada.], 
-//   []
-// )
 
 == Plan de iteraciones
 
-Habiendo identificado previamente las historias de usuario se debe crear el plan de iteraciones donde cada HU se convierte en tareas especificas de desarrollo y para cada uno se establecen pruebas. En cada ciclo se analizan las pruebas fallidas para prevenir que no vuelvan a ocurrir y ser corregidas.
+Habiendo identificado previamente las historias de usuario se debe crear el plan de iteraciones donde cada HU se convierte en tareas específicas de desarrollo y para cada uno se establecen pruebas. En cada ciclo se analizan las pruebas fallidas para prevenir que no vuelvan a ocurrir y ser corregidas.
 
 Se acordaron 2 iteraciones que a continuación serán descritas:
 
-- *Iteración 1:* se desarrollan las HU 1,2,3,4,5 las cuales corresponden al envió de consultas y archivos PDF; la generación de respuestas; procesamiento de archivos; la búsqueda de documentos relevantes. Al finalizar la iteración se realizaran las pruebas.
+- *Iteración 1*: Se desarrollan las HU 1,2,3,4,5 las cuales corresponden al envío de consultas y archivos PDF; la generación de respuestas; procesamiento de archivos; la búsqueda de documentos relevantes. Al finalizar la iteración se realizarán las pruebas.
 
-- *Iteración 2:* se desarrollan las HU 6,7,8,9,10,11,12 las cuales corresponden a la capacidad de mostrar documentos recuperados; regenerar, dar retroalimentación de las respuestas; editar una consulta previa; ajustar los parámetros del sistema; crear multiples conversaciones; limpiar el chat y por ultimo incluir citas en las respuestas. Al finalizar la iteración se realizaran las pruebas faltantes y la entrega final de la propuesta de solución. 
+- *Iteración 2*: Se desarrollan las HU 6,7,8,9,10,11,12 las cuales corresponden a la capacidad de mostrar documentos recuperados; regenerar, dar retroalimentación de las respuestas; editar una consulta previa; ajustar los parámetros del sistema; crear múltiples conversaciones; limpiar el chat y por último incluir citas en las respuestas. Al finalizar la iteración se realizarán las pruebas faltantes y la entrega final de la propuesta de solución. 
 
-En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo estimado por iteración asi como las HU a desarrollar. Se tomo como unidad de mediada que cada semana contaba de 5 días laborales de los cuales se trabajaran 8 horas cada día.
+En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo estimado por iteración, así como las HU a desarrollar. Se tomó como unidad de medida que cada semana contaba de 5 días laborales, de los cuales se trabajarán 8 horas cada día.
 
 #figure(
   table(
@@ -323,7 +315,7 @@ Para la propuesta de solución se definieron 4 capas (@layered):
         edge(<logic>, <ai>, "<->"),
         edge(<ai>, <persist>, "<->"),
     ),
-    caption: [Capas del Sistema (Elaboración Propia)]
+    caption: [Capas del Sistema (Elaboración propia)]
 )<layered>
 
 == Patrones de diseño 
@@ -368,7 +360,7 @@ def create_query_plan(
 
 === Máquina de Estados
 
-Una Máquina de Estados es un patrón que permite a un objeto alterar su comportamiento cuando su estado interno cambia. Se utiliza para modelar sistemas que pueden existir en un número finito de estados y transicionan entre ellos en respuesta a eventos o condiciones. Es útil para gestionar flujos de control complejos y secuencias de operaciones ordenadas. En este código, el proceso general de la función `ask` sigue una secuencia (planificar, recuperar, generar, validar, refinar) que puede iterar hasta alcanzar un estado final ('completo'). @Finite-State-Machines.
+Una Máquina de Estados es un patrón que permite a un objeto alterar su comportamiento cuando su estado interno cambia. Se utiliza para modelar sistemas que pueden existir en un número finito de estados y transiciones entre ellos en respuesta a eventos o condiciones. Es útil para gestionar flujos de control complejos y secuencias de operaciones ordenadas. En este código, el proceso general de la función `ask` sigue una secuencia (planificar, recuperar, generar, validar, refinar) que puede iterar hasta alcanzar un estado final ('completo'). @Finite-State-Machines.
 
 #codly(highlights: (
   (line: 1, start: 0, end: 25, fill: green),
@@ -449,10 +441,11 @@ def ask(
         yield from iterative_retrieval(plan, db, chunks)
 ```
 
+
 == Conclusiones parciales
 
 Se llegaron a las siguientes conclusiones:
-- La descripción general de la propuesta de solución ayudo a sentar las bases para la comprensión del flujo de la información y el contexto de la solución.
-- Se definieron las funcionalidades especificas del sistema a traves de las historias de usuario asi como los requisitos no funcionales.
-- Se obtuvo una planificación del tiempo de desarrollo a traves del plan de iteraciones asi como el orden en el que se implementaran las tareas.
+- La descripción general de la propuesta de solución ayudó a sentar las bases para la comprensión del flujo de la información y el contexto de la solución.
+- Se definieron las funcionalidades específicas del sistema a través de las historias de usuario, así como los requisitos no funcionales.
+- Se obtuvo una planificación del tiempo de desarrollo a través del plan de iteraciones, así como el orden en el que se implementarán las tareas.
 - Se implementaron patrones de diseño con el fin de garantizar una mayor extensibilidad y mantenibilidad de la solución.
