@@ -92,17 +92,15 @@ El sistema permite al usuario indexar documentos PDF que son segmentados en frag
 - *RnF3*: Las funcionalidades del sistema estarán disponibles en todo momento.
 
 *Rendimiento*
-- *RnF4*: El sistema permitirá que multiple usuarios lo empleen a la vez.
+- *RnF4*: El sistema permitirá que multiples usuarios lo empleen a la vez.
 
 *Legales*
 - *RnF5*: Las herramientas seleccionadas para el desarrollo de la propuesta de solución estarán respaldadas por licencias libres.
 
 *Hardware* 
-- *RnF6*: El sistema debe ejecutarse en una computadora con procesador mayor a Intel Core i7 7700k u homólogos.
-- *RnF7*: El sistema debe ejecutarse en una computadora con memoria RAM mínima de 4 Gigabytes.
+- *RnF7*: El sistema debe ejecutarse en una computadora con memoria RAM mínima de 8 gigabytes.
 - *RnF8*: El sistema debe ejecutarse en una computadora con GPU Nvidia.
-- *RnF9*: El sistema debe ejecutarse en una computadora con GPU superior a Nvidia 1050ti.
-- *RnF10*: El sistema debe ejecutarse en una computadora con memoria VRAM mínima de 4 Gigabytes.
+- *RnF10*: El sistema debe ejecutarse en una computadora con memoria VRAM mínima de 8 gigabytes.
 
 == Descripción de las historias de usuario
 
