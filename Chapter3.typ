@@ -8,8 +8,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
 == Tareas de Ingeniería
 
 
-#table_engineering_task(
-  number: 1,
+#table_engineering_task(number: 1,
   hu_number: 1,
   nombre: [Enviar consultas],
   type: [Desarrollo],
@@ -18,8 +17,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   description: [Se realiza la integración de una caja de texto que contiene un botón de enviar, esta se encarga de enviar la consulta al componente que se encarga de procesarla.]
 )
 
-#table_engineering_task(
-  number: 2,
+#table_engineering_task(number: 2,
   hu_number: 2,
   nombre: [Enviar archivos PDF],
   type: [Desarrollo],
@@ -28,8 +26,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   description: [En la caja de texto de enviar consulta se añade un botón para agregar un documento,este tiene un limite de 300mb. Cuando el usuario envía la consulta los archivos son procesados en el backend.] // TODO:
 )
 
-#table_engineering_task(
-  number: 3,
+#table_engineering_task(number: 3,
   hu_number: 3,
   nombre: [Generar respuestas],
   type: [Desarrollo],
@@ -38,8 +35,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   description: [La consulta se divide en sub consultas, estas se utilizan para obtener documentos relevantes, luego con estos documentos se genera una respuesta, si la respuesta esta completa (la pregunta fue respondida) se le manda al usuario, sino se inicia una búsqueda de los elementos faltantes, esto se puede repetir hasta que se completa la respuesta o se alcanza el máximo numero de iteraciones.] // TODO:
 )
 
-#table_engineering_task(
-  number: 4,
+#table_engineering_task(number: 4,
   hu_number: 4,
   nombre: [Procesar archivos],
   type: [Desarrollo],
@@ -48,8 +44,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   description: [Los archivos son divididos en pequeños pedazos que se encuentran dentro de un umbral de tokens que el modelo de embeddings puede leer, luego se generan los embeddings y se almacenan en la base de datos vectorial en memoria.] // TODO:
 )
 
-#table_engineering_task(
-  number: 5,
+#table_engineering_task(number: 5,
   hu_number: 5,
   nombre: [Buscar documentos relevantes],
   type: [Desarrollo],
@@ -58,8 +53,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   description: [Se crean los embeddings de la consulta, estos se utilizan para encontrar en la base de datos embeddings que compartan cierta similitud semantica (mediante la similitud del coseno) asi como lexicográfica, luego estos se reordenan usando el modelo Reranker.]
 )
 
-#table_engineering_task(
-  number: 6,
+#table_engineering_task(number: 6,
   hu_number: 6,
   nombre: [Mostrar documentos recuperados],
   type: [Desarrollo],
@@ -68,8 +62,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   description: [Los documentos recuperados son mostrados en una barra lateral derecha, en forma de lista donde cada elemento es colapsable.]
 )
 
-#table_engineering_task(
-  number: 7,
+#table_engineering_task(number: 7,
   hu_number: 7,
   nombre: [Regenerar respuesta],
   type: [Desarrollo],
@@ -78,8 +71,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   description: [Se activa la opción de Gradio para regenerar la respuesta.] // TODO:
 )
 
-#table_engineering_task(
-  number: 8,
+#table_engineering_task(number: 8,
   hu_number: 8,
   nombre: [Dar retroalimentación de una respuesta],
   type: [Desarrollo],
@@ -88,8 +80,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   description: [Se activa la opción de Gradio para dar retroalimentación, la cual se guarda en un archivo.] // TODO:
 )
 
-#table_engineering_task(
-  number: 9,
+#table_engineering_task(number: 9,
   hu_number: 9,
   nombre: [Editar una consulta previa],
   type: [Desarrollo],
@@ -98,8 +89,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   description: [Se activa la opción de Gradio para dar editar la consulta.]
 )
 
-#table_engineering_task(
-  number: 10,
+#table_engineering_task(number: 10,
   hu_number: 10,
   nombre: [Ajustar los parámetros del sistema],
   type: [Desarrollo],
@@ -108,8 +98,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   description: [Se implementa una barra lateral izquierda con varios campos para seleccionar los parámetros de generación, estos se almacenan en el local storage del navegador, y se le pasa a la logica del backend para instruir la generación.]
 )
 
-#table_engineering_task(
-  number: 11,
+#table_engineering_task(number: 11,
   hu_number: 11,
   nombre: [Crear múltiples conversaciones],
   type: [Desarrollo],
@@ -118,8 +107,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   description: [Se activa la opción en Gradio para crear múltiples conversaciones.]
 )
 
-#table_engineering_task(
-  number: 12,
+#table_engineering_task(number: 12,
   hu_number: 12,
   nombre: [Limpiar el chat],
   type: [Desarrollo],
@@ -197,7 +185,7 @@ Para implementarla se siguen los siguientes pasos:
 
 2. Calcular de la siguiente forma
 
-$ "Context Relevance" = "# de afirmaciones relevantes" / "# total de afirmaciones" $
+$ "Context Recall" = "# de afirmaciones relevantes" / "# total de afirmaciones" $
 
 
 // === Métricas de Recuperación
@@ -456,14 +444,14 @@ Algunos ejemplos se muestran a continuación:
   result: [Satisfactoria]
 )
 
-
 #figure(
   lq.diagram(
     ylabel: [Pruebas],
     xlabel: [Iteraciones],
-    width: 5cm,
+    width:  5cm,
     height: 6cm,
     ylim: (0, 70),
+    xaxis: (subticks: none, ticks: (1, 2)),
     legend: (position: (100% + .5em, 0%)),
     lq.bar(
       offset: -0.2, width: 0.4,
@@ -489,10 +477,10 @@ Algunos ejemplos se muestran a continuación:
 
 A partir del proceso de implementación y verificación de la solución propuesta, se derivan las siguientes conclusiones:
 
-- Las pruebas de unidad y los mecanismos de evaluación sistemática aplicados demuestran que cada componente del sistema funciona conforme a lo esperado.
+- Las pruebas de unidad y los mecanismos de evaluación aplicados demuestran que cada componente del sistema funciona conforme a lo esperado.
 
-- Las pruebas de rendimiento revelan tiempos de respuesta adecuados, incluso con entradas de gran tamaño, así como un uso eficiente de recursos computacionales.
+- Las pruebas de rendimiento revelan tiempos de respuesta adecuados, incluso con entradas de gran tamaño, así como un uso efectivo de recursos computacionales.
 
-- Se incorporaron metodologías especializadas para la validación de sistemas con LLM, que van más allá del paradigma tradicional del software. El uso de métricas de recuperación y generación aporta un marco sólido para la evaluación de sistemas RAG.
+- Se incorporaron metodologías especializadas para la validación de sistemas con LLM, que van más allá del paradigma tradicional del software. El uso de métricas de generación aporta un marco sólido para la evaluación de sistemas RAG.
 
-En conjunto, estos elementos validan la veracidad, fiabilidad y factibilidad técnica de la solución desarrollada, sentando las bases para su posible extensión, adaptación o implementación en contextos reales.
+En conjunto, estos elementos validan la veracidad, fiabilidad y factibilidad técnica de la solución desarrollada, sentando las bases para su posible extensión, mejora, adaptación o implementación en contextos reales.

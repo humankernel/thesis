@@ -86,144 +86,128 @@ El sistema permite al usuario indexar documentos PDF que son segmentados en frag
 
 *Usabilidad*
 - *RnF1*: Se podrá interactuar de forma fácil por cualquier usuario.
-- *RnF2*: Se podrá emplear el idioma Ingles y Español.
-
-*Accesibilidad*
-- *RnF3*: Las funcionalidades del sistema estarán disponibles en todo momento.
+- *RnF2*: Se podrá emplear el idioma Inglés y Español.
 
 *Rendimiento*
-- *RnF4*: El sistema permitirá que multiples usuarios lo empleen a la vez.
+- *RnF4*: El sistema permitirá que múltiples usuarios lo empleen a la vez.
 
 *Legales*
 - *RnF5*: Las herramientas seleccionadas para el desarrollo de la propuesta de solución estarán respaldadas por licencias libres.
 
 *Hardware* 
 - *RnF7*: El sistema debe ejecutarse en una computadora con memoria RAM mínima de 8 gigabytes.
-- *RnF8*: El sistema debe ejecutarse en una computadora con GPU Nvidia.
-- *RnF10*: El sistema debe ejecutarse en una computadora con memoria VRAM mínima de 8 gigabytes.
+- *RnF8*: El sistema debe ejecutarse en una computadora con GPU Nvidia con memoria VRAM mínima de 8 gigabytes.
 
 == Descripción de las historias de usuario
 
 En este capítulo se definen los requisitos funcionales y no funcionales del sistema, los cuales describen, respectivamente, las funcionalidades que debe ofrecer la aplicación y las restricciones o cualidades que debe cumplir (como rendimiento, usabilidad y seguridad). En la metodología XP, estos requisitos se especifican mediante historias de usuario, redactadas en un lenguaje claro y accesible por el cliente, permitiendo encapsular de forma concisa lo que el sistema debe realizar. Este enfoque facilita la priorización, estimación y validación de cada historia, garantizando una comunicación efectiva entre desarrolladores y usuarios, y permitiendo iteraciones de desarrollo ágiles y adaptables a las necesidades reales @sommerville_ingenierisoftware_2005.
 
-#table_user_story(1, [Enviar consultas],
-  [Alta], [Bajo],
-  [Investigador],
-  1, 1,
-  [Joaquin Enrique Rivas Sánchez],
-  [El usuario puede escribir y enviar consultas al sistema.], 
-  [],
+#table_user_story(number: 1, name: [Enviar consultas],
+  user: [Investigador],
+  priority: [Alta], risk: [Bajo],
+  weeks: 1, iterations: 1,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El usuario debe poder escribir y enviar consultas al sistema.], 
   picture: "Images/hu-enviar-consulta.png"
 )
 
-#table_user_story(2, [Enviar archivos PDF],
-  [Alta], [Bajo],
-  [Investigador],
-  1, 1,
-  [Joaquin Enrique Rivas Sánchez],
-  [El usuario puede enviar archivos PDF al sistema para su procesamiento de hasta 300 megabytes.], 
-  [En caso de intentar enviar otros formatos de archivo, se mostrara un mensaje de advertencia.],
+#table_user_story(number: 2, name: [Enviar archivos PDF],
+  user: [Investigador],
+  priority: [Alta], risk: [Bajo],
+  weeks: 1, iterations: 1,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El usuario debe poder enviar archivos PDF al sistema para su procesamiento de hasta 300 megabytes.], 
+  observations: [En caso de intentar enviar otros formatos de archivo, se mostrara un mensaje de advertencia.],
   picture: "Images/hu-enviar-pdf.png",
 )
 
-#table_user_story(3, [Generar respuestas],
-  [Alta], [Medio],
-  [],
-  2, 1,
-  [Joaquin Enrique Rivas Sánchez],
-  [El sistema genera respuestas basadas en las consultas realizadas por el usuario.], 
-  [En caso de fallar se muestra un mensaje de error.]
+#table_user_story(number: 3, name: [Generar respuestas],
+  priority: [Alta], risk: [Medio],
+  weeks: 2, iterations: 1,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El sistema debe generar respuestas basadas en las consultas realizadas por el usuario.], 
+  observations: [En caso de fallar se muestra un mensaje de error.]
 )
 
-#table_user_story(4, [Procesar archivos],
-  [Alta], [Alto],
-  [Investigador],
-  3, 1,
-  [Joaquin Enrique Rivas Sánchez],
-  [El sistema procesa los archivos enviados y almacena la información extraída.], 
-  []
+#table_user_story(number: 4, name: [Procesar archivos],
+  priority: [Alta], risk: [Alto],
+  user: [Investigador],
+  weeks: 3, iterations: 1,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El sistema debe procesar los archivos enviados y almacenar la información extraída.], 
 )
 
-#table_user_story(5, [Buscar documentos relevantes],
-  [Alta], [Alta],
-  [],
-  2, 1,
-  [Joaquin Enrique Rivas Sánchez],
-  [El sistema identifica y recupera documentos pertinentes en función de la consulta realizada.], 
-  [En caso de no encontrar documentos relevantes no devuelve nada.]
+#table_user_story(number: 5, name: [Buscar documentos relevantes],
+  priority: [Alta], risk: [Alto],
+  weeks: 2, iterations: 1,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El sistema debe identificar y recuperar documentos relevantes a la consulta realizada.], 
+  observations: [En caso de no encontrar documentos relevantes no devuelve nada.]
 )
 
-#table_user_story(6, [Mostrar documentos recuperados],
-  [Media], [Bajo],
-  [Investigador],
-  1, 2,
-  [Joaquin Enrique Rivas Sánchez],
-  [El sistema muestra una lista de documentos con sus respectivas puntuaciones.], 
-  [En caso de no recibir documentos recuperados no se mostrara nada],
+#table_user_story(number: 6, name: [Mostrar documentos recuperados],
+  user: [Investigador],
+  priority: [Media], risk: [Bajo],
+  weeks: 1, iterations: 2,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El sistema debe mostrar una lista de documentos con sus respectivas puntuaciones de recuperación.], 
+  observations: [En caso de no recibir documentos recuperados no se mostrara nada.],
   picture: "Images/hu-mostrar-chunks.png"
 )
 
-#table_user_story(7, [Regenerar respuesta],
-  [Media], [Bajo],
-  [Investigador],
-  1, 2,
-  [Joaquin Enrique Rivas Sánchez],
-  [El usuario puede solicitar al sistema que regenere una respuesta si la inicial no satisface sus necesidades.], 
-  [],
+#table_user_story(number: 7, name: [Regenerar respuesta],
+  user: [Investigador],
+  priority: [Media], risk: [Bajo],
+  weeks: 1, iterations: 2,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El usuario debe poder solicitar al sistema que regenere una respuesta si la inicial no satisface sus necesidades.], 
   picture: "Images/hu-regenerate.png"
 )
 
-#table_user_story(8, [Dar retroalimentación de una respuesta],
-  [Media], [Bajo],
-  [Investigador],
-  1, 2,
-  [Joaquin Enrique Rivas Sánchez],
-  [El usuario puede proporcionar retroalimentación sobre las respuestas del sistema. Los criterios para retroalimentar son los siguientes: Me gusta, No me gusta, Alucinación, Inapropiado, Dañino.], 
-  [],
+#table_user_story(number: 8, name: [Dar name: retroalimentación de una respuesta],
+  priority: [Media], risk: [Bajo],
+  user: [Investigador],
+  weeks: 1, iterations: 2,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El usuario debe poder proporcionar retroalimentación sobre las respuestas del sistema. Los criterios para retroalimentar son los siguientes: Me gusta, No me gusta, Alucinación, Inapropiado, Dañino.], 
   picture: "Images/hu-retroalimentacion.png"
 )
 
-#table_user_story(9, [Editar una consulta previa],
-  [Media], [Bajo],
-  [Investigador],
-  1, 2,
-  [Joaquin Enrique Rivas Sánchez],
-  [El sistema permite la edición de consultas y genera nuevas respuestas basadas en los cambios.], 
-  [],
+#table_user_story(number: 9, name: [Editar una consulta previa],
+  user: [Investigador],
+  priority: [Media], risk: [Bajo],
+  weeks: 1, iterations: 2,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El sistema debe permitir la edición de consultas y generar nuevas respuestas basadas en los cambios.], 
   picture: "Images/hu-editar-consulta.png"
 )
 
-#table_user_story(10, [Ajustar los parámetros del sistema],
-  [Baja], [Medio],
-  [Investigador],
-  2, 2,
-  [Joaquin Enrique Rivas Sánchez],
-  [El usuario accede a opciones de configuración para modificar parámetros específicos. Los parámetros incluyen: 
-    - Temperatura del modelo
-    - Máximo de tokens de salida
-    - Penalización de frecuencia y de presencia
-    ], 
-  [],
+#table_user_story(number: 10, name: [Ajustar los parámetros del sistema],
+  user: [Investigador],
+  priority: [Baja], risk: [Medio],
+  weeks: 2, iterations: 2,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El usuario debe poder acceder a opciones de configuración para modificar parámetros específicos.],
+  observations: [Los parámetros incluyen: Temperatura del modelo, Máximo de tokens de salida, Penalización de frecuencia y de presencia],
   picture: "Images/hu-model-params.png"
 )
 
-#table_user_story(11, [Crear múltiples conversaciones],
-  [Media], [Bajo],
-  [Investigador],
-  1, 2,
-  [Joaquin Enrique Rivas Sánchez],
-  [El usuario puede iniciar múltiples conversaciones independientes para gestionar diferentes temas o consultas.], 
-  [Cada conversación maneja su propio historial y contexto.],
+#table_user_story(number: 11, name: [Crear múltiples conversaciones],
+  user: [Investigador],
+  priority: [Media], risk: [Bajo],
+  weeks: 1, iterations: 2,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El usuario debe poder iniciar múltiples conversaciones independientes para gestionar diferentes temas o consultas.], 
+  observations: [Cada conversación maneja su propio historial y contexto.],
   picture: "Images/hu-nuevos-chats.png"
 )
 
-#table_user_story(12, [Limpiar el chat],
-  [Baja], [Bajo],
-  [Investigador],
-  1, 2,
-  [Joaquin Enrique Rivas Sánchez],
-  [El usuario puede limpiar el historial del chat para comenzar una nueva conversación.], 
-  [],
+#table_user_story(number: 12, name: [Limpiar el chat],
+  user: [Investigador],
+  priority: [Baja], risk: [Bajo],
+  weeks: 1, iterations: 2,
+  responsable: [Joaquin Enrique Rivas Sánchez],
+  description: [El usuario debe poder limpiar el historial del chat para comenzar una nueva conversación.], 
   picture: "Images/hu-limpiar-chat.png"
 )
 
@@ -238,7 +222,7 @@ Se acordaron 2 iteraciones que a continuación serán descritas:
 
 - *Iteración 2*: Se desarrollan las HU 6,7,8,9,10,11,12 las cuales corresponden a la capacidad de mostrar documentos recuperados; regenerar, dar retroalimentación de las respuestas; editar una consulta previa; ajustar los parámetros del sistema; crear múltiples conversaciones; limpiar el chat y por último incluir citas en las respuestas. Al finalizar la iteración se realizarán las pruebas faltantes y la entrega final de la propuesta de solución. 
 
-En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo estimado por iteración, así como las HU a desarrollar. Se tomó como unidad de medida que cada semana contaba de 5 días laborales, de los cuales se trabajarán 8 horas cada día.
+En la @hu-estimation se muestra el plan de iteraciones y se incluye el tiempo estimado por iteración, así como las HU a desarrollar. Se tomó como unidad de medida 1 semana y cada una contaba de 5 días laborales, de los cuales se trabajarán 8 horas cada día. Se estima un total de duración de 4 meses y medio.
 
 #figure(
   table(
@@ -403,7 +387,7 @@ class Settings(BaseModel):
 
 # otro archivo.py
 from settings import settings
-llm_model = OpenAIClient() if settings.ENVIRONMENT == "dev" else vLLMClient()
+llm_model = vLLMClient() if settings.ENVIRONMENT == "prod" else OpenAIClient()   
 ```
 
 === Inyección de Dependencias

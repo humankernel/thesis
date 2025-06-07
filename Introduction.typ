@@ -3,19 +3,18 @@
 = Introducción
 
 En Cuba, la investigación científica enfrenta desafíos únicos derivados de las limitaciones
-tecnológicas y el acceso restringido a recursos digitales. Los investigadores trabajan frecuentemente con grandes volúmenes de artículos científicos en formato PDF, los cuales deben analizarse manualmente debido a la falta de herramientas automatizadas adaptadas al contexto local. Este proceso consume un tiempo valioso que podría destinarse a la generación de nuevo conocimiento, especialmente en áreas críticas como la medicina, la agricultura o la energía, sectores prioritarios para el desarrollo nacional. Además, la conectividad a internet es intermitente y costosa, lo que dificulta el uso de soluciones basadas en la nube o modelos de inteligencia artificial (IA) de alto consumo computacional, y a los que en muchas ocasiones se encuentran bloqueadas para nuestro país.
+tecnológicas y el acceso restringido a recursos digitales. Los investigadores trabajan frecuentemente con grandes volúmenes de artículos científicos, los cuales deben analizarse manualmente debido a la falta de herramientas automatizadas adaptadas al contexto local. Este proceso consume un tiempo valioso que podría destinarse a la generación de nuevo conocimiento, especialmente en áreas críticas como la medicina, la agricultura o la energía, sectores prioritarios para el desarrollo nacional. Además, la conectividad a internet es intermitente y costosa, lo que dificulta el uso de soluciones basadas en la nube o modelos de inteligencia artificial (IA) de alto consumo computacional, y a los que en muchas ocasiones se encuentran bloqueadas para nuestro país.
 
-Las herramientas existentes para el análisis automatizado de textos, como los grandes
-modelos de lenguaje (LLM) o sistemas comerciales (p. ej., ChatGPT, ChatPDF, etc.),
-presentan barreras significativas en este contexto. Por un lado, su dependencia de conexión estable a internet y hardware avanzado los hace inaccesibles para muchos investigadores cubanos. Por otro lado, están optimizados para el inglés y no priorizan el español, lo que limita su precisión en documentos científicos locales. A esto se suma la incapacidad de procesar eficientemente PDF complejos (con tablas, ecuaciones o gráficos) y la falta de adaptación a temas específicos de interés para Cuba, lo que reduce su utilidad práctica en escenarios reales de investigación.
+Las herramientas existentes para el análisis automatizado de textos, como los sistemas comerciales (p. ej., ChatGPT, Elicit, etc.), presentan barreras significativas en este contexto. Por un lado, su dependencia de conexión estable a internet y hardware avanzado los hace inaccesibles para muchos investigadores cubanos, ademas están optimizados para el inglés y no priorizan el español, lo que limita su precisión en documentos científicos locales.
 
-A partir de la problemática anteriormente descrita se plantea como *problema de investigación*: ¿Cómo desarrollar una herramienta de IA accesible, eficiente y localizable que permita a investigadores cubanos analizar documentos científicos en PDF de forma automatizada, aprovechando LLM y Generación-Aumentada por Recuperación (RAG), sin depender de infraestructura costosa o conexión estable a internet?, teniendo como *objeto de estudio*: Modelos del lenguaje grandes (LLM). Como *campo de acción*: Extensión de LLM basado en RAG.
+A partir de la problemática anteriormente descrita se plantea como *problema de investigación*: ¿Cómo contribuir al acceso y análisis de documentos científicos en formato `pdf` utilizando infraestructura libre de costo y sin necesitar acceso a internet?. 
+// ¿Cómo desarrollar una herramienta de IA accesible, eficiente y localizable que permita a investigadores cubanos analizar documentos científicos en PDF de forma automatizada, aprovechando los Modelo de Lenguaje de Gran Tamaño y Generación-Aumentada por Recuperación, sin depender de infraestructura costosa o conexión estable a internet?
+Se tiene como *objeto de estudio*: Modelo de Lenguaje de Gran Tamaño. 
+Como *campo de acción*: Extensión de Modelo de Lenguaje de Gran Tamaño basado en Generación-Aumentada por Recuperación.
 
-Se propone como *objetivo general*: Desarrollar una herramienta de código abierto, basada en LLM y RAG, para el análisis
-semiautomático de artículos científicos en PDF, adaptada al contexto tecnológico y lingüístico
-de Cuba
+Se propone como *objetivo general*: Desarrollar una herramienta de código abierto, basada en LLM y RAG, para el análisis semiautomático de artículos científicos en PDF, adaptada al contexto tecnológico y lingüístico de Cuba.
 
-Para dar cumplimiento al objetivo propuesto se proponen un conjunto de *objetivos específicos*:
+Para dar cumplimiento al objetivo propuesto se proponen un conjunto de *tareas de investigación*:
 
 + Realizar estudio del estado del arte sobre el objeto de estudio y campo de acción.
 + Elaborar una propuesta de solución al problema tratado.
@@ -31,19 +30,15 @@ Para alcanzar el conocimiento necesario que permita cumplir con el objetivo esta
 - *Analítico-sintético*: aplicados en la revisión de documentos y bibliografía, permitieron identificar y extraer las ideas clave necesarias para sustentar teóricamente tanto la investigación como la propuesta presentada.
 
 
-*Métodos Empíricos*:
-- *Experimental*: permitió la realización de experimentos controlados y mediciones precisas para validar hipótesis inicial.
-
-
 == Estructura de la investigación por capítulos
 
 El presente trabajo está dividido en los siguientes tres capítulos que recogen todo lo abordado en la investigación.
 
-*@chapter1*: Se centra en la fundamentación teórica y conceptos fundamentales relacionados con el objeto de estudio y campo de acción. Se realiza un análisis de las soluciones similares y se selecciona la metodología de desarrollo de software y las herramientas y tecnologías propuestas para la propuesta de solución.
+*@chapter1 - Fundamentación Teórica*: Se centra en la fundamentación teórica y conceptos fundamentales relacionados con el objeto de estudio y campo de acción. Se realiza un análisis de las soluciones similares y se selecciona la metodología de desarrollo de software y las herramientas y tecnologías propuestas para la propuesta de solución.
 
-*@chapter2*: Se realiza la fundamentación de la propuesta de solución, los requisitos funcionales y no funcionales, se realiza el diseño ingenieril donde se describen las buenas prácticas así como los patrones de diseño.
+*@chapter2 - Propuesta de solución*: Se realiza la fundamentación de la propuesta de solución, los requisitos funcionales y no funcionales, se realiza el diseño ingenieril donde se describen las buenas prácticas así como los patrones de diseño.
 
-*@chapter3*: En este capítulo se abordan los procesos de implementación de la solución propuesta, detallando los estándares utilizados. Además, se describen las pruebas realizadas para evaluar su funcionamiento, fiabilidad y desempeño, garantizando que cumpla con los objetivos planteados en la investigación.
+*@chapter3 - Implementación y realización de pruebas*: En este capítulo se abordan los procesos de implementación de la solución propuesta, detallando los estándares utilizados. Además, se describen las pruebas realizadas para evaluar su funcionamiento, fiabilidad y desempeño, garantizando que cumpla con los objetivos planteados en la investigación.
 
 
 Finalmente son presentadas las Conclusiones, Recomendaciones, Referencias Bibliográficas.

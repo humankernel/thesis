@@ -31,10 +31,10 @@ Un *modelo de aprendizaje automático* es un sistema computacional diseñado par
     caption: [Esquema general del proceso de aprendizaje profundo @Gugger2020-on]
 )<ml-diagram>
 
-En el contexto del aprendizaje automático, @ml-diagram ilustra de manera esquemática el flujo de trabajo de un modelo de aprendizaje profundo, se observa que el proceso comienza con la entrada de datos (inputs), que alimenta al modelo (model). El modelo genera predicciones o resultados (results), los cuales son evaluados mediante una métrica de desempeño (perf). Adicionalmente, el modelo ajusta sus parámetros a través de un mecanismo de pesos (weights), permitiendo la optimización y mejora progresiva del rendimiento @Gugger2020-on.
+En el contexto del aprendizaje automático, @ml-diagram ilustra de manera esquemática el flujo de trabajo de un modelo de aprendizaje profundo, se observa que el proceso comienza con la entrada de datos (inputs), que entrena al modelo (model). El modelo genera predicciones o resultados (results), los cuales son evaluados mediante una métrica de desempeño (perf). Adicionalmente, el modelo ajusta sus parámetros a través de un mecanismo de pesos (weights), permitiendo la optimización y mejora progresiva del rendimiento @Gugger2020-on.
 
 // ¿Qué es un modelo del Lenguaje?
-Un *modelo de lenguaje* es una representación estadística o basada en redes neuronales que asigna probabilidades a secuencias de palabras, permitiendo predecir la siguiente palabra en un texto o generar textos coherentes. Inicialmente, se utilizaron modelos de n-gramas, pero el advenimiento de las técnicas de deep learning ha permitido construir modelos mucho más sofisticados que comprenden contextos largos y capturan matices semánticos y sintácticos complejos. Los modelos del lenguaje son la base para tareas de generación y comprensión de texto, siendo esenciales en aplicaciones como sistemas de traducción automática, resumen de textos y respuestas a preguntas @Goodfellow-et-al-2016.
+Un *modelo de lenguaje* es una representación estadística basada en redes neuronales que asigna probabilidades a secuencias de palabras, permitiendo predecir la siguiente palabra en un texto. Inicialmente, se utilizaron modelos de n-gramas, pero el advenimiento de las técnicas de aprendizaje profundo ha permitido construir modelos mucho más sofisticados que comprenden contextos largos y capturan matices semánticos y sintácticos complejos. Los modelos del lenguaje son la base para tareas de generación y comprensión de texto, siendo esenciales en aplicaciones como sistemas de traducción automática, resumen de textos y respuestas a preguntas @Goodfellow-et-al-2016.
 
 // El reciente desarrollo gracias a la introducción de la arquitectura Transformers
 
@@ -44,14 +44,12 @@ Esta arquitectura revolucionó el procesamiento del lenguaje natural al:
 
 - Eliminar la dependencia secuencial: A diferencia de las redes neuronales recurrentes (RNN) y las LSTM, los Transformers procesan todas las palabras en paralelo, lo que mejora la eficiencia en el entrenamiento.
 - Introducir el mecanismo de self-attention: Este mecanismo permite al modelo ponderar la importancia de cada palabra en una oración, capturando relaciones de largo alcance de manera efectiva.
-- Escalar a grandes volúmenes de datos: Gracias a su arquitectura, se han desarrollado modelos de gran tamaño (como GPT, BERT y sus variantes) que utilizan billones de parámetros, lo que ha impulsado su capacidad para comprender y generar lenguaje de manera sorprendente @vaswani2023attentionneed.
+- Escalar a grandes volúmenes de datos: Debido a su arquitectura, se han desarrollado modelos de gran tamaño (como GPT, BERT y sus variantes) que utilizan billones de parámetros, lo que ha impulsado su capacidad para comprender y generar lenguaje de manera sorprendente @vaswani2023attentionneed.
 
 
-Gracias a la arquitectura Transformer, los modelos de lenguaje han alcanzado un nivel sin precedentes de comprensión y generación de texto, superando enfoques tradicionales en términos de contextualización y manejo de dependencias a largo plazo @vaswani2023attentionneed. Esta evolución ha permitido aplicar estos modelos a una amplia variedad de tareas dentro del procesamiento del lenguaje natural, desde la generación automática de texto hasta sistemas avanzados de preguntas y respuestas, entre otras aplicaciones fundamentales para la inteligencia artificial moderna. A continuación, se detallan algunas de las principales tareas que estos modelos han revolucionado y los retos que aún persisten en su implementación
+La arquitectura Transformer ha permitido que los modelos de lenguaje han alcanzado un nivel sin precedentes de comprensión y generación de texto, superando enfoques tradicionales en términos de contextualización y manejo de dependencias a largo plazo @vaswani2023attentionneed. Esta evolución ha permitido aplicar estos modelos a una amplia variedad de tareas dentro del procesamiento del lenguaje natural, desde la generación automática de texto hasta sistemas avanzados de preguntas y respuestas, entre otras aplicaciones. A continuación, se detallan algunas de las principales tareas que estos modelos han revolucionado y los retos que aún persisten en su implementación.
 
-El impacto de la arquitectura Transformer ha sido determinante en la evolución de los Modelos de Lenguaje de Gran Tamaño (LLM), permitiendo que estos sean aplicados a una amplia variedad de tareas dentro del Procesamiento del Lenguaje Natural (PLN).
-
-Los sistemas QA han sido profundamente transformados por los LLM, ya que permiten interpretar preguntas en lenguaje natural y proporcionar respuestas precisas, facilitando la interacción entre humanos y máquinas en asistentes virtuales y sistemas de búsqueda avanzada @gómezrodríguez2025grandesmodeloslenguajela. Del mismo modo, en la generación de texto y resumen automático, estos modelos han optimizado la creación de resúmenes concisos y coherentes a partir de grandes volúmenes de información, lo que es especialmente útil en entornos científicos @han2025retrievalaugmentedgenerationgraphsgraphrag. Por otra parte, en la traducción automática, modelos como GPT-4 han logrado capturar la semántica y gramática de múltiples idiomas, mejorando la calidad de las traducciones @openai2024gpt4technicalreport.
+Los sistemas de preguntas y respuestas han sido profundamente transformados por los LLM, ya que permiten interpretar preguntas en lenguaje natural y proporcionar respuestas precisas, facilitando la interacción entre humanos y máquinas en asistentes virtuales y sistemas de búsqueda avanzada @gómezrodríguez2025grandesmodeloslenguajela. Del mismo modo, en la generación de texto y resumen automático, estos modelos han optimizado la creación de resúmenes concisos y coherentes a partir de grandes volúmenes de información, lo que es especialmente útil en entornos científicos @han2025retrievalaugmentedgenerationgraphsgraphrag. Por otra parte, en la traducción automática, modelos como GPT-4 han logrado capturar la semántica y gramática de múltiples idiomas, mejorando la calidad de las traducciones @openai2024gpt4technicalreport.
 
 // Retos asociados en el uso de estos modelos para dichas tareas
 
@@ -74,19 +72,19 @@ Por otro lado, la *memoria no paramétrica* almacena información fuera de los p
 
 == Técnicas para extender la memoria de un modelo
 
-Dado que los modelos de lenguaje de gran tamaño (LLM) tienen una capacidad limitada para almacenar y actualizar información de manera eficiente, han surgido diversas técnicas para extender su memoria y mejorar su capacidad de adaptación. Estas técnicas permiten que los modelos accedan a información externa, se actualicen sin necesidad de un nuevo entrenamiento costoso y retengan conocimientos previos sin sufrir degradación @lewis2021retrievalaugmentedgenerationknowledgeintensivenlp.
+Dado que los modelos de lenguaje de gran tamaño (LLM) tienen una capacidad limitada para almacenar y actualizar información de manera eficiente, han surgido diversas técnicas para extender su memoria y mejorar su capacidad de adaptación. Estas técnicas permiten que los modelos accedan a información externa, se actualicen sin necesidad de un nuevo entrenamiento  y retengan conocimientos previos sin sufrir degradación @lewis2021retrievalaugmentedgenerationknowledgeintensivenlp.
 
 === Transferencia del Aprendizaje 
 
 La transferencia del aprendizaje es una técnica clave para extender la memoria de un modelo, permitiendo que un modelo preentrenado en una tarea general se adapte a una tarea específica con una cantidad reducida de datos adicionales. En lugar de entrenar un modelo desde cero, se reutilizan los pesos y representaciones aprendidas en un dominio más amplio para mejorar el desempeño en un nuevo contexto.
 
-Este enfoque ha demostrado ser particularmente útil en modelos de lenguaje, donde un modelo preentrenado en grandes corpus de texto puede especializarse en tareas más específicas como análisis de sentimientos, traducción de idiomas o recuperación de información. Sin embargo, uno de los desafíos principales es evitar el catastrophic forgetting, donde el modelo puede perder información valiosa del preentrenamiento al ajustarse a nuevos datos @vandeven2024continuallearningcatastrophicforgetting.
+Este enfoque ha demostrado ser particularmente útil en modelos de lenguaje, donde un modelo preentrenado en grandes corpus de texto puede especializarse en tareas más específicas como análisis de sentimientos, traducción de idiomas o recuperación de información. Sin embargo, uno de los desafíos principales es evitar el _catastrophic forgetting_, donde el modelo puede perder información valiosa del preentrenamiento al ajustarse a nuevos datos @vandeven2024continuallearningcatastrophicforgetting.
 
 Una de las principales técnicas para extender la memoria de un modelo es el *fine-tuning*, que consiste en ajustar un modelo de lenguaje preentrenado con un conjunto de datos específico para adaptar su conocimiento a una nueva tarea. En este proceso, se reutilizan los parámetros aprendidos durante el entrenamiento previo y se afinan en función de nuevos ejemplos, permitiendo que el modelo retenga su conocimiento general y lo especialice en un contexto particular. A pesar de su efectividad, el fine-tuning implica un costo computacional elevado y la necesidad de datos etiquetados relevantes, lo que puede limitar su aplicabilidad en entornos con información en constante cambio @gao2024retrievalaugmentedgenerationlargelanguage.
 
 === Generación Aumentada por Recuperación (RAG)
 
-La Generación Aumentada por Recuperación (RAG) es un enfoque híbrido que combina la capacidad de generación de los modelos de lenguaje con técnicas de recuperación de información externa. Con RAG, el modelo no se limita únicamente a su conocimiento almacenado en sus parámetros (memoria paramétrica), sino que además consulta fuentes externas (memoria no paramétrica) para complementar y actualizar la información que utiliza en la generación de respuestas.
+La RAG es un enfoque híbrido que combina la capacidad de generación de los modelos de lenguaje con técnicas de recuperación de información externa. Con RAG, el modelo no se limita únicamente a su conocimiento almacenado en sus parámetros (memoria paramétrica), sino que además consulta fuentes externas (memoria no paramétrica) para complementar y actualizar la información que utiliza en la generación de respuestas.
 
 Este proceso se lleva a cabo en dos fases principales:
 
@@ -161,10 +159,10 @@ Este proceso se lleva a cabo en dos fases principales:
 La @rag ilustra el flujo general de un sistema de Generación Aumentada por Recuperación (RAG) dividido en tres etapas, cada una señalada con un color distinto:
 
 - *Indexado* (recuadro verde):
-    Se muestran los documentos en PDF que, tras un proceso de extracción de información, se convierten en representaciones vectoriales (o word embeddings, denotadas como $e(x)$). Este paso permite crear una base de conocimiento indexada a partir de los textos originales.
+    Se muestran los documentos en PDF que, tras un proceso de extracción de información, se convierten en representaciones vectoriales (o _word embeddings_, denotadas como $e(x)$). Este paso permite crear una base de conocimiento indexada a partir de los textos originales.
 
 - *Recuperación* (recuadro celeste):
-    Aquí se representan las consultas del usuario ($x_1,x_2,x_3$), que también son transformadas en sus correspondientes embeddings $e(x)$. El círculo negro indica el cálculo de la similitud coseno (cosine similarity) entre los embeddings de la consulta y los de la base de conocimiento, con el fin de recuperar los $"top"_k$ documentos más relevantes para cada pregunta.
+    Aquí se representan las consultas del usuario ($x_1,x_2,x_3$), que también son transformadas en sus correspondientes embeddings $e(x)$. El círculo negro indica el cálculo de la similitud coseno (_cosine similarity_) entre los embeddings de la consulta y los de la base de conocimiento, con el fin de recuperar los $"top"_k$ documentos más relevantes para cada pregunta.
 
 - *Generación* (recuadro azul):
     Finalmente, el modelo mm utiliza los documentos recuperados ($z_1,z_2,…,z_k$) y las consultas para producir las respuestas ($y_1,y_2,y_3$). Este paso corresponde a la fase de generación, donde se integran los resultados de la recuperación para brindar información coherente y contextualizada al usuario.
@@ -178,11 +176,11 @@ Es una medida de similitud entre dos vectores que calcula el coseno del ángulo 
 $"cosine similarity" = S_c (A, B) := cos(theta) = (A dot B) / (||A||||B||) = (sum_(i=1) A_i B_i) / ( sqrt(sum_(i=1)^n) A_i^2 dot sqrt(sum_(i=1)^n B_i^2) ) $
 
 *Reranking*: 
-Es un paso de post-procesamiento en sistemas de recuperación por etapas que reordena el listado inicial de candidatos para elevar los más relevantes al tope. Tras una primera recuperación (ej., BM25 o búsqueda semántica), un modelo especializado (como un cross-encoder) evalúa de nuevo cada par consulta-documento, ajustando el ranking según criterios más finos de relevancia. En pipelines RAG, el reranking maximiza el recall efectivo al reducir el ruido ingresado al LLM, mejorando la calidad de las respuestas generadas. Una estrategia habitual consiste en aplicar un segundo modelo entrenado con datos anotados para discriminar con mayor precisión los fragmentos más útiles antes de la generación de texto @rerankers. 
+Es un paso de post-procesamiento en sistemas de recuperación por etapas que reordena el listado inicial de candidatos para elevar los más relevantes al tope. Tras una primera recuperación (ej., BM25 y/o búsqueda semántica), un modelo especializado (como un _cross-encoder_) evalúa de nuevo cada par consulta-documento, ajustando el ranking según criterios más finos de relevancia. En pipelines RAG, el reranking maximiza el recall efectivo al reducir el ruido ingresado al LLM, mejorando la calidad de las respuestas generadas. Una estrategia habitual consiste en aplicar un segundo modelo entrenado con datos anotados para discriminar con mayor precisión los fragmentos más útiles antes de la generación de texto @rerankers. 
 
 === Comparativa
 
-La @finetuning-v-rag compara los dos enfoques anteriormente mencionados: Fine-Tuning y RAG @gao2024retrievalaugmentedgenerationlargelanguage. Se analizan y contrastan estos métodos según diferentes características clave, incluyendo la adaptación a nuevos conocimientos, los requerimientos computacionales, la latencia, sus aplicaciones ideales y sus limitaciones.
+La @finetuning-v-rag compara los dos enfoques anteriormente mencionados: Fine-Tuning y RAG. Se analizan y contrastan estos métodos según diferentes características clave, incluyendo la adaptación a nuevos conocimientos, los requerimientos computacionales, la latencia, sus aplicaciones ideales y sus limitaciones.
 
 #figure(
     table(
@@ -196,7 +194,7 @@ La @finetuning-v-rag compara los dos enfoques anteriormente mencionados: Fine-Tu
         [Ajusta un modelo preentrenado sin necesidad de reentrenar completamente para cada nueva actualización de conocimiento],
         [No requiere reentrenamiento o reajuste; permite agregar conocimiento externo en tiempo real],
         [Requerimientos Computacionales],
-        [Altos: necesita grandes cantidades de datos y recursos computacionales para entrenar],
+        [Normalmente requiere altos recursos computacionales para entrenar],
         [Menores en comparación, ya que se enfoca en la adaptación, integración y recuperación de la información],
         [Latencia],
         [Baja, ya que el modelo responde directamente con el conocimiento integrado],
@@ -208,9 +206,9 @@ La @finetuning-v-rag compara los dos enfoques anteriormente mencionados: Fine-Tu
         [No adecuado para incorporar rápidamente
 nuevos conocimientos, posibles preocupaciones
 éticas sobre la recuperación de datos],
-        [Mayor complejidad técnica y, debido a tener más partes móviles, se incrementa el riesgo de un único punto de falla]
+        [Mayor complejidad técnica y, debido a tener más partes interdependientes, se incrementa el riesgo de un único punto de falla]
     ),
-    caption: [Comparativa entre Fine-Tuning y RAG]
+    caption: [Comparativa entre Fine-Tuning y RAG @gao2024retrievalaugmentedgenerationlargelanguage]
 )<finetuning-v-rag>
 
 A partir de la @finetuning-v-rag, se pueden extraer varias conclusiones clave sobre las ventajas y desventajas de cada enfoque. El Fine-Tuning es una técnica poderosa cuando se busca un rendimiento altamente especializado en tareas específicas, especialmente aquellas que requieren una estructura o estilo constante en las respuestas. Sin embargo, su principal desventaja radica en los altos costos computacionales y en la dificultad de incorporar nuevo conocimiento de manera ágil, lo cual lo hace menos flexible ante entornos dinámicos donde la información cambia frecuentemente.
@@ -232,16 +230,16 @@ A partir del estudio de los sistemas internacionales detallados en la @compariso
         table.header(
             [*Servicio*], [*Accesibilidad*], [*Uso Limitado*], [*Localización*], [*Código Abierto*], [*Seguridad y Privacidad*]
         ),
-        [Elicit],[Si],[20 Artículos / mes],[Ingles mayormente],[No],[Servidor remoto],
+        [Elicit],[Si],[20 Artículos / mes],[Inglés mayormente],[No],[Servidor remoto],
         [ChatGPT],[Bloqueada],[No permite registrarse desde Cuba],[Todos],[No],[Servidor remoto],
         [ChatPDF],[Bloqueada],[2 pdf y 20 mensajes / dia ],[Todos],[No],[Servidor remoto],
-        [Humata],[Si],[60 paginas / mes],[Ingles mayormente],[No],[Servidor remoto],
-        [Scholarcy],[Bloqueada],[10 resúmenes],[Ingles mayormente],[No],[Servidor remoto],
+        [Humata],[Si],[60 páginas / mes],[Inglés mayormente],[No],[Servidor remoto],
+        [Scholarcy],[Bloqueada],[10 resúmenes],[Inglés mayormente],[No],[Servidor remoto],
     ),
     caption: [Comparativa entre homólogos]
 )<comparison>
 
-Si bien las soluciones analizadas no resuelven integralmente los desafíos identificados, ofrecen referencias valiosas para el diseño de un sistema alternativo. Por ejemplo:
+Si bien las soluciones analizadas no resuelven integralmente todos los desafíos identificados, ofrecen referencias valiosas para el diseño de un sistema alternativo. Por ejemplo:
 
 - Estandarización de funcionalidades: La capacidad de ChatGPT para operar en múltiples idiomas (aunque su accesibilidad sea limitada) destaca la importancia del soporte multilingüe en plataformas globales @chatgpt-2025.
 
@@ -255,12 +253,12 @@ Si bien las soluciones analizadas no resuelven integralmente los desafíos ident
 
 Una metodología es un conjunto organizado de procedimientos, técnicas, herramientas y documentos auxiliares que guían a los desarrolladores en la implementación de sistemas de información. Se estructura en fases y subfases que facilitan la elección de las técnicas más adecuadas en cada etapa del proyecto, permitiendo una planificación, gestión, control y evaluación efectiva, y asegurando la calidad y coherencia del producto final @sommerville_ingenierisoftware_2005.
 
-Dado que el proyecto es pequeño, el tamaño del equipo consta es de un solo integrante, el tiempo es limitado, la metodología XP (Programación Extrema) es ideal porque permite recibir retroalimentación frecuente y realizar ajustes rápidos en el desarrollo. Su enfoque en ciclos iterativos cortos y pruebas constantes ayuda a garantizar que cada avance sea funcional y alineado con los objetivos del proyecto, optimizando el uso del tiempo y asegurando mejoras continuas sin desviaciones significativas.
+Dado que el proyecto es pequeño, el tamaño del equipo consta es de un solo integrante, el tiempo es limitado, la metodología _Extreme Programming_ (XP) es ideal porque permite recibir retroalimentación frecuente y realizar ajustes rápidos en el desarrollo. Su enfoque en ciclos iterativos cortos y pruebas constantes ayuda a garantizar que cada avance sea funcional y alineado con los objetivos del proyecto, optimizando el uso del tiempo y asegurando mejoras continuas sin desviaciones significativas.
 
 
 *Metodología de desarrollo de software Programación Extrema (XP)*
 
-XP, o Extreme Programming, es una metodología de desarrollo de software que lleva las prácticas tradicionales al extremo. Se fundamenta en iteraciones frecuentes y breves ciclos de lanzamiento, donde los requisitos se definen mediante "historias de usuario" que se transforman en tareas con pruebas de aceptación. Entre sus prácticas clave se encuentran la programación en pareja, el desarrollo guiado por pruebas (TDD) y la integración continua, lo que garantiza la calidad y la adaptabilidad del software a lo largo del proceso. Además, XP incorpora valores fundamentales y técnicas como el diseño simple, tarjetas CRC, pruebas unitarias, soluciones spike, prototipos y refactorización, lo que la hace especialmente efectiva para desarrollar sistemas complejos con equipos pequeños @sommerville_ingenierisoftware_2005. Esta se desarrolla a través de varias fases fundamentales iterativas y flexibles: Planificación, Diseño, Codificación y Pruebas.
+La metodología XP se fundamenta en iteraciones frecuentes y breves ciclos de lanzamiento, donde los requisitos se definen mediante 'historias de usuario' que se transforman en tareas de ingeniería. Entre sus prácticas clave se encuentran la programación en pareja, el desarrollo guiado por pruebas (TDD) y la integración continua, lo que garantiza la calidad y la adaptabilidad del software a lo largo del proceso. Además, XP incorpora valores fundamentales y técnicas como el diseño simple, pruebas unitarias, soluciones _spike_, prototipos y refactorización constante, lo que la hace especialmente efectiva para desarrollar sistemas complejos con equipos pequeños @sommerville_ingenierisoftware_2005. Esta se desarrolla a través de varias fases fundamentales iterativas y flexibles: Planificación, Diseño, Codificación y Pruebas.
 
 En la *fase de planificación*, se recopilan y definen las historias de usuario que expresan de forma práctica los requisitos y objetivos del sistema. Aquí, el equipo estima el esfuerzo y los recursos necesarios para cada historia, lo que permite establecer prioridades basadas en el valor que aportan al proyecto y en las restricciones de tiempo. Este enfoque iterativo posibilita la adaptación de la planificación a medida que se van clarificando los requerimientos y surgen nuevos desafíos.
 
@@ -282,11 +280,7 @@ A continuación se detallan las tecnologías y herramientas utilizadas así como
 
 - Sencillez: Su diseño enfocado en la legibilidad reduce la curva de aprendizaje y facilita la colaboración en equipos.
 
-- Multiparadigma y flexible: Permite implementar OOP (herencia, polimorfismo, encapsulación) junto con técnicas funcionales (lambda, mapeo, filtrado), adaptándose a arquitecturas diversas, desde scripts simples hasta sistemas distribuidos.
-
-- Ecosistema robusto y especializado: Cuenta con frameworks maduros como Pandas (análisis de datos), TensorFlow / PyTorch (machine learning) y FastAPI (APIs REST), que aceleran el desarrollo en dominios específicos.
-
-- Portabilidad multiplataforma: Al ejecutarse en un intérprete, el código Python funciona en cualquier sistema operativo sin modificaciones, ideal para entornos heterogéneos.
+- Ecosistema robusto y especializado: Cuenta con frameworks maduros para la IA como Pandas, TensorFlow, PyTorch, NumPy.
 
 - Gestión automática de memoria: Utiliza un recolector de basura para liberar recursos no utilizados, simplificando la administración de memoria.
 
@@ -296,13 +290,11 @@ A continuación se detallan las tecnologías y herramientas utilizadas así como
 
 *Desventajas de Python*:
 
-- Rendimiento en tiempo real limitado: Al ser interpretado, su ejecución es más lenta que lenguajes compilados como C/C++ o Rust. Esto puede ser un cuello de botella en aplicaciones de alta concurrencia o procesamiento masivo.
+- Rendimiento en tiempo real limitado: Al ser interpretado y tener un manejo de memoria automático, su ejecución es más lenta que lenguajes compilados como C/C++ o Rust. Esto puede ser un cuello de botella en aplicaciones de alta concurrencia o procesamiento masivo.
 
-- Global Interpreter Lock (GIL): Restringe la ejecución paralela de hilos, limitando el aprovechamiento de multi-core en tareas intensivas.
+- Global Interpreter Lock (GIL): Restringe la ejecución paralela de hilos, limitando el aprovechamiento de multiples núcleos de la CPU.
 
-- Dificultades en empaquetado y despliegue: La gestión de dependencias (ej. conflictos entre versiones con pip) y la creación de ejecutables autónomos pueden ser complejas, aunque herramientas como UV o Docker simplifican estos procesos.
-
-- Tipado dinámico: Aunque favorece la flexibilidad, puede generar errores en tiempo de ejecución difíciles de depurar @castro2023landscapehighperformancepythondevelop.
+- Tipado dinámico: Aunque en ciertos casos puede favorecer la flexibilidad, puede generar errores en tiempo de ejecución difíciles de depurar.. @castro2023landscapehighperformancepythondevelop.
 
 === Modelos LLM 
 
@@ -310,7 +302,7 @@ A continuación se detallan las tecnologías y herramientas utilizadas así como
 
 *Ventajas*
 
-- *Rendimiento en razonamiento*: Hereda capacidades de razonamiento del modelo más grande DeepSeek-R1, mostrando un rendimiento impresionante en tareas de matemáticas y razonamiento lógico.
+- *Rendimiento en razonamiento*: Hereda capacidades de razonamiento del modelo más grande DeepSeek-R1, mostrando un rendimiento impresionante en tareas de razonamiento lógico.
 
 - *Versatilidad*: Puede ser utilizado en una variedad de aplicaciones, desde generación de texto hasta tareas de comprensión del lenguaje.
 
@@ -318,14 +310,14 @@ A continuación se detallan las tecnologías y herramientas utilizadas así como
 
 - *Flexibilidad de implementación*: Disponible en varios formatos y niveles de cuantización, lo que permite su uso en diferentes tipos de dispositivos y aplicaciones @deepseekai2025deepseekr1incentivizingreasoningcapability.
 
-*BAAI/bge-m3*: es un modelo avanzado de embeddings #footnote[Los embeddings son representaciones numéricas de datos que capturan el significado o características de objetos como palabras, imágenes o conceptos en un espacio multidimensional. Elementos con significados similares se ubican cerca en el espacio vectorial, esto permite la búsqueda por cercanía]. Destaca por su versatilidad en tres dimensiones clave.
+*BAAI/bge-m3*: es un modelo avanzado de embeddings. Destaca por su versatilidad en tres dimensiones clave.
 
 - Multifuncionalidad: Combina tres métodos de recuperación en un solo modelo:
   + Embeddings Densos: Vectores compactos para búsqueda semántica.
   + Recuperación léxica (sparse): Ponderación de tokens al estilo BM25.
   + Interacción multi-vector (Col-BERT): Múltiples vectores por texto para mayor precisión.
 
-- Multilingüístico: Soporta más de 100 idiomas. Rendimiento optimizado para lenguas como inglés, español, chino, francés y árabe.
+- Multilingüístico: Soporta más de 100 idiomas con un rendimiento optimizado para lenguas como inglés, español, chino, francés y árabe.
 
 - Multigranularidad: Procesa textos desde frases cortas hasta documentos largos (hasta 8,192 tokens) esto lo hace ideal para RAG (Retrieval-Augmented Generation) con textos extensos @bge-m3.
 
@@ -340,18 +332,14 @@ Ventajas clave:
 
 - Gestión eficiente de memoria GPU: Gracias a mecanismos como PagedAttention y técnicas como PyTorch Compile/CUDA Graph, vLLM maximiza el uso de la memoria disponible, permitiendo servir más usuarios y contextos largos con menos hardware.
 
-- Compatibilidad y flexibilidad: Soporta múltiples arquitecturas y modelos populares de código abierto (como Llama 3, Mistral, Mixtral, CodeLlama), integra APIs compatibles con OpenAI y facilita el despliegue tanto en la nube como en servidores propios.
-
-- Reducción de costos de hardware: Al optimizar el uso de GPU, permite ejecutar modelos grandes con menos recursos, disminuyendo la necesidad de hardware costoso y el consumo energético.
+- Compatibilidad y flexibilidad: Soporta múltiples arquitecturas y modelos populares de código abierto (como Llama, Mistral, Mixtral, Qwen), integra APIs compatibles con OpenAI y facilita el despliegue tanto en la nube como en servidores propios.
 
 - Escalabilidad y despliegue: Admite inferencia distribuida, paralelismo de tensores, despliegue con Docker, NVIDIA Triton, Ray y SkyPilot, y se adapta fácilmente a diferentes tamaños de modelos y cargas de trabajo.
 
-- Innovación y comunidad activa: Proyecto open source con una comunidad activa que impulsa mejoras continuas, transparencia y personalización.
-
-- Privacidad y control: Permite el autoalojamiento, ofreciendo mayor control sobre los datos y la privacidad frente a servicios de terceros @vLLM.
+- Innovación y comunidad activa: Proyecto de código abierto con una comunidad activa que impulsa mejoras continuas, transparencia y personalización @vLLM.
 
 
-*Gradio v5.20.1*: es una biblioteca de Python de código abierto diseñada para crear interfaces web interactivas para modelos de machine learning y aplicaciones de inteligencia artificial. Permite a los desarrolladores construir y desplegar interfaces gráficas de manera rápida y sencilla, sin necesidad de conocimientos avanzados en desarrollo web
+*Gradio v5.20.1*: es una biblioteca de Python de código abierto diseñada para crear interfaces web interactivas para aplicaciones de IA. Permite a los desarrolladores construir y desplegar interfaces gráficas de manera rápida y sencilla, sin necesidad de conocimientos avanzados en desarrollo web
 
 *Ventajas clave*:
 

@@ -1,7 +1,7 @@
 #set heading(numbering: none)
 = Recomendaciones
 
-- Extender mediante agentes web que se integren con plataformas de investigación cubanas y repositorios académicos locales.
+- Extender fuentes de información mediante agentes web que se integren con plataformas de investigación cubanas y repositorios académicos locales.
 
 - Explorar lenguajes y técnicas de alto rendimiento (C/C++ o Mojo) para aprovechar mejor los recursos.
 
@@ -11,4 +11,4 @@
 
 - Combinar fine-tuning con RAG para aumentar la fidelidad de las respuestas ajustando modelos a dominios concretos.
 
-- Investigar GraphRAG para integrar grafos de conocimiento, para mejorar la precisión, contextualización y relevancia en la generación de respuestas basadas en grandes conjuntos de datos.
+- Investigar GraphRAG para integrar gráfos de conocimiento, para mejorar la precisión, contextualización y relevancia en la generación de respuestas basadas en grandes conjuntos de datos.

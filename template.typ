@@ -69,7 +69,8 @@
     body: none,
   ),
   bibliography: bibliography,
-  body
+  annexes: array,
+  body,
 ) = {  
   // Metadata -----------------------------------------------------------------------
   set text(lang: lang)
@@ -163,7 +164,7 @@
 
   // Abstract & Keywords ------------------------------------------------------------
   set page()
-  heading[RESUMEN]
+  heading[Resumen]
   text[#abstract]
   v(2pt)
   text[*Palabras clave*: #keywords.join(", ")]
@@ -224,31 +225,50 @@
   if bibliography != none {
     page(bibliography)
   }
+
+  // Annexes ------------------------------------------------------------------------
+  if annexes.len() > 0 {
+    set page()
+    heading[Anexos]
+    for annex in annexes [
+        #figure(
+          image(annex.image),
+          caption: [#annex.caption]
+        ) #label(annex.ref)
+    ]
+  }
 }
 
 
 
-// ----------------------------------- HELPERS -----------------------------------
+// ----------------------------------- HELPERS --------------------------------------
 
-#let table_user_story(number,name, priority, risk, user,  points,  iterations,  responsable,description, observations, picture: none) = {
+#let table_user_story(
+  number: int, name: str, priority: str , risk: str, user: none, weeks: int, iterations: int,  responsable: int, description: str, observations: none, picture: none) = {
   let rows = (
       table.header(table.cell(colspan: 2)[*Historia de Usuario*]),
-      [*Número:* #number],[*Nombre:* #name],
-      table.cell(colspan: 2)[*Usuario:* #user], 
-      [*Prioridad de negocio:* #priority],[*Riesgo en desarrollo:* #risk],
-      [*Puntos estimados:* #points],[*Iteración asignada:* #iterations],
-      table.cell(colspan: 2)[*Programador Responsable:* #responsable],
-      table.cell(colspan: 2)[*Descripción:* #description],
+      [*Número*: #number],[*Nombre*: #name],
+      
   )
+  if user != none {
+    rows.push(table.cell(colspan: 2)[*Usuario*: #user])
+  }
+
+  rows.push([*Prioridad de negocio*: #priority])
+  rows.push([*Riesgo en desarrollo*: #risk])
+  rows.push([*Tiempo estimado*: #weeks])
+  rows.push([*Iteración asignada*: #iterations])
+  rows.push(table.cell(colspan: 2)[*Programador Responsable*: #responsable])
+  rows.push(table.cell(colspan: 2)[*Descripción*: #description])
 
   if observations != none {
-    rows.push(table.cell(colspan: 2)[*Observaciones:* #observations])
+    rows.push(table.cell(colspan: 2)[*Observaciones*: #observations])
   }
 
   if picture != none {
     rows.push(
       table.cell(colspan: 2)[
-        *Prototipo Interfaz:* \
+        *Prototipo Interfaz*: \
         #align(center, image(picture, width: 60%))
       ]
     ) 
