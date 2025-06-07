@@ -36,6 +36,7 @@
 )
 
 // TODO: fix orthography and grammar
+// TODO: update template
 
 #include "Introduction.typ"
 #include "Chapter1.typ"

@@ -1,4 +1,4 @@
-
+// TODO: review this conclusions
 = Conclusiones Finales <conclusions>
 
 Con el desarrollo de la herramienta se puede afirmar que:
