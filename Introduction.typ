@@ -7,8 +7,9 @@ tecnológicas y el acceso restringido a recursos digitales. Los investigadores t
 
 Las herramientas existentes para el análisis automatizado de textos, como los sistemas comerciales (p. ej., ChatGPT, Elicit, etc.), presentan barreras significativas en este contexto. Por un lado, su dependencia de conexión estable a internet y hardware avanzado los hace inaccesibles para muchos investigadores cubanos, ademas están optimizados para el inglés y no priorizan el español, lo que limita su precisión en documentos científicos locales.
 
-A partir de la problemática anteriormente descrita se plantea como *problema de investigación*: ¿Cómo contribuir al acceso y análisis de documentos científicos en formato `pdf` utilizando infraestructura libre de costo y sin necesitar acceso a internet?. 
-// ¿Cómo desarrollar una herramienta de IA accesible, eficiente y localizable que permita a investigadores cubanos analizar documentos científicos en PDF de forma automatizada, aprovechando los Modelo de Lenguaje de Gran Tamaño y Generación-Aumentada por Recuperación, sin depender de infraestructura costosa o conexión estable a internet?
+A partir de la problemática anteriormente descrita se plantea como *problema de investigación*: 
+// ¿Cómo contribuir al acceso y análisis de documentos científicos en formato `pdf` utilizando infraestructura libre de costo y sin necesitar acceso a internet?. 
+¿Cómo desarrollar una herramienta de inteligencia artificial accesible, eficiente y localizable que permita a investigadores cubanos analizar documentos científicos de forma automatizada, aprovechando los Modelos de Lenguaje de Gran Tamaño y Generación Aumentada por Recuperación, sin depender de infraestructura costosa o conexión a internet?
 Se tiene como *objeto de estudio*: Modelo de Lenguaje de Gran Tamaño. 
 Como *campo de acción*: Extensión de Modelo de Lenguaje de Gran Tamaño basado en Generación-Aumentada por Recuperación.
 
