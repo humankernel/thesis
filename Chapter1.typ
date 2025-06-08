@@ -224,17 +224,17 @@ A partir del estudio de los sistemas internacionales detallados en la @compariso
 
 #figure(
     table(
-        columns: 6,
+        columns: (1fr, 0.8fr, 1fr, 1fr, 0.7fr, 0.9fr),
         inset: 10pt,
         align: horizon,
         table.header(
-            [*Servicio*], [*Accesibilidad*], [*Uso Limitado*], [*Localización*], [*Código Abierto*], [*Seguridad y Privacidad*]
+            [*Servicio*], [*Bloqueada*], [*Uso Limitado*], [*Localización*], [*Código Abierto*], [*Privacidad*]
         ),
-        [Elicit],[Si],[20 Artículos / mes],[Inglés mayormente],[No],[Servidor remoto],
-        [ChatGPT],[Bloqueada],[No permite registrarse desde Cuba],[Todos],[No],[Servidor remoto],
-        [ChatPDF],[Bloqueada],[2 pdf y 20 mensajes / dia ],[Todos],[No],[Servidor remoto],
-        [Humata],[Si],[60 páginas / mes],[Inglés mayormente],[No],[Servidor remoto],
-        [Scholarcy],[Bloqueada],[10 resúmenes],[Inglés mayormente],[No],[Servidor remoto],
+        [Elicit],[No],[20 Artículos / mes],[Inglés mayormente],[No],[Servidor remoto],
+        [ChatGPT],[Si],[No permite \ registrarse desde Cuba],[Todos],[No],[Servidor remoto],
+        [ChatPDF],[Si],[2 pdf y \ 20 mensajes/dia ],[Todos],[No],[Servidor remoto],
+        [Humata],[No],[60 páginas/mes],[Inglés mayormente],[No],[Servidor remoto],
+        [Scholarcy],[Si],[10 resúmenes],[Inglés mayormente],[No],[Servidor remoto],
     ),
     caption: [Comparativa entre homólogos]
 )<comparison>
