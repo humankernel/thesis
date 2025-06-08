@@ -286,8 +286,8 @@
 }
 
 
-#let table_engineering_task(number: int, hu_number: int, nombre: content, type: content, points: int, start_date: datetime, description: content) = {
-  let end_date = start_date + duration(days: points * 7)
+#let table_engineering_task(number: int, hu_number: int, nombre: content, type: content, weeks: int, start_date: datetime, description: content) = {
+  let end_date = start_date + duration(days: weeks * 7)
   figure(
     table(
       align: left,
@@ -295,7 +295,7 @@
       stroke: .5pt + black,
       table.header(table.cell(colspan: 2)[*Tarea de Ingeniería* - HU #hu_number]),
       table.cell(colspan: 2)[*Nombre de Tarea:* #nombre], 
-      [*Tipo de Tarea:* #type],[*Puntos Estimados:* #points],
+      [*Tipo de Tarea:* #type],[*Tiempo Estimado:* #weeks],
       [*Fecha de inicio:* #start_date.display()],[*Fecha de fin:* #end_date.display()],
       table.cell(colspan: 2)[*Descripción:* #description],
     ),

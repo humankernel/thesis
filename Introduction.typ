@@ -12,7 +12,7 @@ A partir de la problemática anteriormente descrita se plantea como *problema de
 Se tiene como *objeto de estudio*: Modelo de Lenguaje de Gran Tamaño. 
 Como *campo de acción*: Extensión de Modelo de Lenguaje de Gran Tamaño basado en Generación-Aumentada por Recuperación.
 
-Se propone como *objetivo general*: Desarrollar una herramienta de código abierto, basada en LLM y RAG, para el análisis semiautomático de artículos científicos en PDF, adaptada al contexto tecnológico y lingüístico de Cuba.
+Se propone como *objetivo general*: Desarrollar una herramienta de código abierto, basada en LLM y RAG, para el análisis semiautomático de artículos científicos en formato `pdf`, adaptada al contexto tecnológico y lingüístico de Cuba.
 
 Para dar cumplimiento al objetivo propuesto se proponen un conjunto de *tareas de investigación*:
 
@@ -27,7 +27,7 @@ Para alcanzar el conocimiento necesario que permita cumplir con el objetivo esta
 *Métodos teóricos*:
 - *Modelación*: facilitó la creación de diagramas, representado de manera gráfica parte del contenido de la investigación.
 
-- *Analítico-sintético*: aplicados en la revisión de documentos y bibliografía, permitieron identificar y extraer las ideas clave necesarias para sustentar teóricamente tanto la investigación como la propuesta presentada.
+- *Analítico-sintético*: aplicado en la revisión de documentos y bibliografía, permitió identificar y extraer las ideas clave necesarias para sustentar teóricamente tanto la investigación como la propuesta presentada.
 
 
 == Estructura de la investigación por capítulos

@@ -5,10 +5,10 @@
 
 - Explorar lenguajes y técnicas de alto rendimiento (C/C++ o Mojo) para aprovechar mejor los recursos.
 
-- Integrar un mejor preprocesamiento de los archivos, utilizando OCR y detección del layout y formulas matemáticas.
+- Integrar un mejor preprocesamiento de los archivos, utilizando OCR y detección del layout y fórmulas matemáticas.
 
 - Evaluar arquitecturas distribuidas, desplegando modelos ligeros y especializados en nodos heterogéneos para mejorar escalabilidad.
 
 - Combinar fine-tuning con RAG para aumentar la fidelidad de las respuestas ajustando modelos a dominios concretos.
 
-- Investigar GraphRAG para integrar gráfos de conocimiento, para mejorar la precisión, contextualización y relevancia en la generación de respuestas basadas en grandes conjuntos de datos.
+- Explorar GraphRAG para integrar grafos de conocimiento, para mejorar la precisión, contextualización y relevancia en la generación de respuestas basadas en grandes conjuntos de datos.

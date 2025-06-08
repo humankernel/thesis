@@ -253,7 +253,7 @@ Si bien las soluciones analizadas no resuelven integralmente todos los desafíos
 
 Una metodología es un conjunto organizado de procedimientos, técnicas, herramientas y documentos auxiliares que guían a los desarrolladores en la implementación de sistemas de información. Se estructura en fases y subfases que facilitan la elección de las técnicas más adecuadas en cada etapa del proyecto, permitiendo una planificación, gestión, control y evaluación efectiva, y asegurando la calidad y coherencia del producto final @sommerville_ingenierisoftware_2005.
 
-Dado que el proyecto es pequeño, el tamaño del equipo consta es de un solo integrante, el tiempo es limitado, la metodología _Extreme Programming_ (XP) es ideal porque permite recibir retroalimentación frecuente y realizar ajustes rápidos en el desarrollo. Su enfoque en ciclos iterativos cortos y pruebas constantes ayuda a garantizar que cada avance sea funcional y alineado con los objetivos del proyecto, optimizando el uso del tiempo y asegurando mejoras continuas sin desviaciones significativas.
+Dado que el proyecto es pequeño, el tamaño del equipo consta de un solo integrante, el tiempo es limitado, la metodología _Extreme Programming_ (XP) es ideal porque permite recibir retroalimentación frecuente y realizar ajustes rápidos en el desarrollo. Su enfoque en ciclos iterativos cortos y pruebas constantes ayuda a garantizar que cada avance sea funcional y alineado con los objetivos del proyecto, optimizando el uso del tiempo y asegurando mejoras continuas sin desviaciones significativas.
 
 
 *Metodología de desarrollo de software Programación Extrema (XP)*

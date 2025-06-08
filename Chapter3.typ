@@ -12,7 +12,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   hu_number: 1,
   nombre: [Enviar consultas],
   type: [Desarrollo],
-  points: 1,
+  weeks: 1,
   start_date: datetime(year: 2025, month: 1, day: 3),
   description: [Se realiza la integración de una caja de texto que contiene un botón de enviar, esta se encarga de enviar la consulta al componente que se encarga de procesarla.]
 )
@@ -21,7 +21,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   hu_number: 2,
   nombre: [Enviar archivos PDF],
   type: [Desarrollo],
-  points: 1,
+  weeks: 1,
   start_date: datetime(year: 2025, month: 1, day: 10),
   description: [En la caja de texto de enviar consulta se añade un botón para agregar un documento,este tiene un limite de 300mb. Cuando el usuario envía la consulta los archivos son procesados en el backend.] // TODO:
 )
@@ -30,7 +30,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   hu_number: 3,
   nombre: [Generar respuestas],
   type: [Desarrollo],
-  points: 2,
+  weeks: 2,
   start_date: datetime(year: 2025, month: 1, day: 17),
   description: [La consulta se divide en sub consultas, estas se utilizan para obtener documentos relevantes, luego con estos documentos se genera una respuesta, si la respuesta esta completa (la pregunta fue respondida) se le manda al usuario, sino se inicia una búsqueda de los elementos faltantes, esto se puede repetir hasta que se completa la respuesta o se alcanza el máximo numero de iteraciones.] // TODO:
 )
@@ -39,7 +39,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   hu_number: 4,
   nombre: [Procesar archivos],
   type: [Desarrollo],
-  points: 3,
+  weeks: 3,
   start_date: datetime(year: 2025, month: 1, day: 31),
   description: [Los archivos son divididos en pequeños pedazos que se encuentran dentro de un umbral de tokens que el modelo de embeddings puede leer, luego se generan los embeddings y se almacenan en la base de datos vectorial en memoria.] // TODO:
 )
@@ -48,16 +48,16 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   hu_number: 5,
   nombre: [Buscar documentos relevantes],
   type: [Desarrollo],
-  points: 2,
+  weeks: 2,
   start_date: datetime(year: 2025, month: 2, day: 21),
-  description: [Se crean los embeddings de la consulta, estos se utilizan para encontrar en la base de datos embeddings que compartan cierta similitud semantica (mediante la similitud del coseno) asi como lexicográfica, luego estos se reordenan usando el modelo Reranker.]
+  description: [Se crean los embeddings de la consulta, estos se utilizan para encontrar en la base de datos embeddings que compartan cierta similitud semántica (mediante la similitud del coseno) así como lexicográfica, luego estos se reordenan usando el modelo Reranker.]
 )
 
 #table_engineering_task(number: 6,
   hu_number: 6,
   nombre: [Mostrar documentos recuperados],
   type: [Desarrollo],
-  points: 1,
+  weeks: 1,
   start_date: datetime(year: 2025, month: 3, day: 7),
   description: [Los documentos recuperados son mostrados en una barra lateral derecha, en forma de lista donde cada elemento es colapsable.]
 )
@@ -66,7 +66,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   hu_number: 7,
   nombre: [Regenerar respuesta],
   type: [Desarrollo],
-  points: 1,
+  weeks: 1,
   start_date: datetime(year: 2025, month: 3, day: 14),
   description: [Se activa la opción de Gradio para regenerar la respuesta.] // TODO:
 )
@@ -75,7 +75,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   hu_number: 8,
   nombre: [Dar retroalimentación de una respuesta],
   type: [Desarrollo],
-  points: 1,
+  weeks: 1,
   start_date: datetime(year: 2025, month: 3, day: 21),
   description: [Se activa la opción de Gradio para dar retroalimentación, la cual se guarda en un archivo.] // TODO:
 )
@@ -84,7 +84,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   hu_number: 9,
   nombre: [Editar una consulta previa],
   type: [Desarrollo],
-  points: 1,
+  weeks: 1,
   start_date: datetime(year: 2025, month: 3, day: 28),
   description: [Se activa la opción de Gradio para dar editar la consulta.]
 )
@@ -93,7 +93,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   hu_number: 10,
   nombre: [Ajustar los parámetros del sistema],
   type: [Desarrollo],
-  points: 2,
+  weeks: 2,
   start_date: datetime(year: 2025, month: 4, day: 4),
   description: [Se implementa una barra lateral izquierda con varios campos para seleccionar los parámetros de generación, estos se almacenan en el local storage del navegador, y se le pasa a la logica del backend para instruir la generación.]
 )
@@ -102,7 +102,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   hu_number: 11,
   nombre: [Crear múltiples conversaciones],
   type: [Desarrollo],
-  points: 1,
+  weeks: 1,
   start_date: datetime(year: 2025, month: 4, day: 18),
   description: [Se activa la opción en Gradio para crear múltiples conversaciones.]
 )
@@ -111,7 +111,7 @@ Este capítulo presenta la implementación de la solución propuesta y las prueb
   hu_number: 12,
   nombre: [Limpiar el chat],
   type: [Desarrollo],
-  points: 1,
+  weeks: 1,
   start_date: datetime(year: 2025, month: 4, day: 25),
   description: [Se activa la opción en Gradio para limpiar el chat.]
 )
@@ -151,7 +151,7 @@ Las métricas de generación definidas tienen como fin valorar la calidad de las
 
 A continuación, se describen las principales métricas introducidas por RAGAS @RAGAS:
 
-- *Faithfulness*: Una respuesta es fiel cuando no introduce hechos ajenos o inexactitudes que no estén respaldadas por las fuentes consultadas. Esta metrica es especialmente util para ayudar a detectar las alucinaciones @RAGAS.
+- *Faithfulness*: Una respuesta es fiel cuando no introduce hechos ajenos o inexactitudes que no estén respaldadas por las fuentes consultadas. Esta métrica es especialmente útil para ayudar a detectar las alucinaciones @RAGAS.
 
     Para implementarla se siguen los siguientes pasos:
 
@@ -268,7 +268,7 @@ Los resultados obtenidos (@ragas-results) a través de la evaluación con RAGAS 
 
 - Esta situación también se refleja en el puntaje de `Factual Correctness` (#factual_correctness), que indica una precisión moderada: las respuestas son parcialmente correctas, aunque inconsistentes. La generación es adecuada en algunos casos, pero no puede garantizarse una fidelidad completa con la información recuperada. 
 
-En conjunto, estos resultados conducen a tres implicaciones clave: (1) la recuperación funciona de forma confiable y robusta; (2) el modelo generador requiere ajustes para mejorar la fidelidad a la evidencia contextual; y (3) es necesario implementar medidas correctivas como el perfeccionamiento de los prompts (instrucciones explícitas para que el modelo solo utilice el contexto dado), garantizar la claridad y relevancia de los fragmentos recuperados, realizar fine-tuning con datos del dominio específico y, finalmente, aplicar filtros o mecanismos de control para reducir la generación de contenido erróneo o no verificado. En suma, el sistema muestra un buen potencial, pero necesita mejoras significativas en la etapa de generación para alcanzar una mayor precisión y confiabilidad.
+En conjunto, estos resultados conducen a tres implicaciones clave: (1) la recuperación funciona de forma confiable y robusta; (2) el modelo generador requiere ajustes para mejorar la fidelidad a la evidencia contextual; y (3) es necesario implementar medidas correctivas como el perfeccionamiento de los prompts (instrucciones explícitas para que el modelo solo utilice el contexto dado), garantizar la claridad y relevancia de los fragmentos recuperados, realizar fine-tuning con datos del dominio específico y, finalmente, aplicar filtros o mecanismos de control para reducir la generación de contenido erróneo o no verificado. En resumen, el sistema muestra un buen potencial, pero necesita mejoras en la etapa de indexado para alcanzar una mayor precisión y confiabilidad.
 
 #figure(
   lq.diagram(

@@ -11,7 +11,7 @@
   advisors: ("Msc. Angel Alberto Vazquez Sánchez", 
              "Msc. Lisset Salazar Gómez"),
 
-  abstract: [La presente tesis de grado propone una herramienta de código abierto, basada en modelos de lenguaje de gran tamaño (LLM) y en la técnica de Generación Aumentada por Recuperación (RAG), para facilitar el análisis automatizado de artículos científicos en PDF, adaptada al contexto tecnológico y lingüístico de Cuba. Enfrentando limitaciones como baja conectividad, restricciones geopolíticas y falta de recursos, la solución utiliza Python, vLLM y Gradio, con modelos como `DeepSeek-R1-Distill-Qwen-1.5B` y `BAAI/bge-m3`. Desarrollada bajo la metodología _Extreme Programming_ (XP), la herramienta incluye módulos de reformulación de consultas, recuperación y generación de respuestas. Evaluaciones con RAGAS revelaron una fidelidad moderada en las respuestas y un alto nivel de recuperación contextual, validando la viabilidad técnica del sistema y sentando las bases para futuras mejoras.],
+  abstract: [La presente tesis de grado propone una herramienta de código abierto, basada en modelos de lenguaje de gran tamaño (LLM) y en la técnica de Generación Aumentada por Recuperación (RAG), para facilitar el análisis automatizado de artículos científicos, adaptada al contexto tecnológico y lingüístico de Cuba. Enfrentando limitaciones como baja conectividad, restricciones geopolíticas y falta de recursos, la solución utiliza Python, vLLM y Gradio, con modelos como `DeepSeek-R1-Distill-Qwen-1.5B` y `BAAI/bge-m3`. Desarrollada bajo la metodología _Extreme Programming_ (XP), la herramienta incluye módulos de reformulación de consultas, recuperación y generación de respuestas. Evaluaciones con RAGAS revelaron una fidelidad moderada en las respuestas y un alto nivel de recuperación contextual, validando la viabilidad técnica del sistema y sentando las bases para futuras mejoras.],
   keywords: ("Aprendizaje Profundo", 
              "Contexto Cubano",
              "Código Abierto",
@@ -31,6 +31,11 @@
       image: "Images/rag-eval.png", 
       caption: "Herramienta de Evaluación (Elaboración propia)", 
       ref: "rag-eval" 
+    ),
+    (
+      image: "Images/rag.png", 
+      caption: "Prototipo (Elaboración propia)", 
+      ref: "prototype-rag" 
     ),
   )
 )
