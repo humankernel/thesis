@@ -56,20 +56,16 @@
   faculty: content,
   authors: array, 
   advisors: array,
+  dedication: content,
+  acknowledgments: content,
   abstract: content, 
   keywords: array,
   general-index: (enabled: false, title: ""),
   table-index:   (enabled: false, title: ""),
   figure-index:  (enabled: false, title: ""),
   watermark: content, 
-  appendix: (
-    enabled: false,
-    title: "",
-    heading-numbering-format: "",
-    body: none,
-  ),
   bibliography: bibliography,
-  annexes: array,
+  appendix: array,
   body,
 ) = {  
   // Metadata -----------------------------------------------------------------------
@@ -81,7 +77,7 @@
   show raw: set text(font: ("DejaVu Math TeX Gyre"), size: 9pt)
   set page(
     paper: "a4",
-    margin: (bottom: 1.75cm, top: 2.25cm),
+    margin: (bottom: 1.75cm, top: 2cm),
     background: rotate(-45deg, 
       text(120pt, fill: rgb(230, 230, 230))[*#watermark*]
     ),
@@ -128,83 +124,133 @@
 
         #v(-0.5em)
 
-        #text(size: 8pt)[#faculty]
+        #text(size: 8.2pt)[#faculty]
 
         #v(5em)
 
-        #text(size: 18pt)[#title]
+        #text(size: 20pt)[#title]
 
         #v(5em)
 
-        #text[*Trabajo de diploma para optar por \ el título de Ingeniero en Ciencias Informáticas*]
+        #text(size: 12pt)[*Trabajo de diploma para optar por \ el título de Ingeniero en Ciencias Informáticas*]
 
         #v(15em)
 
-        #text(size: 12pt, [Autor: #authors])
+        #text(size: 12pt)[Autor: #authors]
 
-        #text(size: 12pt, [Tutores: #advisors.join("\n")])
+        #text(size: 12pt)[Tutores: #advisors.join("\n")]
 
         #v(10em)
-        #text(size: 12pt, [*La Habana, 2025*])
+        #text(size: 12pt)[*La Habana, 2025*]
       ],
     ),
   )
+  show: BODY-MATTER.with()
 
-  // Firms --------------------------------------------------------------------------
-  // = Declaración de autoría
-  // Declaramos ser autores de la presente tesis y reconocemos a la Universidad de las Ciencias Informáticas
-  // los derechos patrimoniales sobre esta, con carácter exclusivo.
+  // Acknowledgments -------------------------------------------------------
+  if dedication != none {
+    set page()
+    heading(numbering: none, outlined: false)[Dedicatoria]
+    text[#dedication]
+  }
 
-  // Para que así conste firmamos la presente a los \_\_\_ dias del mes de \_\_\_\_\_\_\_\_\_ del año \_\_\_\_\_\_
+  // Acknowledgments -------------------------------------------------------
+  if acknowledgments != none {
+    set page()
+    heading(numbering: none, outlined: false)[Agradecimientos]
+    text[#acknowledgments]
+  }
 
-  // #block(width: 150pt)[
-  //   #line(length: 100%)
-  //   #align(center)[Signature]
-  // ]
+  // Firms -----------------------------------------------------------------
+  {
+    set page()
+    heading(numbering: none, outlined: false)[Declaración de autoría]
+
+    v(18pt)
+
+    text[Declaramos ser autores de la presente tesis y reconocemos a la Universidad de las Ciencias Informáticas los derechos patrimoniales sobre esta, con carácter exclusivo..]
+
+    v(18pt)
+    
+    text[Para que así conste firmamos la presente a los 18 dias del mes de junio del año 2025.]
+
+    v(200pt)
+
+    align(center)[
+      // Author block
+      #line(length: 7cm)
+      #authors \
+      Autor
+
+      // Vertical space between author and tutors
+      #v(2cm)
+
+      // Tutors in two columns
+      #grid(
+        columns: 2,
+        gutter: 3cm,
+        align(center)[
+          #line(length: 7cm)
+          MSc. Angel Alberto Vazquez Sánchez \
+          Tutor
+        ],
+        align(center)[
+          #line(length: 7cm)
+          MSc. Lisset Salazar Gómez \
+          Tutora
+        ]
+      )
+    ]
+  }
+  
+  
 
   // Abstract & Keywords ------------------------------------------------------------
-  set page()
-  heading[Resumen]
-  text[#abstract]
-  v(2pt)
-  text[*Palabras clave*: #keywords.join(", ")]
+  {
+    set page()
+    heading(numbering: none, outlined: false)[Resumen]
+    text[#abstract]
+    v(2pt)
+    text[*Palabras clave*: #keywords.join(", ")]
+  }
 
 
   // Outline ------------------------------------------------------------------------
   if general-index.enabled != none {
-    page(outline(title: general-index.at("title", default: "Outline")))
+    set page()
+    outline(title: general-index.at("title", default: "Outline"))
   }
 
   // Outline Figures ----------------------------------------------------------------
   if figure-index.enabled != none {
-    page(outline(
+    set page()
+    outline(
       title: figure-index.at("title", default: "Figures Index"), 
       target: figure.where(kind: image)
-    ))
+    )
   }
 
   // Outline Tables -----------------------------------------------------------------
   if table-index != none {
-    page(outline(
+    set page()
+    outline(
       title: table-index.at("title", default: "Tables Index"), 
       target: figure.where(kind: table)
-    ))
+    )
   }
 
-  // Body ---------------------------------------------------------------------------
-  {
-    show: BODY-MATTER.with()
-    body
+  // Body -------------------------------------------------------------------
+  body
+  
+  // Bibliography -------------------------------------------------------------------
+  if bibliography != none {
+    bibliography
   }
 
-
-  // Appendix -----------------------------------------------------------------------
-  if appendix.enabled {
-    pagebreak()
-    heading(level: 1)[#appendix.at("title", default: "Appendix")]
-
-    // For heading prefixes in the appendix, the standard convention is A.1.1.
-    let num-fmt = appendix.at("heading-numbering-format", default: "A.1.1.")
+  // Appendix -------------------------------------------------------------------
+  if appendix != none {
+    set page()
+    heading(numbering: none)[Appendix]
 
     counter(heading).update(0)
     set heading(
@@ -213,28 +259,16 @@
         let vals = nums.pos()
         if vals.len() > 0 {
           let v = vals.slice(0)
-          return numbering(num-fmt, ..v)
+          return numbering("A.1.1.", ..v)
         }
       },
     )
-    appendix.body
-  }
-
-
-  // Bibliography -------------------------------------------------------------------
-  if bibliography != none {
-    page(bibliography)
-  }
-
-  // Annexes ------------------------------------------------------------------------
-  if annexes.len() > 0 {
-    set page()
-    heading[Anexos]
-    for annex in annexes [
+    for item in appendix [
         #figure(
-          image(annex.image),
-          caption: [#annex.caption]
-        ) #label(annex.ref)
+          image(item.image),
+          caption: [#item.caption]
+        ) #label(item.ref)
+        #v(4pt)
     ]
   }
 }
