@@ -17,9 +17,10 @@ Se propone como *objetivo general*: Desarrollar una herramienta de código abier
 
 Para dar cumplimiento al objetivo propuesto se proponen un conjunto de *tareas de investigación*:
 
-+ Realizar estudio del estado del arte sobre el objeto de estudio y campo de acción.
-+ Elaborar una propuesta de solución al problema tratado.
-+ Validar que la propuesta responde a los objetivos planteados
++ Elaboración del marco teórico referente a modelos del lenguaje de gran tamaño y la extension utilizando generación aumentada por recuperación.
++ Análisis de sistemas homólogos para la identificación de los requisitos de software.
++ Implementación del sistema a partir de los requisitos de software.
++ Validación de la propuesta de solución.
 
 == Métodos de investigación
 
