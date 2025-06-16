@@ -165,7 +165,7 @@ La @rag ilustra el flujo general de un sistema de Generación Aumentada por Recu
     Aquí se representan las consultas del usuario ($x_1,x_2,x_3$), que también son transformadas en sus correspondientes embeddings $e(x)$. El círculo negro indica el cálculo de la similitud coseno (_cosine similarity_) entre los embeddings de la consulta y los de la base de conocimiento, con el fin de recuperar los $"top"_k$ documentos más relevantes para cada pregunta.
 
 - *Generación* (recuadro azul):
-    Finalmente, el modelo mm utiliza los documentos recuperados ($z_1,z_2,…,z_k$) y las consultas para producir las respuestas ($y_1,y_2,y_3$). Este paso corresponde a la fase de generación, donde se integran los resultados de la recuperación para brindar información coherente y contextualizada al usuario.
+    Finalmente, el modelo utiliza los documentos recuperados ($z_1,z_2,…,z_k$) y las consultas para producir las respuestas ($y_1,y_2,y_3$). Este paso corresponde a la fase de generación, donde se integran los resultados de la recuperación para brindar información coherente y contextualizada al usuario.
 
 *Word Embedding*:
 Es una representación vectorial de palabras en un espacio numérico continuo. Cada palabra se asigna a un vector de números, de manera que palabras con significados o contextos similares tienen vectores cercanos entre sí. Estos vectores se obtienen mediante técnicas de aprendizaje automático, lo que permite que los modelos capten relaciones semánticas y sintácticas en los textos @mikolov2013efficientestimationwordrepresentations.
