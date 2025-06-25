@@ -7,11 +7,11 @@
     // numbering: "1",
     footer: context {
       line(length: 100%, stroke: 0.5pt)
-      text[
-        Joaquin Rivas Sánchez 
-        #h(1fr) 
+        text[
+          Joaquin Rivas Sánchez 
+          #h(1fr) 
         #counter(page).display("1")
-      ]
+          ] 
     },
     header: [],
   )
@@ -37,7 +37,7 @@
       width: 100%,
       align(
         right,
-        text(weight: "semibold")[#it.body]
+        text(weight: "light")[#it.body]
       )
     )
     line(length: 100%, stroke: 0.5pt)
