@@ -12,7 +12,7 @@
              "Msc. Lisset Salazar Gómez   "),
 
   dedication: [
-    _Le dedico esta tesis a mi Cleo, la perrita mas unica que jamas existirá, Aunque ya no estes, siempre pensare en ti._
+    _Le dedico esta tesis a mi Cleo, la perrita mas unica que jamas existirá, Aunque ya no estés, siempre pensaré en ti._
   ],
   acknowledgments: [
     Le doy gracias a mis padres sin los cuales no estaría vivo en primer lugar, por siempre estar ahi para mi cuando los necesite, por siempre apoyarme sin pedir nada a cambio, por impulsarme a conseguir lo que quiero, y por siempre creer en mi.
