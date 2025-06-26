@@ -74,7 +74,7 @@
   
   // Document Style -----------------------------------------------------------------
   set text(size: 12pt)
-  show raw: set text(font: ("DejaVu Math TeX Gyre"), size: 9pt)
+  show raw: set text(font: ("Times New Roman"), size: 9pt)
   set page(
     paper: "a4",
     margin: (bottom: 1.75cm, top: 2cm),
@@ -109,7 +109,7 @@
     kind: table
   ): set figure.caption(position: top)
   // set size and header-color
-  show table: set text(size: 9pt, font: "DejaVu Math TeX Gyre")
+  show table: set text(size: 9pt, font: "Times New Roman")
   set table(
     fill: (x, y) => if y == 0 { color.rgb(204, 204, 255) },
   )
@@ -132,7 +132,7 @@
 
         #v(5em)
 
-        #text(size: 12pt)[*Trabajo de diploma para optar por \ el título de Ingeniero en Ciencias Informáticas*]
+        #text(size: 11pt)[*Trabajo de diploma para optar por el título de Ingeniero en Ciencias Informáticas*]
 
         #v(15em)
 
