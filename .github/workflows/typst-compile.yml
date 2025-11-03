@@ -1,29 +1,54 @@
-name: Build and Deploy Typst PDF
+# Publish GitHub Pages site consisting of compiled example PDFs
+name: Publish example
 
 on:
   push:
     branches:
-      - typst
+      - main
+
+# Overwritten by the individual jobs
+permissions: {}
 
 jobs:
-  build-and-deploy:
+  build-site:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read #  to fetch code (actions/checkout)
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v5
+    - uses: typst-community/setup-typst@v4
+      with:
+        typst-version: 0.13.1
 
-      - name: Setup Typst
-        uses: typst-community/setup-typst@v4
+    - name: Create output dir
+      # Note: `github-pages-temp` should not exist yet
+      run: mkdir github-pages-temp
 
-      - name: Compile Typst document
-        run: typst compile main.typ main.pdf
+    - name: Build example
+      run: typst compile example.typ github-pages-temp/example.pdf
 
+    - name: Upload site files as artifact
+      id: deployment
+      uses: actions/upload-pages-artifact@v4
+      with:
+        path: github-pages-temp
+
+  # See https://github.com/actions/deploy-pages
+  deploy-site:
+    needs: build-site
+
+    permissions:
+      pages: write
+      id-token: write
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          publish_branch: gh-pages
-          keep_files: true
-          force_orphan: true
+        id: deployment
+        uses: actions/deploy-pages@v4
