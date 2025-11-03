@@ -1,12 +1,14 @@
-name: Compile Document
+name: Build and Deploy Typst PDF
+
 on:
   push:
     branches:
-      - main
+      - typst
 
 jobs:
-  render-document:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -17,8 +19,11 @@ jobs:
       - name: Compile Typst document
         run: typst compile main.typ main.pdf
 
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: compiled-pdf
-          path: main.pdf
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages
+          keep_files: true
+          force_orphan: true
