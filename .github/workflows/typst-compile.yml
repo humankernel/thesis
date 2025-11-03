@@ -25,8 +25,8 @@ jobs:
       # Note: `github-pages-temp` should not exist yet
       run: mkdir github-pages-temp
 
-    - name: Build example
-      run: typst compile example.typ github-pages-temp/example.pdf
+    - name: Build main
+      run: typst compile main.typ github-pages-temp/main.pdf
 
     - name: Upload site files as artifact
       id: deployment
