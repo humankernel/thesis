@@ -2,7 +2,7 @@ name: Compile Document
 on:
   push:
     branches:
-      - typst
+      - main
 
 jobs:
   render-document:
