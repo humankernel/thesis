@@ -3,7 +3,7 @@
 
 #show: template.with(
   watermark: [],
-
+  
   lang: "es",
   title: [Desarrollo de una herramienta basada en LLM y RAG para asistir el análisis de artículos científicos],
   faculty: [FACULTAD DE TECNOLOGÍAS INTERACTIVAS],
